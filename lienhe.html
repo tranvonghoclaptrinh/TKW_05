@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liên hệ - Khoa CNTT HUIT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        .form-glass {
+            background: var(--glass-bg);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            backdrop-filter: blur(10px);
+        }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 500; }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(0,0,0,0.1);
+            background: rgba(255,255,255,0.8);
+            outline: none;
+            transition: var(--transition);
+        }
+        .form-group input:focus { border-color: var(--primary); box-shadow: 0 0 5px rgba(0,84,165,0.3); }
+        
+        @media (max-width: 768px) { .contact-container { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body data-theme="light">
+    <header id="header">
+        <nav class="navbar">
+            <a href="index.html" class="logo">HUIT <span>IT</span></a>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="gioithieu.html" class="nav-link">Giới thiệu</a></li>
+                <li><a href="daotao.html" class="nav-link">Đào tạo</a></li>
+                <li><a href="tintuc.html" class="nav-link">Tin tức</a></li>
+                <li><a href="lienhe.html" class="nav-link">Liên hệ</a></li>
+            </ul>
+            <div class="controls">
+                <i class="fas fa-moon" id="theme-toggle"></i>
+                <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="section" style="margin-top: 150px;">
+        <div class="section-title">
+            <h2>Liên Hệ Với Chúng Tôi</h2>
+            <div></div>
+        </div>
+
+        <div class="contact-container">
+            <div class="form-glass">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label>Họ và Tên</label>
+                        <input type="text" placeholder="Nhập tên của bạn...">
+                    </div>
+                    <div class="form-group">
+                        <label>Email liên hệ</label>
+                        <input type="email" placeholder="example@huit.edu.vn">
+                    </div>
+                    <div class="form-group">
+                        <label>Lời nhắn</label>
+                        <textarea rows="5" placeholder="Bạn cần hỗ trợ gì?"></textarea>
+                    </div>
+                    <button type="submit" class="btn-cta" style="width: 100%;">GỬI LIÊN HỆ</button>
+                </form>
+            </div>
+
+            <div class="info-box">
+                <h3 style="color: var(--primary); margin-bottom: 20px;">Thông tin văn phòng Khoa</h3>
+                <div class="notice-list">
+                    <div class="notice-item"><i class="fas fa-map-marker-alt"></i> 140 Lê Trọng Tấn, P. Tây Thạnh, Q. Tân Phú, TP. HCM</div>
+                    <div class="notice-item"><i class="fas fa-phone-alt"></i> (028) 3816 1673 (Ext: 123)</div>
+                    <div class="notice-item"><i class="fas fa-envelope"></i> khoa.cntt@huit.edu.vn</div>
+                </div>
+                <div style="margin-top: 30px; border-radius: 15px; overflow: hidden; height: 250px; background: #eee; display: flex; align-items: center; justify-content: center;">
+                    <p style="color: #888;">[Bản đồ Google Maps HUIT]</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

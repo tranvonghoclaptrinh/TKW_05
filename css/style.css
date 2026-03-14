@@ -1,0 +1,130 @@
+
+        /* --- 1. BIẾN MÀU SẮC & ROOT --- */
+        :root {
+            --primary: #0054a5;
+            --accent: #ed1c24;
+            --bg-light: #f4f7fa;
+            --text-dark: #2d3436;
+            --glass-bg: rgba(255, 255, 255, 0.8);
+            --card-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] {
+            --bg-light: #0f172a;
+            --text-dark: #f1f5f9;
+            --glass-bg: rgba(15, 23, 42, 0.8);
+            --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        /* --- 2. RESET & CƠ BẢN --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; transition: var(--transition); overflow-x: hidden; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* --- 3. NAVBAR (GLASSMORPHISM) --- */
+        header {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+
+        header.sticky { padding: 5px 0; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+
+        .navbar {
+            max-width: 1200px; margin: 0 auto; padding: 1rem 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary); display: flex; align-items: center; gap: 10px; }
+        .logo span { color: var(--accent); }
+
+        .nav-menu { display: flex; gap: 2rem; align-items: center; }
+        .nav-link { font-weight: 500; position: relative; transition: var(--transition); }
+        .nav-link:hover { color: var(--primary); }
+        .nav-link::after {
+            content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px;
+            background: var(--accent); transition: var(--transition);
+        }
+        .nav-link:hover::after { width: 100%; }
+
+        .controls { display: flex; align-items: center; gap: 15px; }
+        #theme-toggle { cursor: pointer; font-size: 1.2rem; transition: var(--transition); }
+        #theme-toggle:hover { transform: rotate(20deg); color: #f1c40f; }
+
+        /* Mobile Menu Icon */
+        .hamburger { display: none; cursor: pointer; font-size: 1.5rem; }
+
+        /* --- 4. HERO SECTION --- */
+        .hero {
+            height: 80vh; display: flex; align-items: center; justify-content: center;
+            text-align: center; background: linear-gradient(rgba(0,84,165,0.8), rgba(0,84,165,0.6)), url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=2070') center/cover;
+            color: white; padding-top: 80px; clip-path: ellipse(150% 100% at 50% 0%);
+        }
+
+        .hero-content h1 { font-size: 3.5rem; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 2px; }
+        .btn-cta {
+            padding: 12px 30px; background: var(--accent); color: white; border: none;
+            border-radius: 50px; font-weight: bold; cursor: pointer; transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(237, 28, 36, 0.3);
+        }
+        .btn-cta:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(237, 28, 36, 0.5); }
+
+        /* --- 5. GRID MAJORS --- */
+        .section { max-width: 1200px; margin: 80px auto; padding: 0 2rem; }
+        .section-title { text-align: center; margin-bottom: 50px; }
+        .section-title h2 { font-size: 2rem; color: var(--primary); margin-bottom: 10px; }
+        .section-title div { width: 80px; height: 4px; background: var(--accent); margin: 0 auto; border-radius: 2px; }
+
+        .majors-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+        .major-card {
+            background: var(--glass-bg); padding: 40px 30px; border-radius: 20px;
+            text-align: center; transition: var(--transition); border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: var(--card-shadow);
+        }
+        .major-card i { font-size: 3rem; color: var(--primary); margin-bottom: 20px; }
+        .major-card:hover {
+            transform: translateY(-10px);
+            background: var(--primary); color: white;
+        }
+        .major-card:hover i { color: white; }
+
+        /* --- 6. NEWS SECTION --- */
+        .news-container { display: grid; grid-template-columns: 2fr 1fr; gap: 40px; }
+        .news-main { background: white; border-radius: 15px; overflow: hidden; box-shadow: var(--card-shadow); }
+        [data-theme="dark"] .news-main { background: #1e293b; }
+        .news-img { width: 100%; height: 300px; object-fit: cover; }
+        .news-body { padding: 25px; }
+
+        .notice-list { display: flex; flex-direction: column; gap: 15px; }
+        .notice-item {
+            padding: 15px; border-left: 4px solid var(--primary);
+            background: rgba(0, 84, 165, 0.05); transition: var(--transition);
+        }
+        .notice-item:hover { background: rgba(0, 84, 165, 0.1); padding-left: 20px; }
+
+        /* --- 7. FOOTER --- */
+        footer { background: #002d58; color: #cbd5e1; padding: 60px 0 20px; }
+        .footer-content {
+            max-width: 1200px; margin: 0 auto; padding: 0 2rem;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px;
+        }
+        .footer-col h3 { color: white; margin-bottom: 20px; border-left: 3px solid var(--accent); padding-left: 10px; }
+        .footer-bottom { text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.9rem; }
+
+        /* --- 8. RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed; top: 70px; left: -100%; width: 100%; height: calc(100vh - 70px);
+                background: var(--bg-light); flex-direction: column; padding: 40px; transition: 0.5s;
+            }
+            .nav-menu.active { left: 0; }
+            .hamburger { display: block; }
+            .news-container { grid-template-columns: 1fr; }
+            .hero-content h1 { font-size: 2.2rem; }
+        }
+

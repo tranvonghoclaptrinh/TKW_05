@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đào tạo - Khoa CNTT HUIT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .curriculum-card { 
+            background: var(--glass-bg); 
+            padding: 25px; 
+            border-radius: 15px; 
+            border-left: 5px solid var(--primary); 
+            margin-bottom: 20px; 
+            box-shadow: var(--card-shadow);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <header id="header">
+        <nav class="navbar">
+            <a href="index.html" class="logo">HUIT <span>IT</span></a>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="gioithieu.html" class="nav-link">Giới thiệu</a></li>
+                <li><a href="daotao.html" class="nav-link">Đào tạo</a></li>
+                <li><a href="sinhvien.html" class="nav-link">Sinh viên</a></li>
+                <li><a href="lienhe.html" class="nav-link">Liên hệ</a></li>
+            </ul>
+            <div class="controls">
+                <i class="fas fa-moon" id="theme-toggle"></i>
+                <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="section" style="margin-top: 150px;">
+        <div class="section-title">
+            <h2>Chương Trình Đào Tạo</h2>
+            <div></div>
+        </div>
+        <div class="curriculum-card">
+            <h3>Hệ Đại học chính quy</h3>
+            <p>Đào tạo Kỹ sư Công nghệ thông tin với các chuyên ngành mũi nhọn.</p>
+        </div>
+        <div class="curriculum-card" style="border-left-color: var(--accent);">
+            <h3>Hệ Chất lượng cao</h3>
+            <p>Môi trường học tập hiện đại, chú trọng tiếng Anh chuyên ngành.</p>
+        </div>
+    </section>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
