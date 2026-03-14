@@ -127,4 +127,98 @@
             .news-container { grid-template-columns: 1fr; }
             .hero-content h1 { font-size: 2.2rem; }
         }
+/* css mới thêm cho trang đào tạo */
+        .curriculum-card { 
+            background: var(--glass-bg); 
+            padding: 25px; 
+            border-radius: 15px; 
+            border-left: 5px solid var(--primary); 
+            margin-bottom: 20px; 
+            box-shadow: var(--card-shadow);
+            backdrop-filter: blur(10px);
+        }
+/* --- RIGHT PANEL TASKBAR --- */
+.right-panel {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 60px; /* Chiều rộng khi thu gọn */
+    height: auto;
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 30px 0 0 30px;
+    box-shadow: var(--card-shadow);
+    z-index: 999;
+    overflow: hidden;
+    transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
 
+/* Phóng to khi hover */
+.right-panel:hover {
+    width: 200px; /* Chiều rộng khi mở rộng */
+}
+
+.panel-content {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+}
+
+.panel-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    color: var(--text-dark);
+    text-decoration: none;
+    transition: var(--transition);
+    white-space: nowrap; /* Giữ chữ không bị nhảy dòng khi mở rộng */
+}
+
+.panel-item i {
+    font-size: 1.2rem;
+    min-width: 25px;
+    margin-right: 20px;
+    color: var(--primary);
+}
+
+.panel-item span {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-weight: 500;
+}
+
+.right-panel:hover .panel-item span {
+    opacity: 1;
+}
+
+.panel-item:hover {
+    background: rgba(0, 84, 165, 0.1);
+    color: var(--accent);
+}
+
+.panel-trigger {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.8rem;
+    color: var(--primary);
+    transition: transform 0.4s ease;
+}
+
+.right-panel:hover .panel-trigger {
+    transform: translateY(-50%) rotate(180deg);
+    left: auto;
+    right: 10px;
+    opacity: 0; /* Ẩn đi khi đã mở rộng */
+}
+
+/* Ẩn panel trên thiết bị di động nhỏ để tránh che nội dung */
+@media (max-width: 480px) {
+    .right-panel {
+        display: none;
+    }
+}
