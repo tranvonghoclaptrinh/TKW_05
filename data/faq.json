@@ -1,0 +1,212 @@
+[
+  {
+    "id": 1,
+    "category": "đào tạo",
+    "icon": "📚",
+    "question": "Lộ trình đào tạo mấy năm?",
+    "answer": "Chương trình đào tạo Kỹ sư CNTT tại HUIT là 4 năm (128-180 tín chỉ tùy chuyên ngành). Mỗi năm gồm 2 học kỳ chính cộng thêm học kỳ hè tùy chọn."
+  },
+  {
+    "id": 2,
+    "category": "đào tạo",
+    "icon": "🎯",
+    "question": "Các chuyên ngành có gì?",
+    "answer": "Khoa CNTT HUIT có 4 chuyên ngành: (1) Kỹ thuật Phần mềm, (2) An toàn Thông tin, (3) Khoa học Dữ liệu, (4) Hệ thống Thông tin. Bạn sẽ lựa chọn chuyên ngành từ năm 2."
+  },
+  {
+    "id": 3,
+    "category": "đào tạo",
+    "icon": "🏆",
+    "question": "Hệ đào tạo nào tốt hơn - Chính quy hay Chất lượng cao?",
+    "answer": "Cả hai hệ đều tốt. Chính quy: học phí 20 triệu/năm, tiêu chuẩn quốc gia. Chất lượng cao: 30 triệu/năm, giảng viên quốc tế, tiếng Anh chuyên ngành. Chọn tùy theo nhu cầu & ngân sách."
+  },
+  {
+    "id": 4,
+    "category": "đào tạo",
+    "icon": "👨‍🏫",
+    "question": "Giảng viên có kinh nghiệm không?",
+    "answer": "Có. Khoa CNTT có đội ngũ giảng viên gồm PGS, TS, ThS với 10-25 năm kinh nghiệm. Nhiều giảng viên có bằng cấp quốc tế từ Mỹ, Úc, Anh."
+  },
+  {
+    "id": 5,
+    "category": "tuyển sinh",
+    "icon": "📝",
+    "question": "Điều kiện nhập học là gì?",
+    "answer": "Cần tốt nghiệp THPT hoặc tương đương, đạt điểm chuẩn tuyển sinh (thay đổi theo năm). Có thể xét tuyển qua: (1) Kỳ thi THPT Quốc gia, (2) Xét tuyển học bạ, (3) Thi riêng, (4) Ưu tiên tác phẩm."
+  },
+  {
+    "id": 6,
+    "category": "tuyển sinh",
+    "icon": "💰",
+    "question": "Học phí năm nay bao nhiêu?",
+    "answer": "Năm 2026: Hệ Chính quy 20 triệu/năm, Hệ Chất lượng cao 30 triệu/năm. Có hỗ trợ vay vốn học sinh viên với lãi suất ưu đãi."
+  },
+  {
+    "id": 7,
+    "category": "tuyển sinh",
+    "icon": "🎁",
+    "question": "Có học bổng được không?",
+    "answer": "Có! HUIT cấp học bổng từ 30%-100% học phí dựa trên: (1) Kết quả học tập, (2) Hoàn cảnh khác biệt, (3) Tài năng thể thao/văn hóa, (4) Dân tộc thiểu số. Tư vấn chi tiết tại phòng Tuyển sinh."
+  },
+  {
+    "id": 8,
+    "category": "tuyển sinh",
+    "icon": "📞",
+    "question": "Liên hệ tuyển sinh ở đâu?",
+    "answer": "Phòng Tuyển sinh Khoa CNTT: Tòa A, Phòng 205, 140 Lê Trọng Tấn, TTP.HCM. Điện thoại: (028) 3816 1673 - Ext 234. Email: tuyensinh@huit.edu.vn. Giờ làm việc: T2-T6, 8h-17h."
+  },
+  {
+    "id": 9,
+    "category": "học tập",
+    "icon": "📖",
+    "question": "Môn học nào bắt buộc?",
+    "answer": "Tất cả sinh viên phải học: Nhập môn lập trình, Cấu trúc dữ liệu, Toán rời rạc, Cơ sở dữ liệu, Tiếng Anh chuyên ngành, Thể dục. Ngoài ra tùy chuyên ngành có các môn tích cực khác."
+  },
+  {
+    "id": 10,
+    "category": "học tập",
+    "icon": "💻",
+    "question": "Học ngôn ngữ lập trình gì?",
+    "answer": "Năm 1: C++ hoặc Java. Năm 2: Python, JavaScript. Năm 3-4: Tùy chuyên ngành - Phần mềm (Web, Mobile), An toàn (Python, C), Dữ liệu (Python, R), Hệ thống (C#, Java)."
+  },
+  {
+    "id": 11,
+    "category": "học tập",
+    "icon": "🔬",
+    "question": "Có lab/thực hành không?",
+    "answer": "Có. Khoa CNTT có các phòng lab hiện đại cho lập trình, mạng, bảo mật. Mỗi môn học có phần thực hành. Ngoài giờ, sinh viên có thể sử dụng lab tự do."
+  },
+  {
+    "id": 12,
+    "category": "học tập",
+    "icon": "📊",
+    "question": "Cách tính GPA là gì?",
+    "answer": "GPA = Tổng(Điểm chữ × Tín chỉ) / Tổng tín chỉ. Chỉ tính các môn đạt (≥4.0). GPA tích lũy = TB của tất cả các học kỳ. Để DK tốt nghiệp, GPA ≥ 2.0."
+  },
+  {
+    "id": 13,
+    "category": "điểm số",
+    "icon": "📝",
+    "question": "Tra cứu điểm ở đâu?",
+    "answer": "Bạn có thể tra cứu điểm tại website bằng cách: Đăng nhập Portal → Tra cứu điểm. Hoặc truy cập trang Tra cứu điểm trực tiếp, nhập MSSV & tên. Điểm cập nhật 1 tuần sau kỳ thi."
+  },
+  {
+    "id": 14,
+    "category": "điểm số",
+    "icon": "❓",
+    "question": "Điểm em thấp, làm sao?",
+    "answer": "Nếu điểm < 4.0 (không đạt), bạn có thể: (1) Học lại môn đó, (2) Kiểm tra lại bài thi tại phòng Đào tạo, (3) Trao đổi với giảng viên. Liên hệ SV360 để tư vấn hỗ trợ học tập."
+  },
+  {
+    "id": 15,
+    "category": "điểm số",
+    "icon": "🔄",
+    "question": "Học lại môn thì tính điểm sao?",
+    "answer": "Khi học lại một môn, điểm mới sẽ thay thế điểm cũ. Tín chỉ được cộng một lần. Yêu cầu học lại: ghi danh lên Portal trước deadline đăng ký học phần."
+  },
+  {
+    "id": 16,
+    "category": "đăng ký",
+    "icon": "📅",
+    "question": "Đăng ký học phần thế nào?",
+    "answer": "Đăng ký qua Portal (bit.ly/HUIT-Portal): Login → Đăng ký học phần → Chọn các môn → Xác nhận. Deadline đăng ký: phần lớn cuối tháng 8 (HK1) và cuối tháng 1 (HK2)."
+  },
+  {
+    "id": 17,
+    "category": "đăng ký",
+    "icon": "⚡",
+    "question": "Hạn chế tín chỉ đăng ký là bao nhiêu?",
+    "answer": "Tiêu chuẩn: 16-19 tín chỉ/học kỳ. Nếu GPA ≥ 3.5, có thể đăng ký tối đa 22 tín chỉ. Nếu có học kỳ trước, có thể xin giảm đến 13 tín chỉ (liên hệ Khoa để yêu cầu)."
+  },
+  {
+    "id": 18,
+    "category": "đăng ký",
+    "icon": "🚫",
+    "question": "Hủy đăng ký môn học được không?",
+    "answer": "Được, nhưng có deadline. Hủy trong tuần đầu (W1): miễn phí, không ảnh hưởng. Hủy tuần 2-4: được hủy nhưng vẫn tính vào GPA. Sau W4 không hủy được."
+  },
+  {
+    "id": 19,
+    "category": "tốt nghiệp",
+    "icon": "🎓",
+    "question": "Điều kiện tốt nghiệp là gì?",
+    "answer": "Cần: (1) Hoàn thành 120-180 tín chỉ, (2) GPA ≥ 2.0, (3) Không nợ học phí, (4) Hoàn thành khóa luận, (5) Đạt chuẩn ngoại ngữ (có thể miễn). Thời gian tối đa: 6 năm từ lúc nhập học."
+  },
+  {
+    "id": 20,
+    "category": "tốt nghiệp",
+    "icon": "📖",
+    "question": "Khóa luận là gì? Khó không?",
+    "answer": "Khóa luận (Capstone/Thesis) là dự án cuối cùng của sinh viên, thường làm trên cơ sở kiến thức học được + hướng dẫn từ thầy cô. Để tốt nghiệp bắt buộc hoàn thành & đạt điểm ≥ 5.0."
+  },
+  {
+    "id": 21,
+    "category": "tốt nghiệp",
+    "icon": "📅",
+    "question": "Lịch thi tốt nghiệp khi nào?",
+    "answer": "Thi tốt nghiệp thường vào tháng 4-5 (học kỳ 8). Sinh viên năm 4 sẽ được thông báo lịch cụ thể vào tháng 3. Phải hoàn thành khóa luận trước kỳ thi 2-3 tuần."
+  },
+  {
+    "id": 22,
+    "category": "tốt nghiệp",
+    "icon": "💒",
+    "question": "Điểm tốt nghiệp như thế nào?",
+    "answer": "Bằng tốt nghiệp ghi: Họ tên, MSSV, Chuyên ngành, GPA tích lũy. Nếu GPA ≥ 3.0: Bằng loại Giỏi. GPA ≥ 3.5: Bằng loại Xuất sắc. Giấy chứng nhận sẽ ghi rõ loại học lực."
+  },
+  {
+    "id": 23,
+    "category": "việc làm",
+    "icon": "💼",
+    "question": "Có hỗ trợ việc làm không?",
+    "answer": "Có. Phòng Hỗ trợ sinh viên & Phòng Đào tạo cung cấp: (1) Danh sách công ty tuyển dụng, (2) Hội thảo tuyển dụng, (3) Huấn luyện kỹ năng phỏng vấn, CV. Tỉ lệ xin việc của CNTT: 95-98%."
+  },
+  {
+    "id": 24,
+    "category": "việc làm",
+    "icon": "🏢",
+    "question": "Các công ty hợp tác là những ai?",
+    "answer": "HUIT có hợp tác với hơn 100 công ty: FPT Software, Viettel, Grab, Shopee, Lazada, Google Vietnam, AWS, Microsoft, Agribank, CMC, Accenture, v.v. Danh sách cập nhật tại website Khoa."
+  },
+  {
+    "id": 25,
+    "category": "thực tập",
+    "icon": "🔧",
+    "question": "Thực tập bắt buộc à? Ở đâu?",
+    "answer": "Có, bắt buộc ít nhất 6 tuần (HK6). Sinh viên có thể thực tập tại công ty partners của HUIT hoặc tự tìm. Phòng Đào tạo sẽ hỗ trợ và cấp công ty danh sách."
+  },
+  {
+    "id": 26,
+    "category": "kỹ thuật",
+    "icon": "🔐",
+    "question": "Portal là gì? Dùng để làm gì?",
+    "answer": "Portal (bit.ly/HUIT-Portal) là hệ thống quản lý học sinh viên trực tuyến của HUIT. Dùng để: đăng ký môn, xem lịch, tra cứu điểm, nộp bài tập, liên hệ thầy cô."
+  },
+  {
+    "id": 27,
+    "category": "kỹ thuật",
+    "icon": "🆘",
+    "question": "Quên mật khẩu Portal thì sao?",
+    "answer": "Click 'Quên mật khẩu' → nhập email/MSSV → nhận email kích hoạt lại mật khẩu. Nếu không nhận email, liên hệ IT Support: (028) 3816 1673 Ext 300 hoặc itsupport@huit.edu.vn."
+  },
+  {
+    "id": 28,
+    "category": "kỹ thuật",
+    "icon": "📱",
+    "question": "Có app di động không?",
+    "answer": "Có app HUIT Mobile (Android & iOS) gồm: xem lịch, tra cứu điểm, thông báo, tin tức. Download miễn phí từ App Store / Google Play. Tây riêng ưu tiên sử dụng Portal web để đăng ký."
+  },
+  {
+    "id": 29,
+    "category": "hỗ trợ",
+    "icon": "💪",
+    "question": "Có tư vấn học tập/tâm lý không?",
+    "answer": "Có. SV360 (Sinh viên 360) cung cấp: (1) Tư vấn học tập, (2) Hỗ trợ tâm lý, (3) Tư vấn sự nghiệp. Liên hệ: (028) 3816 1673 Ext 400 hoặc sv360@huit.edu.vn."
+  },
+  {
+    "id": 30,
+    "category": "hỗ trợ",
+    "icon": "☎️",
+    "question": "Khoa CNTT có hotline hỗ trợ không?",
+    "answer": "Có. Hotline Khoa CNTT: (028) 3816 1673 (mở từ 8h-17h, T2-T6). Có thể tư vấn qua điện thoại hoặc gặp trực tiếp tại Tòa A, Phòng 201-205. Email: khoa.cntt@huit.edu.vn."
+  }
+]
