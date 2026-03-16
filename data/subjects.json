@@ -1,0 +1,86 @@
+[
+  {
+    "maMonHoc": "CS101",
+    "tenMon": "Nhập môn lập trình",
+    "tinChi": 3,
+    "chuyenNganh": "Chung",
+    "ghiChu": "Bắt buộc năm 1"
+  },
+  {
+    "maMonHoc": "CS102",
+    "tenMon": "Cấu trúc dữ liệu",
+    "tinChi": 3,
+    "chuyenNganh": "Chung",
+    "ghiChu": "Bắt buộc năm 1"
+  },
+  {
+    "maMonHoc": "CS103",
+    "tenMon": "Toán rời rạc",
+    "tinChi": 4,
+    "chuyenNganh": "Chung",
+    "ghiChu": "Bắt buộc năm 1"
+  },
+  {
+    "maMonHoc": "CS104",
+    "tenMon": "Lập trình Java",
+    "tinChi": 3,
+    "chuyenNganh": "Kỹ thuật Phần mềm",
+    "ghiChu": "Bắt buộc chuyên ngành"
+  },
+  {
+    "maMonHoc": "CS105",
+    "tenMon": "Cơ sở dữ liệu",
+    "tinChi": 3,
+    "chuyenNganh": "Chung",
+    "ghiChu": "Bắt buộc năm 1"
+  },
+  {
+    "maMonHoc": "CS106",
+    "tenMon": "Xác suất thống kê",
+    "tinChi": 3,
+    "chuyenNganh": "Khoa học Dữ liệu",
+    "ghiChu": "Bắt buộc chuyên ngành"
+  },
+  {
+    "maMonHoc": "CS107",
+    "tenMon": "Cryptography",
+    "tinChi": 3,
+    "chuyenNganh": "An toàn Thông tin",
+    "ghiChu": "Bắt buộc chuyên ngành"
+  },
+  {
+    "maMonHoc": "CS108",
+    "tenMon": "Mạng máy tính",
+    "tinChi": 3,
+    "chuyenNganh": "Hệ thống Thông tin",
+    "ghiChu": "Bắt buộc chuyên ngành"
+  },
+  {
+    "maMonHoc": "CS109",
+    "tenMon": "Web development",
+    "tinChi": 3,
+    "chuyenNganh": "Kỹ thuật Phần mềm",
+    "ghiChu": "Bắt buộc chuyên ngành"
+  },
+  {
+    "maMonHoc": "CS110",
+    "tenMon": "Machine Learning",
+    "tinChi": 3,
+    "chuyenNganh": "Khoa học Dữ liệu",
+    "ghiChu": "Bắt buộc chuyên ngành"
+  },
+  {
+    "maMonHoc": "CS111",
+    "tenMon": "Tiếng Anh chuyên ngành",
+    "tinChi": 2,
+    "chuyenNganh": "Chung",
+    "ghiChu": "Bắt buộc tất cả"
+  },
+  {
+    "maMonHoc": "CS112",
+    "tenMon": "Thể dục",
+    "tinChi": 1,
+    "chuyenNganh": "Chung",
+    "ghiChu": "Bắt buộc năm 1"
+  }
+]

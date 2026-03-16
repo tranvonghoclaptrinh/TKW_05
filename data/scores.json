@@ -1,0 +1,150 @@
+[
+  {
+    "mssv": "21IT001",
+    "hocKy": 1,
+    "nam": 2021,
+    "marks": [
+      { "maMonHoc": "CS101", "diemQT": 8.5, "diemKT": 8.0, "diemTK": 8.2 },
+      { "maMonHoc": "CS102", "diemQT": 7.5, "diemKT": 7.8, "diemTK": 7.7 },
+      { "maMonHoc": "CS103", "diemQT": 9.0, "diemKT": 8.5, "diemTK": 8.8 },
+      { "maMonHoc": "CS105", "diemQT": 8.0, "diemKT": 8.2, "diemTK": 8.1 },
+      { "maMonHoc": "CS111", "diemQT": 7.0, "diemKT": 7.5, "diemTK": 7.3 },
+      { "maMonHoc": "CS112", "diemQT": 9.0, "diemKT": 0, "diemTK": 9.0 }
+    ]
+  },
+  {
+    "mssv": "21IT001",
+    "hocKy": 2,
+    "nam": 2021,
+    "marks": [
+      { "maMonHoc": "CS104", "diemQT": 8.8, "diemKT": 8.5, "diemTK": 8.7 },
+      { "maMonHoc": "CS105", "diemQT": 8.2, "diemKT": 8.0, "diemTK": 8.1 },
+      { "maMonHoc": "CS109", "diemQT": 8.0, "diemKT": 8.2, "diemTK": 8.1 },
+      { "maMonHoc": "CS111", "diemQT": 7.5, "diemKT": 7.8, "diemTK": 7.7 }
+    ]
+  },
+  {
+    "mssv": "21IT002",
+    "hocKy": 1,
+    "nam": 2021,
+    "marks": [
+      { "maMonHoc": "CS101", "diemQT": 8.0, "diemKT": 7.8, "diemTK": 7.9 },
+      { "maMonHoc": "CS102", "diemQT": 8.5, "diemKT": 8.2, "diemTK": 8.4 },
+      { "maMonHoc": "CS103", "diemQT": 7.8, "diemKT": 8.0, "diemTK": 7.9 },
+      { "maMonHoc": "CS105", "diemQT": 7.5, "diemKT": 7.8, "diemTK": 7.7 },
+      { "maMonHoc": "CS111", "diemQT": 8.5, "diemKT": 8.8, "diemTK": 8.7 },
+      { "maMonHoc": "CS112", "diemQT": 9.0, "diemKT": 0, "diemTK": 9.0 }
+    ]
+  },
+  {
+    "mssv": "21IT002",
+    "hocKy": 2,
+    "nam": 2021,
+    "marks": [
+      { "maMonHoc": "CS107", "diemQT": 8.2, "diemKT": 8.0, "diemTK": 8.1 },
+      { "maMonHoc": "CS105", "diemQT": 8.0, "diemKT": 8.2, "diemTK": 8.1 },
+      { "maMonHoc": "CS102", "diemQT": 8.5, "diemKT": 8.5, "diemTK": 8.5 },
+      { "maMonHoc": "CS111", "diemQT": 8.0, "diemKT": 8.2, "diemTK": 8.1 }
+    ]
+  },
+  {
+    "mssv": "21IT003",
+    "hocKy": 1,
+    "nam": 2021,
+    "marks": [
+      { "maMonHoc": "CS101", "diemQT": 9.0, "diemKT": 8.8, "diemTK": 8.9 },
+      { "maMonHoc": "CS102", "diemQT": 8.8, "diemKT": 8.5, "diemTK": 8.7 },
+      { "maMonHoc": "CS103", "diemQT": 9.2, "diemKT": 9.0, "diemTK": 9.1 },
+      { "maMonHoc": "CS105", "diemQT": 8.5, "diemKT": 8.8, "diemTK": 8.7 },
+      { "maMonHoc": "CS111", "diemQT": 8.0, "diemKT": 8.2, "diemTK": 8.1 },
+      { "maMonHoc": "CS112", "diemQT": 9.0, "diemKT": 0, "diemTK": 9.0 }
+    ]
+  },
+  {
+    "mssv": "21IT003",
+    "hocKy": 2,
+    "nam": 2021,
+    "marks": [
+      { "maMonHoc": "CS106", "diemQT": 9.0, "diemKT": 8.8, "diemTK": 8.9 },
+      { "maMonHoc": "CS110", "diemQT": 8.8, "diemKT": 8.5, "diemTK": 8.7 },
+      { "maMonHoc": "CS102", "diemQT": 8.5, "diemKT": 8.8, "diemTK": 8.7 },
+      { "maMonHoc": "CS111", "diemQT": 8.5, "diemKT": 8.2, "diemTK": 8.4 }
+    ]
+  },
+  {
+    "mssv": "21IT004",
+    "hocKy": 1,
+    "nam": 2021,
+    "marks": [
+      { "maMonHoc": "CS101", "diemQT": 7.5, "diemKT": 7.2, "diemTK": 7.3 },
+      { "maMonHoc": "CS102", "diemQT": 7.8, "diemKT": 7.5, "diemTK": 7.6 },
+      { "maMonHoc": "CS103", "diemQT": 7.0, "diemKT": 7.2, "diemTK": 7.1 },
+      { "maMonHoc": "CS105", "diemQT": 7.5, "diemKT": 7.8, "diemTK": 7.7 },
+      { "maMonHoc": "CS111", "diemQT": 7.0, "diemKT": 7.2, "diemTK": 7.1 },
+      { "maMonHoc": "CS112", "diemQT": 8.5, "diemKT": 0, "diemTK": 8.5 }
+    ]
+  },
+  {
+    "mssv": "21IT004",
+    "hocKy": 2,
+    "nam": 2021,
+    "marks": [
+      { "maMonHoc": "CS108", "diemQT": 7.8, "diemKT": 7.5, "diemTK": 7.6 },
+      { "maMonHoc": "CS105", "diemQT": 7.5, "diemKT": 7.8, "diemTK": 7.7 },
+      { "maMonHoc": "CS102", "diemQT": 7.8, "diemKT": 8.0, "diemTK": 7.9 },
+      { "maMonHoc": "CS111", "diemQT": 7.2, "diemKT": 7.5, "diemTK": 7.4 }
+    ]
+  },
+  {
+    "mssv": "22IT001",
+    "hocKy": 1,
+    "nam": 2022,
+    "marks": [
+      { "maMonHoc": "CS101", "diemQT": 8.5, "diemKT": 8.2, "diemTK": 8.3 },
+      { "maMonHoc": "CS102", "diemQT": 8.0, "diemKT": 7.8, "diemTK": 7.9 },
+      { "maMonHoc": "CS103", "diemQT": 8.5, "diemKT": 8.2, "diemTK": 8.4 },
+      { "maMonHoc": "CS105", "diemQT": 8.2, "diemKT": 8.0, "diemTK": 8.1 },
+      { "maMonHoc": "CS111", "diemQT": 7.5, "diemKT": 7.8, "diemTK": 7.7 },
+      { "maMonHoc": "CS112", "diemQT": 9.0, "diemKT": 0, "diemTK": 9.0 }
+    ]
+  },
+  {
+    "mssv": "22IT002",
+    "hocKy": 1,
+    "nam": 2022,
+    "marks": [
+      { "maMonHoc": "CS101", "diemQT": 8.8, "diemKT": 8.5, "diemTK": 8.7 },
+      { "maMonHoc": "CS102", "diemQT": 8.5, "diemKT": 8.2, "diemTK": 8.4 },
+      { "maMonHoc": "CS103", "diemQT": 8.8, "diemKT": 8.5, "diemTK": 8.7 },
+      { "maMonHoc": "CS105", "diemQT": 8.5, "diemKT": 8.2, "diemTK": 8.4 },
+      { "maMonHoc": "CS111", "diemQT": 8.0, "diemKT": 8.2, "diemTK": 8.1 },
+      { "maMonHoc": "CS112", "diemQT": 9.0, "diemKT": 0, "diemTK": 9.0 }
+    ]
+  },
+  {
+    "mssv": "22IT003",
+    "hocKy": 1,
+    "nam": 2022,
+    "marks": [
+      { "maMonHoc": "CS101", "diemQT": 8.2, "diemKT": 8.0, "diemTK": 8.1 },
+      { "maMonHoc": "CS102", "diemQT": 8.5, "diemKT": 8.2, "diemTK": 8.4 },
+      { "maMonHoc": "CS103", "diemQT": 8.0, "diemKT": 8.2, "diemTK": 8.1 },
+      { "maMonHoc": "CS105", "diemQT": 8.2, "diemKT": 8.0, "diemTK": 8.1 },
+      { "maMonHoc": "CS111", "diemQT": 8.5, "diemKT": 8.2, "diemTK": 8.4 },
+      { "maMonHoc": "CS112", "diemQT": 9.0, "diemKT": 0, "diemTK": 9.0 }
+    ]
+  },
+  {
+    "mssv": "22IT004",
+    "hocKy": 1,
+    "nam": 2022,
+    "marks": [
+      { "maMonHoc": "CS101", "diemQT": 7.8, "diemKT": 7.5, "diemTK": 7.6 },
+      { "maMonHoc": "CS102", "diemQT": 8.0, "diemKT": 7.8, "diemTK": 7.9 },
+      { "maMonHoc": "CS103", "diemQT": 7.8, "diemKT": 8.0, "diemTK": 7.9 },
+      { "maMonHoc": "CS105", "diemQT": 7.8, "diemKT": 8.0, "diemTK": 7.9 },
+      { "maMonHoc": "CS111", "diemQT": 7.5, "diemKT": 7.8, "diemTK": 7.7 },
+      { "maMonHoc": "CS112", "diemQT": 8.5, "diemKT": 0, "diemTK": 8.5 }
+    ]
+  }
+]
