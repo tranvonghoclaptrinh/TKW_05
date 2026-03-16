@@ -47,7 +47,18 @@
         });
 
         // --- 4. FLOATING CHATBOT WIDGET ---
+        loadFAQForChatbot();
         initFloatingChatbot();
+
+        // Load FAQ data for chatbot
+        function loadFAQForChatbot() {
+            fetch('data/faq.json')
+                .then(res => res.json())
+                .then(data => {
+                    window.faqDataWidget = data;
+                })
+                .catch(err => console.log('FAQ không load được:', err));
+        }
 
         function initFloatingChatbot() {
             // Create chatbot HTML
