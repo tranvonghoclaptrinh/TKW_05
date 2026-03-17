@@ -1,71 +1,71 @@
 [
   {
-    "mssv": "21IT001",
+    "mssv": "2001240001",
     "hoTen": "Nguyễn Văn A",
-    "lop": "21IT1",
+    "lop": "15DHTH01",
     "khoaDayTao": "2021",
     "chuyenNganh": "Kỹ thuật Phần mềm",
     "heDaoTao": "Chính quy",
     "tongTinChiHoLT": 130
   },
   {
-    "mssv": "21IT002",
+    "mssv": "2001240002",
     "hoTen": "Trần Thị B",
-    "lop": "21IT1",
+    "lop": "15DHTH01",
     "khoaDayTao": "2021",
     "chuyenNganh": "An toàn Thông tin",
     "heDaoTao": "Chính quy",
     "tongTinChiHoLT": 128
   },
   {
-    "mssv": "21IT003",
+    "mssv": "2001240003",
     "hoTen": "Phạm Văn C",
-    "lop": "21IT2",
+    "lop": "15DHTH02",
     "khoaDayTao": "2021",
     "chuyenNganh": "Khoa học Dữ liệu",
     "heDaoTao": "Chất lượng cao",
     "tongTinChiHoLT": 125
   },
   {
-    "mssv": "21IT004",
+    "mssv": "2001240004",
     "hoTen": "Hoàng Thị D",
-    "lop": "21IT2",
+    "lop": "15DHTH02",
     "khoaDayTao": "2021",
     "chuyenNganh": "Hệ thống Thông tin",
     "heDaoTao": "Chính quy",
     "tongTinChiHoLT": 120
   },
   {
-    "mssv": "22IT001",
+    "mssv": "2002240001",
     "hoTen": "Võ Văn E",
-    "lop": "22IT1",
+    "lop": "15DHTH03",
     "khoaDayTao": "2022",
     "chuyenNganh": "Kỹ thuật Phần mềm",
     "heDaoTao": "Chính quy",
     "tongTinChiHoLT": 90
   },
   {
-    "mssv": "22IT002",
+    "mssv": "2002240002",
     "hoTen": "Lê Thị F",
-    "lop": "22IT1",
+    "lop": "15DHTH03",
     "khoaDayTao": "2022",
     "chuyenNganh": "Khoa học Dữ liệu",
     "heDaoTao": "Chất lượng cao",
     "tongTinChiHoLT": 88
   },
   {
-    "mssv": "22IT003",
+    "mssv": "2002240003",
     "hoTen": "Đinh Văn G",
-    "lop": "22IT2",
+    "lop": "15DHTH04",
     "khoaDayTao": "2022",
     "chuyenNganh": "An toàn Thông tin",
     "heDaoTao": "Chính quy",
     "tongTinChiHoLT": 95
   },
   {
-    "mssv": "22IT004",
+    "mssv": "2002240004",
     "hoTen": "Bùi Thị H",
-    "lop": "22IT2",
+    "lop": "15DHTH04",
     "khoaDayTao": "2022",
     "chuyenNganh": "Hệ thống Thông tin",
     "heDaoTao": "Chính quy",

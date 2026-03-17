@@ -316,7 +316,9 @@
                     <input 
                         type="text" 
                         id="mssv" 
-                        placeholder="Nhập MSSV (VD: 21IT001)" 
+                        placeholder="Nhập MSSV (VD: 2001240001)" 
+                        pattern="^\d{10}$"
+                        title="MSSV phải có 10 chữ số (định dạng: 2001240XXX)"
                         required
                     >
                 </div>
@@ -443,16 +445,23 @@
         function searchStudent(event) {
             event.preventDefault();
             
-            const mssv = document.getElementById('mssv').value.trim().toUpperCase();
+            const mssv = document.getElementById('mssv').value.trim();
             const hoTen = document.getElementById('hoTen').value.trim().toLowerCase();
             const errorMsg = document.getElementById('errorMessage');
+            
+            // Validate MSSV format (10 digits)
+            if (!/^\d{10}$/.test(mssv)) {
+                showError('MSSV không đúng định dạng. Vui lòng nhập 10 chữ số (VD: 2001240001).');
+                document.getElementById('resultsContainer').classList.remove('show');
+                return;
+            }
             
             // Clear previous errors
             errorMsg.classList.remove('show');
             
             // Find student
             const student = studentData.find(s => 
-                s.mssv.toUpperCase() === mssv && 
+                s.mssv === mssv && 
                 (hoTen === '' || s.hoTen.toLowerCase().includes(hoTen))
             );
             
