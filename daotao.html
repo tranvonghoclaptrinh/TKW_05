@@ -37,6 +37,37 @@
         .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
+        /* Hero Section */
+        .training-hero {
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(rgba(0,84,165,0.88), rgba(237,28,36,0.78)), url('https://ts.huit.edu.vn/app_web/tttstt/images/slide/chao-tsv-k16-02.png') center/cover;
+            color: white;
+            border-radius: 20px;
+            margin-bottom: 60px;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
+        }
+
+        .training-hero-content h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+            font-weight: 700;
+        }
+
+        .training-hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+        }
+
+        .training-hero-content .btn-cta {
+            background: var(--accent);
+        }
+
         /* Major Details Card */
         .major-detail {
             background: var(--glass-bg);
@@ -152,6 +183,19 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            .training-hero {
+                height: 300px;
+                margin-top: 30px;
+            }
+
+            .training-hero-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .training-hero-content p {
+                font-size: 1rem;
+            }
+
             .major-detail-header {
                 grid-template-columns: 1fr;
                 gap: 25px;
@@ -183,10 +227,35 @@
     </header>
 
     <section class="section" style="margin-top: 150px;">
-        <!-- Tiêu đề chính -->
+        <!-- Page Title -->
         <div class="section-title">
             <h2>Chương Trình Đào Tạo</h2>
             <div></div>
+        </div>
+
+        <!-- Hero Section Introduction -->
+        <div class="training-hero">
+            <div class="training-hero-content">
+                <h1>Đào Tạo Kỹ Sư Công Nghệ Thông Tin</h1>
+                <p>Chuẩn bị đầy đủ kiến thức, kỹ năng và kinh nghiệm để trở thành chuyên gia CNTT hàng đầu</p>
+                <a href="tracuudiem.html" class="btn-cta">TRA CỨU ĐIỂM</a>
+            </div>
+        </div>
+
+        <!-- NAV TABS -->
+        <div class="tabs-nav">
+            <button class="tab-btn active" onclick="switchTab(event, 'software')">
+                <i class="fas fa-code"></i> Kỹ thuật Phần mềm
+            </button>
+            <button class="tab-btn" onclick="switchTab(event, 'security')">
+                <i class="fas fa-shield-alt"></i> An toàn Thông tin
+            </button>
+            <button class="tab-btn" onclick="switchTab(event, 'data')">
+                <i class="fas fa-database"></i> Khoa học Dữ liệu
+            </button>
+            <button class="tab-btn" onclick="switchTab(event, 'systems')">
+                <i class="fas fa-network-wired"></i> Hệ thống Thông tin
+            </button>
         </div>
 
         <!-- Hệ Đào Tạo Cards -->
@@ -204,9 +273,6 @@
                 <small style="color: var(--accent);">Học phí: 30 triệu/năm</small>
             </div>
         </div>
-
-        <!-- NAV TABS -->
-        <div class="tabs-nav">
             <button class="tab-btn active" onclick="switchTab(event, 'software')">
                 <i class="fas fa-code"></i> Kỹ thuật Phần mềm
             </button>
@@ -680,49 +746,57 @@
                 <div class="lecturer-card">
                     <div class="lecturer-avatar">👨‍🏫</div>
                     <div class="lecturer-info">
-                        <h4>PGS.TS. Nguyễn Văn A</h4>
-                        <p>Chuyên gia Kỹ thuật Phần mềm</p>
+                        <h4>PGS. TS. Vũ Thanh Nguyên</h4>
+                        <p>Trưởng khoa</p>
                         <p style="color: var(--accent); font-size: 0.85rem;">25 năm kinh nghiệm</p>
                     </div>
                 </div>
                 <div class="lecturer-card">
                     <div class="lecturer-avatar">👩‍🏫</div>
                     <div class="lecturer-info">
-                        <h4>TS. Trần Thị B</h4>
-                        <p>Chuyên gia An toàn Thông tin</p>
+                        <h4>ThS. Phạm Nguyễn Huy Phương</h4>
+                        <p>P. Trưởng Khoa</p>
                         <p style="color: var(--accent); font-size: 0.85rem;">18 năm kinh nghiệm</p>
                     </div>
                 </div>
                 <div class="lecturer-card">
-                    <div class="lecturer-avatar">👨‍🏫</div>
+                    <div class="lecturer-avatar">👩‍🏫</div>
                     <div class="lecturer-info">
-                        <h4>TS. Phạm Văn C</h4>
-                        <p>Chuyên gia Khoa học Dữ liệu</p>
-                        <p style="color: var(--accent); font-size: 0.85rem;">15 năm kinh nghiệm</p>
+                        <h4>TS. Phùng Thế Bảo</h4>
+                        <p>Trưởng Bộ môn Khoa học dữ liệu</p>
+                        <p style="color: var(--accent); font-size: 0.85rem;">18 năm kinh nghiệm</p>
                     </div>
                 </div>
                 <div class="lecturer-card">
                     <div class="lecturer-avatar">👩‍🏫</div>
                     <div class="lecturer-info">
-                        <h4>ThS. Hoàng Thị D</h4>
-                        <p>Chuyên gia Hệ thống Thông tin</p>
-                        <p style="color: var(--accent); font-size: 0.85rem;">12 năm kinh nghiệm</p>
-                    </div>
-                </div>
-                <div class="lecturer-card">
-                    <div class="lecturer-avatar">👨‍🏫</div>
-                    <div class="lecturer-info">
-                        <h4>TS. Võ Văn E</h4>
-                        <p>Chuyên gia Web Development</p>
-                        <p style="color: var(--accent); font-size: 0.85rem;">14 năm kinh nghiệm</p>
+                        <h4>ThS. Nguyễn Văn Lễ</h4>
+                        <p>Phụ trách Bộ môn hệ thống thông tin</p>
+                        <p style="color: var(--accent); font-size: 0.85rem;">18 năm kinh nghiệm</p>
                     </div>
                 </div>
                 <div class="lecturer-card">
                     <div class="lecturer-avatar">👩‍🏫</div>
                     <div class="lecturer-info">
-                        <h4>ThS. Lê Thị F</h4>
-                        <p>Chuyên gia Machine Learning</p>
-                        <p style="color: var(--accent); font-size: 0.85rem;">10 năm kinh nghiệm</p>
+                        <h4>ThS. Vũ Văn Vinh</h4>
+                        <p>Phụ trách Bộ môn Kỹ thuật phần mềm</p>
+                        <p style="color: var(--accent); font-size: 0.85rem;">18 năm kinh nghiệm</p>
+                    </div>
+                </div>
+                <div class="lecturer-card">
+                    <div class="lecturer-avatar">👩‍🏫</div>
+                    <div class="lecturer-info">
+                        <h4>TS. Nguyễn Hồng Vũ</h4>
+                        <p>Phụ trách Bộ môn mạng máy tính và An toàn thông tin</p>
+                        <p style="color: var(--accent); font-size: 0.85rem;">18 năm kinh nghiệm</p>
+                    </div>
+                </div>
+                <div class="lecturer-card">
+                    <div class="lecturer-avatar">👩‍🏫</div>
+                    <div class="lecturer-info">
+                        <h4>TS. Trần Khải Thiện</h4>
+                        <p>Phụ trách Bộ môn Công nghệ số</p>
+                        <p style="color: var(--accent); font-size: 0.85rem;">18 năm kinh nghiệm</p>
                     </div>
                 </div>
             </div>
