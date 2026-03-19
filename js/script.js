@@ -34,25 +34,27 @@ window.addEventListener('scroll', () => {
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('nav-menu');
 
-hamburger.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-    hamburger.innerHTML = navMenu.classList.contains('active') 
-        ? '<i class="fas fa-times"></i>' 
-        : '<i class="fas fa-bars"></i>';
-});
-
-// Đóng menu khi click link
-document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+if (hamburger && navMenu) {
+    hamburger.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        hamburger.innerHTML = navMenu.classList.contains('active') 
+            ? '<i class="fas fa-times"></i>' 
+            : '<i class="fas fa-bars"></i>';
     });
-});
+
+    // Đóng menu khi click link
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+        });
+    });
+}
 
 
 // Load FAQ data for chatbot
 function loadFAQForChatbot() {
-    fetch('data/faq.json')
+    fetch('/data/faq.json')
         .then(res => res.json())
         .then(data => {
             window.faqDataWidget = data;
@@ -429,7 +431,7 @@ window.sendChatbotMessage = function() {
     // Hide suggestions after first message
     if (suggestions) suggestions.classList.add('hidden');
 
-    // Load FAQ if not loaded
+    // Load FAQ/ if not loaded
     if (!window.faqDataWidget) {
         fetch('data/faq.json')
             .then(r => r.json())
@@ -494,9 +496,12 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, { threshold: 0.1 });
 
-document.querySelectorAll('.lecturer-card').forEach(card => {
-    observer.observe(card);
-});
+const lecturerCards = document.querySelectorAll('.lecturer-card');
+if (lecturerCards.length > 0) {
+    lecturerCards.forEach(card => {
+        observer.observe(card);
+    });
+}
 
 // Header Sticky
 window.addEventListener('scroll', () => {
