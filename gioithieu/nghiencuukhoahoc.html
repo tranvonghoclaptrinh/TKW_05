@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nghiên cứu khoa học - Khoa CNTT HUIT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <style>
+        /* --- LAYOUT FIXES --- */
+        .page-wrapper {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            min-height: calc(100vh - 70px);
+        }
+
+        /* --- HUIT HERO SECTION --- */
+        .huit-hero-section {
+            position: relative;
+            padding: 40px;
+            background-color: #0054a5;
+            background-image: linear-gradient(rgba(0, 84, 165, 0.92), rgba(0, 41, 82, 0.92)), 
+                              url('https://huit.edu.vn/images/slide/hufi-2020-6.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .bg-pattern {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .huit-container {
+            position: relative;
+            z-index: 1;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* --- BREADCRUMB & HEADER --- */
+        .huit-breadcrumb {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+        .huit-breadcrumb a { color: white; text-decoration: none; }
+        .huit-main-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 35px;
+            letter-spacing: 1px;
+        }
+
+        /* --- RESEARCH STYLES --- */
+        .research-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .summary-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .summary-item i { font-size: 1.5rem; color: #ffd700; margin-bottom: 10px; }
+        .summary-item h4 { font-size: 1.5rem; margin: 5px 0; }
+        .summary-item p { font-size: 0.85rem; opacity: 0.8; margin: 0; }
+
+        .research-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            color: #333;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .section-title {
+            color: #0054a5;
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 10px;
+        }
+
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .topic-card {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #ed1c24;
+            transition: 0.3s;
+        }
+        .topic-card:hover { transform: translateX(10px); background: #f1f5f9; }
+        .topic-card h5 { color: #0054a5; font-size: 1.1rem; margin-bottom: 10px; }
+        .topic-card p { font-size: 0.9rem; color: #64748b; line-height: 1.5; }
+
+        .lab-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .lab-item {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+        .lab-icon {
+            background: #0054a5;
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .lab-info h6 { font-size: 1rem; color: #1e293b; margin-bottom: 5px; }
+        .lab-info p { font-size: 0.85rem; color: #64748b; }
+
+    </style>
+</head>
+<body data-theme="light">
+    <header id="header">
+        <nav class="navbar">
+            <a href="../index.html" class="logo">HUIT <span>IT</span></a>
+            <ul class="nav-menu">
+                <li><a href="../gioithieu.html" class="nav-link active">Giới thiệu</a></li>
+                <li><a href="../daotao.html" class="nav-link">Đào tạo</a></li>
+                <li><a href="../tintuc.html" class="nav-link">Tin tức</a></li>
+                <li><a href="../lienhe.html" class="nav-link">Liên hệ</a></li>
+            </ul>
+            <div class="controls">
+                <i class="fas fa-moon" id="theme-toggle"></i>
+            </div>
+        </nav>
+    </header>
+
+    <div class="page-wrapper">
+        <aside class="left-sidebar">
+            <div class="sidebar-nav">
+                <div class="sidebar-title"><i class="fas fa-bars"></i> Danh mục</div>
+                <nav class="nav-group">
+                    <a href="../gioithieu.html" class="nav-item">Tổng quan khoa <i class="fas fa-chevron-right"></i></a>
+                    <a href="sumenh-tamnhin.html" class="nav-item">Sứ mệnh - Tầm nhìn <i class="fas fa-chevron-right"></i></a>
+                    <a href="cocautochuc.html" class="nav-item">Cơ cấu tổ chức <i class="fas fa-chevron-right"></i></a>
+                    <a href="doingugiangvien.html" class="nav-item">Đội ngũ giảng viên <i class="fas fa-chevron-right"></i></a>
+                    <a href="chuongtrinhdaotao.html" class="nav-item">Chương trình đào tạo <i class="fas fa-chevron-right"></i></a>
+                    <a href="nghiencuukhoahoc.html" class="nav-item active">Nghiên cứu khoa học <i class="fas fa-chevron-right"></i></a>
+                    <a href="sinhvien.html" class="nav-item">Sinh viên <i class="fas fa-chevron-right"></i></a>
+                    <a href="hoptacdoanhnghiep.html" class="nav-item">Hợp tác doanh nghiệp <i class="fas fa-chevron-right"></i></a>
+                </nav>
+            </div>
+        </aside>
+
+        <main class="huit-hero-section">
+            <div class="bg-pattern"></div>
+            <div class="huit-container">
+
+                    <nav class="huit-breadcrumb">
+                        <a href="../index.html">Trang chủ</a> / <a href="../gioithieu.html">Giới thiệu</a> / <span>Nghiên cứu khoa học</span>
+                    </nav>
+                    <h1 class="huit-main-title">Nghiên cứu & Chuyển giao</h1>
+
+
+                <!-- THỐNG KÊ NGHIÊN CỨU -->
+                <div class="research-summary">
+                    <div class="summary-item">
+                        <i class="fas fa-file-alt"></i>
+                        <h4>150+</h4>
+                        <p>Bài báo quốc tế (ISI/Scopus)</p>
+                    </div>
+                    <div class="summary-item">
+                        <i class="fas fa-project-diagram"></i>
+                        <h4>25+</h4>
+                        <p>Đề tài cấp Bộ & Tỉnh</p>
+                    </div>
+                    <div class="summary-item">
+                        <i class="fas fa-lightbulb"></i>
+                        <h4>10</h4>
+                        <p>Bằng sáng chế & Giải pháp</p>
+                    </div>
+                    <div class="summary-item">
+                        <i class="fas fa-handshake"></i>
+                        <h4>30+</h4>
+                        <p>Đối tác doanh nghiệp R&D</p>
+                    </div>
+                </div>
+
+                <!-- CÁC HƯỚNG NGHIÊN CỨU CHÍNH -->
+                <div class="research-section">
+                    <h2 class="section-title"><i class="fas fa-microscope"></i> Hướng nghiên cứu trọng điểm</h2>
+                    <div class="topics-grid">
+                        <div class="topic-card">
+                            <h5>Trí tuệ nhân tạo (AI)</h5>
+                            <p>Tập trung vào Machine Learning, Deep Learning, thị giác máy tính và xử lý ngôn ngữ tự nhiên ứng dụng trong công nghiệp.</p>
+                        </div>
+                        <div class="topic-card">
+                            <h5>An toàn thông tin</h5>
+                            <p>Nghiên cứu các giải pháp bảo mật hạ tầng mạng, mật mã học ứng dụng và phát hiện xâm nhập bằng AI.</p>
+                        </div>
+                        <div class="topic-card">
+                            <h5>Internet of Things (IoT)</h5>
+                            <p>Phát triển các hệ thống nông nghiệp thông minh, quản lý năng lượng và đô thị thông minh dựa trên nền tảng cảm biến.</p>
+                        </div>
+                        <div class="topic-card">
+                            <h5>Dữ liệu lớn (Big Data)</h5>
+                            <p>Xử lý dữ liệu quy mô lớn, khai phá dữ liệu và xây dựng hệ thống hỗ trợ ra quyết định cho doanh nghiệp.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PHÒNG THÍ NGHIỆM & NHÓM NGHIÊN CỨU -->
+                <div class="research-section">
+                    <h2 class="section-title"><i class="fas fa-flask"></i> Hệ thống Lab nghiên cứu</h2>
+                    <div class="lab-list">
+                        <div class="lab-item">
+                            <div class="lab-icon"><i class="fas fa-brain"></i></div>
+                            <div class="lab-info">
+                                <h6>HUIT AI Laboratory</h6>
+                                <p>Nơi triển khai các dự án về học máy và robot thông minh.</p>
+                            </div>
+                        </div>
+                        <div class="lab-item">
+                            <div class="lab-icon"><i class="fas fa-shield-virus"></i></div>
+                            <div class="lab-info">
+                                <h6>Cyber Security Center</h6>
+                                <p>Phòng thí nghiệm trọng điểm về an ninh mạng và mã hóa.</p>
+                            </div>
+                        </div>
+                        <div class="lab-item">
+                            <div class="lab-icon"><i class="fas fa-cloud"></i></div>
+                            <div class="lab-info">
+                                <h6>Cloud & DevOps Hub</h6>
+                                <p>Nghiên cứu về ảo hóa, containerization và hạ tầng đám mây.</p>
+                            </div>
+                        </div>
+                        <div class="lab-item">
+                            <div class="lab-icon"><i class="fas fa-mobile-alt"></i></div>
+                            <div class="lab-info">
+                                <h6>Smart Systems Group</h6>
+                                <p>Phát triển các ứng dụng di động và hệ thống nhúng thông minh.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <aside class="right-panel">
+        <div class="panel-content">
+            <a href="../lich-dao-tao.html" class="panel-item">
+                <i class="fas fa-calendar-check"></i>
+                <span>Lịch đào tạo</span>
+            </a>
+            <a href="../tracuudiem.html" class="panel-item">
+                <i class="fas fa-user-graduate"></i>
+                <span>Tra cứu điểm</span>
+            </a>
+            <a href="../thu-vien-so.html" class="panel-item">
+                <i class="fas fa-book-open"></i>
+                <span>Thư viện số</span>
+            </a>
+            <a href="../ho-tro-sv.html" class="panel-item">
+                <i class="fas fa-headset"></i>
+                <span>Hỗ trợ SV</span>
+            </a>
+        </div>
+        <div class="panel-trigger">
+            <i class="fas fa-chevron-left"></i>
+        </div>
+    </aside>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3>VỀ CHÚNG TÔI</h3>
+                <p>Khoa Công Nghệ Thông Tin - Trường Đại học Công Thương TP.HCM (HUIT) là đơn vị đào tạo nguồn nhân lực chất lượng cao.</p>
+            </div>
+            <div class="footer-col">
+                <h3>LIÊN HỆ</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 140 Lê Trọng Tấn, Tây Thạnh, Tân Phú, TP.HCM</p>
+                <p><i class="fas fa-phone"></i> (028) 3816 1673</p>
+                <p><i class="fas fa-envelope"></i> khoa.cntt@huit.edu.vn</p>
+            </div>
+            <div class="footer-col">
+                <h3>FOLLOW US</h3>
+                <div style="display: flex; gap: 15px; font-size: 1.5rem; cursor: pointer;">
+                    <i class="fab fa-facebook"></i>
+                    <i class="fab fa-youtube"></i>
+                    <i class="fab fa-linkedin"></i>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Khoa CNTT - HUIT. Designed by Trần Hữu Vọng.
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>
