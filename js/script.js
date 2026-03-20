@@ -1,9 +1,3 @@
-// ================= INIT =================
-document.addEventListener('DOMContentLoaded', () => {
-    loadFAQForChatbot();
-    initFloatingChatbot();
-});
-
 // ================= 1. DARK MODE =================
 const themeToggle = document.getElementById('theme-toggle');
 const body = document.body;
@@ -58,139 +52,192 @@ if (hamburger && navMenu) {
     });
 }
 
-// ================= 4. LOAD FAQ =================
+// ================= 4. CHATBOT SYSTEM =================
+document.addEventListener('DOMContentLoaded', () => {
+    loadFAQForChatbot();
+    initChatbot();
+});
+
+/* --- LOAD FAQ DATA --- */
 function loadFAQForChatbot() {
-    fetch('./data/faq.json') // FIX PATH
+    fetch('./data/faq.json')
         .then(res => res.json())
         .then(data => {
             window.faqDataWidget = data;
         })
-        .catch(err => console.log('FAQ không load được:', err));
+        .catch(() => console.log('FAQ lỗi hoặc chưa có file data/faq.json'));
 }
 
-// ================= 5. CHATBOT =================
-function initFloatingChatbot() {
-    const chatbotHTML = `
-        <div id="chatbotWidget" class="chatbot-widget">
-            <button class="chatbot-toggle" id="chatbotToggle">
+/* --- INIT CHATBOT UI & LOGIC --- */
+function initChatbot() {
+    const html = `
+        <div class="chatbot-widget">
+            <button class="chatbot-toggle" id="chatbotToggle" style="position: fixed; z-index: 1000;">
                 <i class="fas fa-comments"></i>
                 <span class="chatbot-badge">?</span>
             </button>
 
             <div class="chatbot-container" id="chatbotContainer">
                 <div class="chatbot-header">
-                    <h3>🤖 Hỗ Trợ Nhanh</h3>
-                    <button id="chatbotClose"><i class="fas fa-times"></i></button>
+                    <span>🤖 Hỗ Trợ HUIT IT</span>
+                    <button id="chatbotClose">✖</button>
                 </div>
 
-                <div id="chatbotMessages" class="chatbot-messages">
+                <div class="chatbot-messages" id="chatbotMessages">
                     <div class="msg-bot">
-                        <div class="msg-bubble">Xin chào! 👋 Bạn cần hỗ trợ gì?</div>
+                        <div class="msg-bubble">Chào bạn! Vị trí của mình sẽ được lưu lại khi bạn chuyển trang. 👋</div>
                     </div>
                 </div>
 
                 <div id="chatbotSuggestions">
-                    <button onclick="selectQuickQuestion('Tra cứu điểm ở đâu?')">📊 Tra cứu điểm</button>
-                    <button onclick="selectQuickQuestion('Học phí bao nhiêu?')">💰 Học phí</button>
+                    <button onclick="quick('Tra cứu điểm')">📊 Điểm</button>
+                    <button onclick="quick('Học phí')">💰 Học phí</button>
                 </div>
 
-                <div>
-                    <input id="chatbotInput" placeholder="Gõ câu hỏi..." />
-                    <button onclick="sendChatbotMessage()">➤</button>
+                <div class="chatbot-input-area">
+                    <input id="chatbotInput" placeholder="Nhập câu hỏi..." />
+                    <button onclick="send()">➤</button>
                 </div>
             </div>
         </div>
     `;
 
-    document.body.insertAdjacentHTML('beforeend', chatbotHTML);
+    document.body.insertAdjacentHTML('beforeend', html);
 
-    const toggle = document.getElementById('chatbotToggle');
-    const container = document.getElementById('chatbotContainer');
+    const btn = document.getElementById('chatbotToggle');
+    const box = document.getElementById('chatbotContainer');
     const closeBtn = document.getElementById('chatbotClose');
     const input = document.getElementById('chatbotInput');
 
-    toggle.addEventListener('click', () => {
-        container.classList.add('open');
-        toggle.style.display = 'none';
-        input.focus();
+    // --- KHÔI PHỤC VỊ TRÍ TỪ LOCALSTORAGE ---
+    const savedPos = JSON.parse(localStorage.getItem('chatbotPos'));
+    if (savedPos) {
+        btn.style.left = savedPos.left;
+        btn.style.top = savedPos.top;
+    } else {
+        // Vị trí mặc định ban đầu
+        btn.style.right = "25px";
+        btn.style.bottom = "80px";
+    }
+
+    // --- BIẾN ĐIỀU KHIỂN KÉO THẢ ---
+    let isDragging = false;
+    let moved = false;
+    let offsetX, offsetY;
+
+    btn.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        moved = false;
+        const rect = btn.getBoundingClientRect();
+        offsetX = e.clientX - rect.left;
+        offsetY = e.clientY - rect.top;
+        btn.style.cursor = "grabbing";
+        btn.style.transition = "none"; 
+    });
+
+    document.addEventListener("mousemove", (e) => {
+        if (!isDragging) return;
+        moved = true;
+
+        let x = e.clientX - offsetX;
+        let y = e.clientY - offsetY;
+
+        // Giới hạn trong màn hình
+        const maxX = window.innerWidth - btn.offsetWidth;
+        const maxY = window.innerHeight - btn.offsetHeight;
+        x = Math.max(0, Math.min(x, maxX));
+        y = Math.max(0, Math.min(y, maxY));
+
+        btn.style.left = x + "px";
+        btn.style.top = y + "px";
+        btn.style.right = "auto";
+        btn.style.bottom = "auto";
+    });
+
+    document.addEventListener("mouseup", () => {
+        if (!isDragging) return;
+        isDragging = false;
+        btn.style.cursor = "pointer";
+        btn.style.transition = "all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)"; 
+
+        const middle = window.innerWidth / 2;
+        const rect = btn.getBoundingClientRect();
+        const safePadding = 25; 
+
+        let finalLeft;
+        if (rect.left < middle) {
+            finalLeft = `${safePadding}px`;
+        } else {
+            finalLeft = (window.innerWidth - btn.offsetWidth - safePadding) + "px";
+        }
+
+        btn.style.left = finalLeft;
+
+        // 🔥 LƯU VỊ TRÍ VÀO LOCALSTORAGE
+        localStorage.setItem('chatbotPos', JSON.stringify({
+            left: finalLeft,
+            top: btn.style.top
+        }));
+    });
+
+    // --- ĐÓNG/MỞ ---
+    btn.addEventListener('click', () => {
+        if (!moved) { 
+            box.classList.add('open');
+            btn.style.visibility = 'hidden';
+            btn.style.opacity = '0';
+        }
     });
 
     closeBtn.addEventListener('click', () => {
-        container.classList.remove('open');
-        toggle.style.display = 'flex';
+        box.classList.remove('open');
+        btn.style.visibility = 'visible';
+        btn.style.opacity = '1';
     });
 
-    input.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') sendChatbotMessage();
+    input.addEventListener('keypress', e => {
+        if (e.key === 'Enter') send();
     });
 }
 
-// ================= CHATBOT LOGIC =================
-window.selectQuickQuestion = function(question) {
-    addUserMessage(question);
-    processChatbotMessage(question);
-};
-
-window.sendChatbotMessage = function() {
+/* --- LOGIC CHAT --- */
+function send() {
     const input = document.getElementById('chatbotInput');
-    const message = input.value.trim();
-    if (!message) return;
+    const text = input.value.trim();
+    if (!text) return;
 
-    addUserMessage(message);
-    processChatbotMessage(message);
+    addUser(text);
+    reply(text);
     input.value = '';
-};
-
-function addUserMessage(text) {
-    const messages = document.getElementById('chatbotMessages');
-
-    const msg = document.createElement('div');
-    msg.className = 'msg-user';
-    msg.innerHTML = `<div class="msg-bubble">${text}</div>`;
-    messages.appendChild(msg);
-    messages.scrollTop = messages.scrollHeight;
 }
 
-function processChatbotMessage(message) {
-    const messages = document.getElementById('chatbotMessages');
-    const faq = findSimilarFAQWidget(message);
+function quick(q) {
+    addUser(q);
+    reply(q);
+}
+
+function addUser(text) {
+    const box = document.getElementById('chatbotMessages');
+    box.innerHTML += `<div class="msg-user"><div class="msg-bubble">${text}</div></div>`;
+    box.scrollTop = box.scrollHeight;
+}
+
+function reply(text) {
+    const box = document.getElementById('chatbotMessages');
+    const faq = findFAQ(text);
 
     setTimeout(() => {
-        const botMsg = document.createElement('div');
-        botMsg.className = 'msg-bot';
-
-        botMsg.innerHTML = `
-            <div class="msg-bubble">
-                ${faq ? faq.answer : 'Không tìm thấy câu trả lời 😢'}
-            </div>
-        `;
-
-        messages.appendChild(botMsg);
-        messages.scrollTop = messages.scrollHeight;
-    }, 300);
+        box.innerHTML += `
+            <div class="msg-bot">
+                <div class="msg-bubble">${faq || 'Khoa chưa có thông tin này, bạn thử hỏi về Học phí hoặc Điểm nhé!'}</div>
+            </div>`;
+        box.scrollTop = box.scrollHeight;
+    }, 400);
 }
 
-function findSimilarFAQWidget(query) {
+function findFAQ(q) {
     if (!window.faqDataWidget) return null;
-
-    const q = query.toLowerCase();
-
-    return window.faqDataWidget.find(faq =>
-        faq.question.toLowerCase().includes(q) ||
-        faq.answer.toLowerCase().includes(q)
-    );
-}
-
-// ================= 6. SCROLL ANIMATION =================
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-        }
-    });
-}, { threshold: 0.1 });
-
-const lecturerCards = document.querySelectorAll('.lecturer-card');
-if (lecturerCards.length > 0) {
-    lecturerCards.forEach(card => observer.observe(card));
+    q = q.toLowerCase();
+    const f = window.faqDataWidget.find(x => x.question.toLowerCase().includes(q));
+    return f ? f.answer : null;
 }
