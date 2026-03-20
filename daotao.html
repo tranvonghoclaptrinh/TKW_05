@@ -207,7 +207,97 @@
             .lecturers-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
             .lecturer-avatar { height: 150px; }
         }
+/* Container chính */
+.lecturers-section {
+    margin-top: 80px;
+    padding: 0 20px;
+}
 
+/* Grid Layout */
+.huit-lecturer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+/* Thẻ Giảng Viên Style */
+.huit-lecturer-card {
+    background: var(--card-bg, #ffffff); /* Tự động đổi theo Dark Mode */
+    border-radius: 16px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Hiệu ứng Hover */
+.huit-lecturer-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    border-color: var(--accent, #0056b3);
+}
+
+/* Avatar tròn chuẩn chuyên nghiệp */
+.huit-avatar-wrapper {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 15px;
+    border: 3px solid var(--accent, #0056b3);
+    padding: 3px;
+    background: white;
+}
+
+.huit-avatar-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* Thông tin giảng viên */
+.huit-lecturer-info h4 {
+    margin: 10px 0 5px;
+    font-size: 1.15rem;
+    color: var(--text-color, #333);
+}
+
+.huit-lecturer-info .role {
+    color: #666;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.huit-lecturer-info .exp {
+    color: var(--accent, #0056b3);
+    font-size: 0.85rem;
+    font-weight: 600;
+    background: rgba(0, 86, 179, 0.1);
+    padding: 4px 12px;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+/* Dark Mode support (nếu body có attribute data-theme="dark") */
+[data-theme="dark"] .huit-lecturer-card {
+    background: #1e1e1e;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .huit-lecturer-info h4 {
+    color: #fff;
+}
+
+[data-theme="dark"] .huit-lecturer-info .role {
+    color: #bbb;
+}
     </style>
 </head>
 <body data-theme="light">
@@ -737,71 +827,91 @@
             </div>
         </div>
 
-        <!-- SECTION: LECTURERS -->
-        <div style="margin-top: 80px;">
+        <section class="lecturers-section">
             <div class="section-title">
                 <h2>Đội Ngũ Giảng Viên</h2>
-                <div></div>
+                <div class="title-underline"></div>
             </div>
-            <div class="lecturers-grid">
-                <div class="lecturer-card">
-                    <div class="lecturer-avatar">👨‍🏫</div>
-                    <div class="lecturer-info">
+            
+            <div class="huit-lecturer-grid">
+                <div class="huit-lecturer-card">
+                    <div class="huit-avatar-wrapper">
+                        <img src="https://tse4.mm.bing.net/th/id/OIP.UttAB1IMxjjDr6sQY57l6gHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Giảng viên">
+                    </div>
+                    <div class="huit-lecturer-info">
                         <h4>PGS. TS. Vũ Thanh Nguyên</h4>
-                        <p>Trưởng khoa</p>
-                        <p style="color: var(--accent); font-size: 0.85rem;">25 năm kinh nghiệm</p>
+                        <p class="role">Trưởng khoa</p>
+                        <p class="exp">25 năm kinh nghiệm</p>
                     </div>
                 </div>
-                <div class="lecturer-card">
-                    <div class="lecturer-avatar">👩‍🏫</div>
-                    <div class="lecturer-info">
+
+                <div class="huit-lecturer-card">
+                    <div class="huit-avatar-wrapper">
+                        <img src="https://tse4.mm.bing.net/th/id/OIP.UttAB1IMxjjDr6sQY57l6gHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Giảng viên">
+                    </div>
+                    <div class="huit-lecturer-info">
                         <h4>ThS. Phạm Nguyễn Huy Phương</h4>
-                        <p>P. Trưởng Khoa</p>
-                        <p style="color: var(--accent); font-size: 0.85rem;">18 năm kinh nghiệm</p>
+                        <p class="role">P. Trưởng Khoa</p>
+                        <p class="exp">18 năm kinh nghiệm</p>
                     </div>
                 </div>
-                <div class="lecturer-card">
-                    <div class="lecturer-avatar">👩‍🏫</div>
-                    <div class="lecturer-info">
+
+                <div class="huit-lecturer-card">
+                    <div class="huit-avatar-wrapper">
+                        <img src="https://tse4.mm.bing.net/th/id/OIP.UttAB1IMxjjDr6sQY57l6gHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Giảng viên">
+                    </div>
+                    <div class="huit-lecturer-info">
                         <h4>TS. Phùng Thế Bảo</h4>
-                        <p>Trưởng Bộ môn Khoa học dữ liệu</p>
-                        <p style="color: var(--accent); font-size: 0.85rem;">18 năm kinh nghiệm</p>
+                        <p class="role">Trưởng Bộ môn Khoa học dữ liệu</p>
+                        <p class="exp">18 năm kinh nghiệm</p>
                     </div>
                 </div>
-                <div class="lecturer-card">
-                    <div class="lecturer-avatar">👩‍🏫</div>
-                    <div class="lecturer-info">
+
+                <div class="huit-lecturer-card">
+                    <div class="huit-avatar-wrapper">
+                        <img src="https://tse4.mm.bing.net/th/id/OIP.UttAB1IMxjjDr6sQY57l6gHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Giảng viên">
+                    </div>
+                    <div class="huit-lecturer-info">
                         <h4>ThS. Nguyễn Văn Lễ</h4>
-                        <p>Phụ trách Bộ môn hệ thống thông tin</p>
-                        <p style="color: var(--accent); font-size: 0.85rem;">18 năm kinh nghiệm</p>
+                        <p class="role">Phụ trách Bộ môn Hệ thống thông tin</p>
+                        <p class="exp">18 năm kinh nghiệm</p>
                     </div>
                 </div>
-                <div class="lecturer-card">
-                    <div class="lecturer-avatar">👩‍🏫</div>
-                    <div class="lecturer-info">
+
+                <div class="huit-lecturer-card">
+                    <div class="huit-avatar-wrapper">
+                        <img src="https://tse4.mm.bing.net/th/id/OIP.UttAB1IMxjjDr6sQY57l6gHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Giảng viên">
+                    </div>
+                    <div class="huit-lecturer-info">
                         <h4>ThS. Vũ Văn Vinh</h4>
-                        <p>Phụ trách Bộ môn Kỹ thuật phần mềm</p>
-                        <p style="color: var(--accent); font-size: 0.85rem;">18 năm kinh nghiệm</p>
+                        <p class="role">Phụ trách Bộ môn Kỹ thuật phần mềm</p>
+                        <p class="exp">18 năm kinh nghiệm</p>
                     </div>
                 </div>
-                <div class="lecturer-card">
-                    <div class="lecturer-avatar">👩‍🏫</div>
-                    <div class="lecturer-info">
+
+                <div class="huit-lecturer-card">
+                    <div class="huit-avatar-wrapper">
+                        <img src="https://tse4.mm.bing.net/th/id/OIP.UttAB1IMxjjDr6sQY57l6gHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Giảng viên">
+                    </div>
+                    <div class="huit-lecturer-info">
                         <h4>TS. Nguyễn Hồng Vũ</h4>
-                        <p>Phụ trách Bộ môn mạng máy tính và An toàn thông tin</p>
-                        <p style="color: var(--accent); font-size: 0.85rem;">18 năm kinh nghiệm</p>
+                        <p class="role">Phụ trách Bộ môn Mạng máy tính và ATTT</p>
+                        <p class="exp">18 năm kinh nghiệm</p>
                     </div>
                 </div>
-                <div class="lecturer-card">
-                    <div class="lecturer-avatar">👩‍🏫</div>
-                    <div class="lecturer-info">
+
+                <div class="huit-lecturer-card">
+                    <div class="huit-avatar-wrapper">
+                        <img src="https://tse4.mm.bing.net/th/id/OIP.UttAB1IMxjjDr6sQY57l6gHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Giảng viên">
+                    </div>
+                    <div class="huit-lecturer-info">
                         <h4>TS. Trần Khải Thiện</h4>
-                        <p>Phụ trách Bộ môn Công nghệ số</p>
-                        <p style="color: var(--accent); font-size: 0.85rem;">18 năm kinh nghiệm</p>
+                        <p class="role">Phụ trách Bộ môn Công nghệ số</p>
+                        <p class="exp">18 năm kinh nghiệm</p>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     </section>
 
     <aside class="right-panel">

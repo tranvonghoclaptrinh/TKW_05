@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lịch đào tạo - Khoa CNTT HUIT</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
     
     <style>
         /* --- LAYOUT FIXES --- */
@@ -186,20 +186,6 @@
             height: 16px;
             border-radius: 4px;
         }
-
-        /* --- DARK MODE --- */
-        [data-theme="dark"] .calendar-card { background: #1e293b; color: #f1f5f9; }
-        [data-theme="dark"] .calendar-title { color: #60a5fa; }
-        [data-theme="dark"] .training-table thead th { background: #0f172a; color: #cbd5e1; border-color: #334155; }
-        [data-theme="dark"] .training-table tbody td { border-color: #334155; color: #94a3b8; }
-        [data-theme="dark"] .training-table .week-num { background: #0f172a; color: #60a5fa; }
-        [data-theme="dark"] .training-table tr.active-week { background-color: #423b2d !important; border-color: #fbbf24; }
-        [data-theme="dark"] .calendar-legend { background: #0f172a; }
-
-        @media (max-width: 768px) {
-            .huit-main-title { font-size: 1.6rem; }
-            .calendar-header { flex-direction: column; align-items: flex-start; gap: 10px; }
-        }
     </style>
 </head>
 <body data-theme="light">
@@ -207,10 +193,11 @@
         <nav class="navbar">
             <a href="../index.html" class="logo">HUIT <span>IT</span></a>
             <ul class="nav-menu">
-                <li><a href="../gioithieu.html" class="nav-link">Giới thiệu</a></li>
-                <li><a href="../daotao.html" class="nav-link active">Đào tạo</a></li>
-                <li><a href="../tintuc.html" class="nav-link">Tin tức</a></li>
-                <li><a href="../gioithieu/sinhvien.html" class="nav-link">Sinh viên</a></li>
+                <li><a href="/gioithieu.html" class="nav-link">Giới thiệu</a></li>
+                <li><a href="/daotao.html" class="nav-link active">Đào tạo</a></li>
+                <li><a href="/tintuc.html" class="nav-link">Tin tức</a></li>
+                <li><a href="/lienhe.html" class="nav-link">Liên hệ</a></li>
+
             </ul>
             <div class="controls">
                 <i class="fas fa-moon" id="theme-toggle"></i>

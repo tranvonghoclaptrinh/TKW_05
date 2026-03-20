@@ -1,478 +1,708 @@
 
-        /* --- 1. BIẾN MÀU SẮC & ROOT --- */
-        :root {
-            --primary: #0054a5; /* Xanh dương HUIT */
-            --accent: #ed1c24;  /* Đỏ HUIT */
-            --bg-light: #f8fafc;
-            --text-dark: #1e293b;
-            --white: #ffffff;
-            --glass-bg: rgba(255, 255, 255, 0.9);
-            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
-            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-[data-theme="dark"] {
-    /* 1. Nền trang: Dùng xanh đen sâu thay vì đen tuyệt đối để mắt dễ chịu hơn */
-    --bg-light: #0f172a; 
-    
-    /* 2. Màu chữ: Trắng xám (slate) giúp giảm độ chói khi đọc nội dung dài */
-    --text-dark: #f1f5f9; 
-    
-    /* 3. Nền các khối (Card/Sidebar): Sáng hơn nền trang một chút để tạo lớp (Layering) */
-    --white: #1e293b; 
-    
-    /* 4. Màu nhấn (Primary): Quan trọng! Hạ tông xanh dương xuống một chút 
-       để nó không bị quá gắt trên nền tối */
-    --primary: #3b82f6; 
-
-    /* 5. Glassmorphism: Độ mờ của nền kính trong suốt */
-    --glass-bg: rgba(15, 23, 42, 0.85); 
-    
-    /* 6. Shadow: Đổ bóng đậm hơn và rộng hơn để tách biệt các khối nội dung */
-    --card-shadow: 0 20px 25px -10px rgba(0, 0, 0, 0.5);
-
-    /* 7. Overlay cho Hero: Làm tối ảnh nền hơn khi ở chế độ Dark Mode */
-    --hero-overlay: rgba(15, 23, 42, 0.9);
+/* --- 1. BIẾN MÀU SẮC & ROOT --- */
+:root {
+    --primary: #0054a5; /* Xanh dương HUIT */
+    --accent: #ed1c24;  /* Đỏ HUIT */
+    --bg-light: #f8fafc;
+    --text-dark: #1e293b;
+    --white: #ffffff;
+    --glass-bg: rgba(255, 255, 255, 0.9);
+    --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+    --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-        /* --- 2. RESET & CƠ BẢN --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; transition: var(--transition); overflow-x: hidden; }
-        a { text-decoration: none; color: inherit; }
-        ul { list-style: none; }
+[data-theme="dark"] {
+/* 1. Nền trang: Dùng xanh đen sâu thay vì đen tuyệt đối để mắt dễ chịu hơn */
+--bg-light: #0f172a; 
 
-        /* --- 3. NAVBAR (GLASSMORPHISM) --- */
-        header {
-            position: fixed; top: 0; width: 100%; z-index: 1000;
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            transition: var(--transition);
-        }
+/* 2. Màu chữ: Trắng xám (slate) giúp giảm độ chói khi đọc nội dung dài */
+--text-dark: #f1f5f9; 
 
-        header.sticky { padding: 5px 0; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+/* 3. Nền các khối (Card/Sidebar): Sáng hơn nền trang một chút để tạo lớp (Layering) */
+--white: #1e293b; 
 
-        .navbar {
-            max-width: 1200px; margin: 0 auto; padding: 1rem 2rem;
-            display: flex; justify-content: space-between; align-items: center;
-        }
+/* 4. Màu nhấn (Primary): Quan trọng! Hạ tông xanh dương xuống một chút 
+để nó không bị quá gắt trên nền tối */
+--primary: #3b82f6; 
 
-        .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary); display: flex; align-items: center; gap: 10px; }
-        .logo span { color: var(--accent); }
+/* 5. Glassmorphism: Độ mờ của nền kính trong suốt */
+--glass-bg: rgba(15, 23, 42, 0.85); 
 
-        .nav-menu { display: flex; gap: 2rem; align-items: center; }
-        .nav-link { font-weight: 500; position: relative; transition: var(--transition); }
-        .nav-link:hover { color: var(--primary); }
-        .nav-link::after {
-            content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px;
-            background: var(--accent); transition: var(--transition);
-        }
-        .nav-link:hover::after { width: 100%; }
+/* 6. Shadow: Đổ bóng đậm hơn và rộng hơn để tách biệt các khối nội dung */
+--card-shadow: 0 20px 25px -10px rgba(0, 0, 0, 0.5);
 
-        .controls { display: flex; align-items: center; gap: 15px; }
-        #theme-toggle { cursor: pointer; font-size: 1.2rem; transition: var(--transition); }
-        #theme-toggle:hover { transform: rotate(20deg); color: #f1c40f; }
+/* 7. Overlay cho Hero: Làm tối ảnh nền hơn khi ở chế độ Dark Mode */
+--hero-overlay: rgba(15, 23, 42, 0.9);
+}
 
-        /* Mobile Menu Icon */
-        .hamburger { display: none; cursor: pointer; font-size: 1.5rem; }
+/* --- 2. RESET & CƠ BẢN --- */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+body { background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; transition: var(--transition); overflow-x: hidden; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
 
-        /* --- 4. HERO SECTION --- */
-        .hero {
-            height: 80vh; display: flex; align-items: center; justify-content: center;
-            text-align: center; background: linear-gradient(rgba(0,84,165,0.8), rgba(0,84,165,0.6)), url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=2070') center/cover;
-            color: white; padding-top: 80px; clip-path: ellipse(150% 100% at 50% 0%);
-        }
+/* --- 3. NAVBAR (GLASSMORPHISM) --- */
+header {
+    position: fixed; top: 0; width: 100%; z-index: 1000;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: var(--transition);
+}
 
-        .hero-content h1 { font-size: 3.5rem; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 2px; }
-        .btn-cta {
-            padding: 12px 30px; background: var(--accent); color: white; border: none;
-            border-radius: 50px; font-weight: bold; cursor: pointer; transition: var(--transition);
-            box-shadow: 0 4px 15px rgba(237, 28, 36, 0.3);
-        }
-        .btn-cta:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(237, 28, 36, 0.5); }
+header.sticky { padding: 5px 0; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
 
-        /* --- 5. GRID MAJORS --- */
-        .section { max-width: 1200px; margin: 80px auto; padding: 0 2rem; }
-        .section-title { text-align: center; margin-bottom: 50px; }
-        .section-title h2 { font-size: 2rem; color: var(--primary); margin-bottom: 10px; }
-        .section-title div { width: 80px; height: 4px; background: var(--accent); margin: 0 auto; border-radius: 2px; }
+.navbar {
+    max-width: 1200px; margin: 0 auto; padding: 1rem 2rem;
+    display: flex; justify-content: space-between; align-items: center;
+}
 
-        .majors-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
-        .major-card {
-            background: var(--glass-bg); padding: 40px 30px; border-radius: 20px;
-            text-align: center; transition: var(--transition); border: 1px solid rgba(255,255,255,0.1);
-            box-shadow: var(--card-shadow);
-        }
-        .major-card i { font-size: 3rem; color: var(--primary); margin-bottom: 20px; }
-        .major-card:hover {
-            transform: translateY(-10px);
-            background: var(--primary); color: white;
-        }
-        .major-card:hover i { color: white; }
+.logo { font-size: 1.5rem; font-weight: bold; color: var(--primary); display: flex; align-items: center; gap: 10px; }
+.logo span { color: var(--accent); }
 
-        /* --- 6. NEWS SECTION --- */
-        .news-container { display: grid; grid-template-columns: 2fr 1fr; gap: 40px; }
-        .news-main { background: white; border-radius: 15px; overflow: hidden; box-shadow: var(--card-shadow); }
-        [data-theme="dark"] .news-main { background: #1e293b; }
-        .news-img { width: 100%; height: 300px; object-fit: cover; }
-        .news-body { padding: 25px; }
+.nav-menu { display: flex; gap: 2rem; align-items: center; }
+.nav-link { font-weight: 500; position: relative; transition: var(--transition); }
+.nav-link:hover { color: var(--primary); }
+.nav-link::after {
+    content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px;
+    background: var(--accent); transition: var(--transition);
+}
+.nav-link:hover::after { width: 100%; }
 
-        .notice-list { display: flex; flex-direction: column; gap: 15px; }
-        .notice-item {
-            padding: 15px; border-left: 4px solid var(--primary);
-            background: rgba(0, 84, 165, 0.05); transition: var(--transition);
-        }
-        .notice-item:hover { background: rgba(0, 84, 165, 0.1); padding-left: 20px; }
+.controls { display: flex; align-items: center; gap: 15px; }
+#theme-toggle { cursor: pointer; font-size: 1.2rem; transition: var(--transition); }
+#theme-toggle:hover { transform: rotate(20deg); color: #f1c40f; }
 
-        /* --- 7. FOOTER --- */
-        footer { background: #002d58; color: #cbd5e1; padding: 60px 0 20px; }
-        .footer-content {
-            max-width: 1200px; margin: 0 auto; padding: 0 2rem;
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px;
-        }
-        .footer-col h3 { color: white; margin-bottom: 20px; border-left: 3px solid var(--accent); padding-left: 10px; }
-        .footer-bottom { text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.9rem; }
+/* Mobile Menu Icon */
+.hamburger { display: none; cursor: pointer; font-size: 1.5rem; }
 
-        /* --- 8. RESPONSIVE --- */
-        @media (max-width: 768px) {
-            .nav-menu {
-                position: fixed; top: 70px; left: -100%; width: 100%; height: calc(100vh - 70px);
-                background: var(--bg-light); flex-direction: column; padding: 40px; transition: 0.5s;
-            }
-            .nav-menu.active { left: 0; }
-            .hamburger { display: block; }
-            .news-container { grid-template-columns: 1fr; }
-            .hero-content h1 { font-size: 2.2rem; }
-        }
+/* --- 4. HERO SECTION --- */
+.hero {
+    height: 80vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; background: linear-gradient(rgba(0,84,165,0.8), rgba(0,84,165,0.6)), url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=2070') center/cover;
+    color: white; padding-top: 80px; clip-path: ellipse(150% 100% at 50% 0%);
+}
+
+.hero-content h1 { font-size: 3.5rem; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 2px; }
+.btn-cta {
+    padding: 12px 30px; background: var(--accent); color: white; border: none;
+    border-radius: 50px; font-weight: bold; cursor: pointer; transition: var(--transition);
+    box-shadow: 0 4px 15px rgba(237, 28, 36, 0.3);
+}
+.btn-cta:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(237, 28, 36, 0.5); }
+
+/* --- 5. GRID MAJORS --- */
+.section { max-width: 1200px; margin: 80px auto; padding: 0 2rem; }
+.section-title { text-align: center; margin-bottom: 50px; }
+.section-title h2 { font-size: 2rem; color: var(--primary); margin-bottom: 10px; }
+.section-title div { width: 80px; height: 4px; background: var(--accent); margin: 0 auto; border-radius: 2px; }
+
+.majors-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+.major-card {
+    background: var(--glass-bg); padding: 40px 30px; border-radius: 20px;
+    text-align: center; transition: var(--transition); border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: var(--card-shadow);
+}
+.major-card i { font-size: 3rem; color: var(--primary); margin-bottom: 20px; }
+.major-card:hover {
+    transform: translateY(-10px);
+    background: var(--primary); color: white;
+}
+.major-card:hover i { color: white; }
+
+/* --- 6. NEWS SECTION --- */
+.news-container { display: grid; grid-template-columns: 2fr 1fr; gap: 40px; }
+.news-main { background: white; border-radius: 15px; overflow: hidden; box-shadow: var(--card-shadow); }
+[data-theme="dark"] .news-main { background: #1e293b; }
+.news-img { width: 100%; height: 300px; object-fit: cover; }
+.news-body { padding: 25px; }
+
+.notice-list { display: flex; flex-direction: column; gap: 15px; }
+.notice-item {
+    padding: 15px; border-left: 4px solid var(--primary);
+    background: rgba(0, 84, 165, 0.05); transition: var(--transition);
+}
+.notice-item:hover { background: rgba(0, 84, 165, 0.1); padding-left: 20px; }
+
+/* --- 7. FOOTER --- */
+footer { background: #002d58; color: #cbd5e1; padding: 60px 0 20px; }
+.footer-content {
+    max-width: 1200px; margin: 0 auto; padding: 0 2rem;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px;
+}
+.footer-col h3 { color: white; margin-bottom: 20px; border-left: 3px solid var(--accent); padding-left: 10px; }
+.footer-bottom { text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.9rem; }
+
+/* --- 8. RESPONSIVE --- */
+@media (max-width: 768px) {
+    .nav-menu {
+        position: fixed; top: 70px; left: -100%; width: 100%; height: calc(100vh - 70px);
+        background: var(--bg-light); flex-direction: column; padding: 40px; transition: 0.5s;
+    }
+    .nav-menu.active { left: 0; }
+    .hamburger { display: block; }
+    .news-container { grid-template-columns: 1fr; }
+    .hero-content h1 { font-size: 2.2rem; }
+}
 /* css mới thêm cho trang đào tạo */
-        .curriculum-card { 
-            background: var(--glass-bg); 
-            padding: 25px; 
-            border-radius: 15px; 
-            border-left: 5px solid var(--primary); 
-            margin-bottom: 20px; 
-            box-shadow: var(--card-shadow);
-            backdrop-filter: blur(10px);
-        }
+.curriculum-card { 
+    background: var(--glass-bg); 
+    padding: 25px; 
+    border-radius: 15px; 
+    border-left: 5px solid var(--primary); 
+    margin-bottom: 20px; 
+    box-shadow: var(--card-shadow);
+    backdrop-filter: blur(10px);
+}
 /* --- RIGHT PANEL TASKBAR --- */
 .right-panel {
-    position: fixed;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 60px; /* Chiều rộng khi thu gọn */
-    height: auto;
-    background: var(--glass-bg);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border-radius: 30px 0 0 30px;
-    box-shadow: var(--card-shadow);
-    z-index: 999;
-    overflow: hidden;
-    transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+position: fixed;
+right: 0;
+top: 50%;
+transform: translateY(-50%);
+width: 60px; /* Chiều rộng khi thu gọn */
+height: auto;
+background: var(--glass-bg);
+backdrop-filter: blur(15px);
+-webkit-backdrop-filter: blur(15px);
+border-radius: 30px 0 0 30px;
+box-shadow: var(--card-shadow);
+z-index: 999;
+overflow: hidden;
+transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* Phóng to khi hover */
 .right-panel:hover {
-    width: 200px; /* Chiều rộng khi mở rộng */
+width: 200px; /* Chiều rộng khi mở rộng */
 }
 
 .panel-content {
-    display: flex;
-    flex-direction: column;
-    padding: 20px 0;
+display: flex;
+flex-direction: column;
+padding: 20px 0;
 }
 
 .panel-item {
-    display: flex;
-    align-items: center;
-    padding: 15px 20px;
-    color: var(--text-dark);
-    text-decoration: none;
-    transition: var(--transition);
-    white-space: nowrap; /* Giữ chữ không bị nhảy dòng khi mở rộng */
+display: flex;
+align-items: center;
+padding: 15px 20px;
+color: var(--text-dark);
+text-decoration: none;
+transition: var(--transition);
+white-space: nowrap; /* Giữ chữ không bị nhảy dòng khi mở rộng */
 }
 
 .panel-item i {
-    font-size: 1.2rem;
-    min-width: 25px;
-    margin-right: 20px;
-    color: var(--primary);
+font-size: 1.2rem;
+min-width: 25px;
+margin-right: 20px;
+color: var(--primary);
 }
 
 .panel-item span {
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    font-weight: 500;
+opacity: 0;
+transition: opacity 0.3s ease;
+font-weight: 500;
 }
 
 .right-panel:hover .panel-item span {
-    opacity: 1;
+opacity: 1;
 }
 
 .panel-item:hover {
-    background: rgba(0, 84, 165, 0.1);
-    color: var(--accent);
+background: rgba(0, 84, 165, 0.1);
+color: var(--accent);
 }
 
 .panel-trigger {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 0.8rem;
-    color: var(--primary);
-    transition: transform 0.4s ease;
+position: absolute;
+left: 10px;
+top: 50%;
+transform: translateY(-50%);
+font-size: 0.8rem;
+color: var(--primary);
+transition: transform 0.4s ease;
 }
 
 .right-panel:hover .panel-trigger {
-    transform: translateY(-50%) rotate(180deg);
-    left: auto;
-    right: 10px;
-    opacity: 0; /* Ẩn đi khi đã mở rộng */
+transform: translateY(-50%) rotate(180deg);
+left: auto;
+right: 10px;
+opacity: 0; /* Ẩn đi khi đã mở rộng */
 }
 
 /* Ẩn panel trên thiết bị di động nhỏ để tránh che nội dung */
 @media (max-width: 480px) {
-    .right-panel {
-        display: none;
-    }
+.right-panel {
+display: none;
+}
 }
 
 /* --- LAYOUT CHÍNH (Đảo Right Task thành Left Task) --- */
 .page-wrapper {
-    display: grid;
-    /* Cột 1: Sidebar (280px) */
-    /* Cột 2: Nội dung chính (tối đa ~1000px và căn giữa phần còn lại) */
-    grid-template-columns: 280px 1fr; 
-    gap: 30px;
-    
-    /* Xóa bỏ max-width và margin auto để sát lề */
-    max-width: 100%; 
-    margin: 100px 0 60px 0; 
-    padding: 0; /* Xóa padding 20px nếu muốn sát lề tuyệt đối */
+display: grid;
+/* Cột 1: Sidebar (280px) */
+/* Cột 2: Nội dung chính (tối đa ~1000px và căn giữa phần còn lại) */
+grid-template-columns: 280px 1fr; 
+gap: 30px;
+
+/* Xóa bỏ max-width và margin auto để sát lề */
+max-width: 100%; 
+margin: 100px 0 60px 0; 
+padding: 0; /* Xóa padding 20px nếu muốn sát lề tuyệt đối */
 }
 
 .left-sidebar {
-    position: sticky;
-    top: 100px;
-    height: fit-content;
-    /* Đảm bảo sidebar không có margin trái */
-    margin-left: 0;
+position: sticky;
+top: 100px;
+height: fit-content;
+/* Đảm bảo sidebar không có margin trái */
+margin-left: 0;
 }
 
 .sidebar-nav {
-    background: var(--white);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: var(--card-shadow);
-    border: 1px solid rgba(0,0,0,0.05);
+background: var(--white);
+border-radius: 12px;
+overflow: hidden;
+box-shadow: var(--card-shadow);
+border: 1px solid rgba(0,0,0,0.05);
 }
 
 .sidebar-title {
-    background: var(--primary);
-    color: white;
-    padding: 15px 20px;
-    font-size: 1rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+background: var(--primary);
+color: white;
+padding: 15px 20px;
+font-size: 1rem;
+font-weight: 700;
+text-transform: uppercase;
+display: flex;
+align-items: center;
+gap: 10px;
 }
 
 .nav-group {
-    display: flex;
-    flex-direction: column;
+display: flex;
+flex-direction: column;
 }
 
 .nav-item {
-    padding: 12px 20px;
-    color: var(--text-dark);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.95rem;
-    border-bottom: 1px solid rgba(0,0,0,0.03);
-    transition: var(--transition);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+padding: 12px 20px;
+color: var(--text-dark);
+text-decoration: none;
+font-weight: 500;
+font-size: 0.95rem;
+border-bottom: 1px solid rgba(0,0,0,0.03);
+transition: var(--transition);
+display: flex;
+justify-content: space-between;
+align-items: center;
 }
 
 .nav-item:hover {
-    background: rgba(0, 84, 165, 0.05);
-    color: var(--primary);
-    padding-left: 25px;
+background: rgba(0, 84, 165, 0.05);
+color: var(--primary);
+padding-left: 25px;
 }
 
 .nav-item.active {
-    background: rgba(237, 28, 36, 0.08);
-    color: var(--accent);
-    border-left: 4px solid var(--accent);
+background: rgba(237, 28, 36, 0.08);
+color: var(--accent);
+border-left: 4px solid var(--accent);
 }
 
 /* Nội dung chính bên phải */
 .main-content {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
+display: flex;
+flex-direction: column;
+gap: 30px;
 }
 
 .breadcrumb {
-    font-size: 0.85rem;
-    color: #64748b;
-    margin-bottom: 10px;
+font-size: 0.85rem;
+color: #64748b;
+margin-bottom: 10px;
 }
 
 .page-header {
-    border-bottom: 2px solid var(--accent);
-    padding-bottom: 15px;
-    margin-bottom: 25px;
+border-bottom: 2px solid var(--accent);
+padding-bottom: 15px;
+margin-bottom: 25px;
 }
 
 .page-header h1 {
-    color: var(--primary);
-    font-size: 1.8rem;
-    text-transform: uppercase;
-    font-weight: 800;
+color: var(--primary);
+font-size: 1.8rem;
+text-transform: uppercase;
+font-weight: 800;
 }
 
 /* Thẻ Giảng viên (Morph effect) */
 .lecturer-card {
-    background: var(--white);
-    border-radius: 16px;
-    padding: 25px;
-    display: flex;
-    gap: 25px;
-    box-shadow: var(--card-shadow);
-    border: 1px solid rgba(0,0,0,0.02);
-    opacity: 0;
-    transform: translateY(40px) scale(0.95);
-    transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+background: var(--white);
+border-radius: 16px;
+padding: 25px;
+display: flex;
+gap: 25px;
+box-shadow: var(--card-shadow);
+border: 1px solid rgba(0,0,0,0.02);
+opacity: 0;
+transform: translateY(40px) scale(0.95);
+transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .lecturer-card.active {
-    opacity: 1;
-    transform: translateY(0) scale(1);
+opacity: 1;
+transform: translateY(0) scale(1);
 }
 
 .lecturer-img {
-    width: 140px;
-    height: 180px;
-    border-radius: 12px;
-    overflow: hidden;
-    flex-shrink: 0;
-    background: #f1f5f9;
+width: 140px;
+height: 180px;
+border-radius: 12px;
+overflow: hidden;
+flex-shrink: 0;
+background: #f1f5f9;
 }
 
 .lecturer-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+width: 100%;
+height: 100%;
+object-fit: cover;
 }
 
 .lecturer-info {
-    flex-grow: 1;
+flex-grow: 1;
 }
 
 .lecturer-rank {
-    background: var(--accent);
-    color: white;
-    padding: 2px 12px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    border-radius: 4px;
-    text-transform: uppercase;
-    display: inline-block;
-    margin-bottom: 10px;
+background: var(--accent);
+color: white;
+padding: 2px 12px;
+font-size: 0.75rem;
+font-weight: 700;
+border-radius: 4px;
+text-transform: uppercase;
+display: inline-block;
+margin-bottom: 10px;
 }
 
 .lecturer-name {
-    font-size: 1.4rem;
-    color: var(--primary);
-    margin-bottom: 15px;
-    font-weight: 700;
+font-size: 1.4rem;
+color: var(--primary);
+margin-bottom: 15px;
+font-weight: 700;
 }
 
 .info-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 8px;
-    font-size: 0.95rem;
+display: flex;
+align-items: center;
+gap: 12px;
+margin-bottom: 8px;
+font-size: 0.95rem;
 }
 
 .info-row i {
-    color: var(--primary);
-    width: 20px;
-    text-align: center;
+color: var(--primary);
+width: 20px;
+text-align: center;
 }
 /* ========================================================
-    CSS CHO HIỆU ỨNG NỀN MỜ XANH (HERO SECTION)
+CSS CHO HIỆU ỨNG NỀN MỜ XANH (HERO SECTION)
 ======================================================== */
 
 .main-content-hero {
-    /* 1. Thay thế URL và thêm lớp phủ overlay (Gradient mờ xanh đậm) */
-    background-image: 
-        linear-gradient(rgba(0, 84, 165, 0.8), rgba(0, 61, 122, 0.8)), /* Đây là overlay: rgba(R, G, B, Opacity) */
-        url('https://huit.edu.vn/images/slide/hufi-2020-6.jpg');
-    
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed; /* Giữ lại hiệu ứng Parallax (nếu muốn) */
-    
-    /* 2. Căn chỉnh lại vị trí - GIỮ NGUYÊN */
-    grid-column: 2; 
-    margin-top: 0; 
-    width: 100%;
-    
-    /* 3. Giữ các hiệu ứng cũ - GIỮ NGUYÊN */
-    position: relative;
-    padding: 80px 20px; /* Tăng padding trên dưới một chút cho đẹp */
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    
-    display: flex;
-    justify-content: center;
-    overflow: hidden;
+/* 1. Thay thế URL và thêm lớp phủ overlay (Gradient mờ xanh đậm) */
+background-image: 
+linear-gradient(rgba(0, 84, 165, 0.8), rgba(0, 61, 122, 0.8)), /* Đây là overlay: rgba(R, G, B, Opacity) */
+url('https://huit.edu.vn/images/slide/hufi-2020-6.jpg');
+
+background-size: cover;
+background-position: center;
+background-attachment: fixed; /* Giữ lại hiệu ứng Parallax (nếu muốn) */
+
+/* 2. Căn chỉnh lại vị trí - GIỮ NGUYÊN */
+grid-column: 2; 
+margin-top: 0; 
+width: 100%;
+
+/* 3. Giữ các hiệu ứng cũ - GIỮ NGUYÊN */
+position: relative;
+padding: 80px 20px; /* Tăng padding trên dưới một chút cho đẹp */
+border-bottom-left-radius: 20px;
+border-bottom-right-radius: 20px;
+box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+
+display: flex;
+justify-content: center;
+overflow: hidden;
 }
 
 /* Đảm bảo chữ bên trong nổi bật lên (Morphing text color) */
 .main-hero-content-wrapper .breadcrumb,
 .main-hero-content-wrapper .breadcrumb a,
 .main-hero-content-wrapper .page-header h1 {
-    color: white; /* Bắt buộc là màu trắng */
-    text-shadow: 0 2px 10px rgba(0,0,0,0.3); /* Thêm bóng đổ mờ cho chữ sắc nét hơn */
+color: white; /* Bắt buộc là màu trắng */
+text-shadow: 0 2px 10px rgba(0,0,0,0.3); /* Thêm bóng đổ mờ cho chữ sắc nét hơn */
 }
 
 /* Cập nhật màu đường gạch dưới cho Breadcrumb và Page Header */
 .main-hero-content-wrapper .breadcrumb {
-    color: white; /* Giữ màu chữ white */
-    opacity: 0.9;
+color: white; /* Giữ màu chữ white */
+opacity: 0.9;
 }
 
 .main-hero-content-wrapper .page-header {
-    border-bottom: 2px solid white; /* Thay gạch đỏ bằng gạch trắng trên nền ảnh */
+border-bottom: 2px solid white; /* Thay gạch đỏ bằng gạch trắng trên nền ảnh */
 }
 
 /* --------------------------------------------------------
-    XỬ LÝ ĐỘNG (HOVER VÀ ACTIVE)
-    -------------------------------------------------------- */
+XỬ LÝ ĐỘNG (HOVER VÀ ACTIVE)
+-------------------------------------------------------- */
 
 /* Hiệu ứng hover cho lecturer-card nằm trên nền hero */
 .main-content-hero .training-fields .lecturer-card.active:hover {
-    background-color: white !important; /* Trả về nền trắng hoàn toàn */
-    color: var(--primary) !important;
-    border: 1px solid var(--primary);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+background-color: white !important; /* Trả về nền trắng hoàn toàn */
+color: var(--primary) !important;
+border: 1px solid var(--primary);
+box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
 }
 
 /* Đảm bảo chữ trong card vàstrenghts có màu dễ đọc (đã xử lý inline, nhưng vẫn thêm ở đây) */
 .main-content-hero .intro-section p,
 .main-content-hero .training-fields .lecturer-card p,
 .main-content-hero .strengths ul li {
+color: var(--text-dark);
+}
+/* ================= CHATBOT THEO THEME ================= */
+
+.chatbot-widget {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 9999;
+}
+
+/* ===== BUTTON ===== */
+.chatbot-toggle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 1.6rem;
+    color: white;
+    cursor: pointer;
+
+    background: linear-gradient(135deg, var(--primary), #93c5fd);
+
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+}
+
+.chatbot-toggle:hover {
+    transform: scale(1.1);
+}
+
+/* ===== CONTAINER (BO TRÒN MỀM) ===== */
+.chatbot-container {
+    position: fixed;
+    bottom: 100px;
+    right: 25px;
+
+    width: 340px;
+    height: 450px;
+
+    background: var(--white);
     color: var(--text-dark);
+
+    border-radius: 20px; /* 🔥 bo tròn hơn */
+    display: none;
+    flex-direction: column;
+
+    box-shadow: var(--card-shadow);
+    backdrop-filter: blur(12px);
+
+    overflow: hidden;
+}
+.chatbot-container {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+}
+
+.chatbot-container.open {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition: all 0.3s ease;
+}
+
+/* ===== HEADER ===== */
+.chatbot-header {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: white;
+
+    padding: 14px 16px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    font-weight: 600;
+}
+
+/* ===== NÚT CLOSE (FIX LỆCH MÀU) ===== */
+#chatbotClose {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+#chatbotClose:hover {
+    background: rgba(255,255,255,0.35);
+}
+
+/* ===== BUBBLE MỀM HƠN ===== */
+.msg-bubble {
+    border-radius: 16px; /* 🔥 mềm hơn */
+}
+
+/* ===== INPUT BO TRÒN ===== */
+.chatbot-input-area {
+    padding: 8px;
+    background: var(--white);
+}
+
+.chatbot-input-area input {
+    border-radius: 12px;
+    background: var(--glass-bg);
+    padding: 10px;
+}
+
+.chatbot-input-area button {
+    border-radius: 12px;
+}
+
+/* ===== MESSAGES ===== */
+.chatbot-messages {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+
+    background: var(--bg-light);
+}
+
+/* ===== MESSAGE ===== */
+.msg-user {
+    text-align: right;
+}
+
+.msg-bot {
+    text-align: left;
+}
+
+.msg-bubble {
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 10px;
+    margin: 5px 0;
+    max-width: 75%;
+    font-size: 14px;
+}
+
+/* user */
+.msg-user .msg-bubble {
+    background: var(--primary);
+    color: white;
+}
+
+/* bot */
+.msg-bot .msg-bubble {
+    background: var(--glass-bg);
+    color: var(--text-dark);
+}
+
+/* ===== SUGGESTIONS ===== */
+#chatbotSuggestions {
+    padding: 8px;
+    display: flex;
+    gap: 5px;
+}
+
+#chatbotSuggestions button {
+    flex: 1;
+    padding: 6px;
+    border: none;
+    border-radius: 8px;
+
+    background: var(--glass-bg);
+    color: var(--text-dark);
+
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+#chatbotSuggestions button:hover {
+    background: var(--primary);
+    color: white;
+}
+
+/* ===== INPUT ===== */
+.chatbot-input-area {
+    display: flex;
+    border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+.chatbot-input-area input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    outline: none;
+
+    background: transparent;
+    color: var(--text-dark);
+}
+
+.chatbot-input-area button {
+    width: 50px;
+    border: none;
+
+    background: var(--primary);
+    color: white;
+
+    cursor: pointer;
+}
+
+/* ===== DARK MODE TINH CHỈNH ===== */
+[data-theme="dark"] .chatbot-container {
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+[data-theme="dark"] .chatbot-messages {
+    background: rgba(15, 23, 42, 0.6);
+}
+
+[data-theme="dark"] .msg-bot .msg-bubble {
+    background: rgba(255,255,255,0.1);
+}
+
+[data-theme="dark"] .chatbot-input-area {
+    border-top: 1px solid rgba(255,255,255,0.1);
 }
