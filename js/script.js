@@ -2,6 +2,7 @@
 const themeToggle = document.getElementById('theme-toggle');
 const body = document.body;
 
+// Kiểm tra localStorage
 const currentTheme = localStorage.getItem('theme') || 'light';
 body.setAttribute('data-theme', currentTheme);
 updateIcon(currentTheme);
@@ -44,6 +45,7 @@ if (hamburger && navMenu) {
             : '<i class="fas fa-bars"></i>';
     });
 
+    // Đóng menu khi click link
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', () => {
             navMenu.classList.remove('active');
@@ -83,7 +85,7 @@ function initChatbot() {
                     <button id="chatbotClose">✖</button>
                 </div>
 
-                <div class="chatbot-messages" id="chatbotMessages">
+                <div id="chatbotMessages" class="chatbot-messages">
                     <div class="msg-bot">
                         <div class="msg-bubble">Chào bạn! Vị trí của mình sẽ được lưu lại khi bạn chuyển trang. 👋</div>
                     </div>
