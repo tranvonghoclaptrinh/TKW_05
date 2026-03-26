@@ -7,39 +7,206 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
     <style>
-        /* Tabs Navigation */
-        .tabs-nav {
+        /* ===== LEFT SIDEBAR ===== */
+        .page-layout {
             display: flex;
-            gap: 10px;
-            margin-bottom: 40px;
-            border-bottom: 2px solid rgba(0, 84, 165, 0.2);
-            overflow-x: auto;
+            gap: 0;
+            align-items: flex-start;
+            position: relative;
         }
-        .tab-btn {
-            padding: 12px 24px;
+
+        /* Sidebar wrapper */
+        .left-sidebar {
+            width: 260px;
+            min-width: 260px;
+            background: var(--glass-bg, #fff);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,84,165,0.13);
+            border: 1px solid rgba(0,84,165,0.10);
+            overflow: hidden;
+            transition: width 0.35s cubic-bezier(.4,0,.2,1), min-width 0.35s cubic-bezier(.4,0,.2,1), box-shadow 0.3s;
+            position: sticky;
+            top: 100px;
+            align-self: flex-start;
+            z-index: 10;
+        }
+
+        .left-sidebar.collapsed {
+            width: 52px;
+            min-width: 52px;
+        }
+
+        /* Sidebar Header */
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 16px 14px 18px;
+            background: linear-gradient(135deg, var(--primary, #0054a5), var(--accent, #ed1c24));
+            color: white;
+            cursor: pointer;
+            user-select: none;
+            min-height: 54px;
+        }
+
+        .sidebar-header-text {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 0.92rem;
+            letter-spacing: 0.04em;
+            white-space: nowrap;
+            overflow: hidden;
+            transition: opacity 0.2s, width 0.3s;
+        }
+
+        .left-sidebar.collapsed .sidebar-header-text {
+            opacity: 0;
+            width: 0;
+        }
+
+        .sidebar-toggle-btn {
+            background: rgba(255,255,255,0.18);
+            border: none;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s, transform 0.35s;
+            flex-shrink: 0;
+        }
+
+        .sidebar-toggle-btn:hover { background: rgba(255,255,255,0.32); }
+
+        .left-sidebar.collapsed .sidebar-toggle-btn {
+            transform: rotate(180deg);
+        }
+
+        /* Sidebar Menu */
+        .sidebar-menu {
+            list-style: none;
+            padding: 10px 0;
+            margin: 0;
+        }
+
+        .sidebar-menu li {
+            position: relative;
+        }
+
+        .sidebar-menu-btn {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            width: 100%;
+            padding: 13px 18px;
             background: transparent;
             border: none;
-            color: var(--text-dark);
-            font-weight: 600;
             cursor: pointer;
-            border-bottom: 3px solid transparent;
-            transition: var(--transition);
+            color: var(--text-dark, #222);
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-align: left;
+            transition: background 0.2s, color 0.2s;
             white-space: nowrap;
-        }
-        .tab-btn:hover { color: var(--primary); }
-        .tab-btn.active {
-            color: var(--accent);
-            border-bottom-color: var(--accent);
+            border-left: 4px solid transparent;
+            position: relative;
         }
 
-        /* Tab Content */
+        .sidebar-menu-btn:hover {
+            background: rgba(0,84,165,0.07);
+            color: var(--primary, #0054a5);
+        }
+
+        .sidebar-menu-btn.active {
+            background: rgba(0,84,165,0.10);
+            color: var(--accent, #ed1c24);
+            border-left-color: var(--accent, #ed1c24);
+        }
+
+        .sidebar-menu-btn .menu-icon {
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.05rem;
+            flex-shrink: 0;
+            color: inherit;
+        }
+
+        .sidebar-menu-btn .menu-label {
+            flex: 1;
+            overflow: hidden;
+            transition: opacity 0.2s, max-width 0.3s;
+            max-width: 200px;
+        }
+
+        .left-sidebar.collapsed .menu-label {
+            opacity: 0;
+            max-width: 0;
+        }
+
+        .sidebar-menu-btn .menu-arrow {
+            font-size: 0.75rem;
+            transition: opacity 0.2s, transform 0.2s;
+            color: var(--primary, #0054a5);
+        }
+
+        .left-sidebar.collapsed .menu-arrow { opacity: 0; }
+        .sidebar-menu-btn.active .menu-arrow { color: var(--accent, #ed1c24); }
+
+        /* Tooltip khi collapsed */
+        .left-sidebar.collapsed .sidebar-menu-btn::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            left: calc(100% + 10px);
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary, #0054a5);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            white-space: nowrap;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            z-index: 999;
+            box-shadow: 0 4px 12px rgba(0,84,165,0.2);
+        }
+
+        .left-sidebar.collapsed .sidebar-menu-btn:hover::after {
+            opacity: 1;
+        }
+
+        /* Divider */
+        .sidebar-divider {
+            height: 1px;
+            background: rgba(0,84,165,0.10);
+            margin: 6px 14px;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .main-content {
+            flex: 1;
+            min-width: 0;
+            padding-left: 28px;
+            transition: padding 0.35s;
+        }
+
+        /* ===== TAB CONTENT ===== */
         .tab-content { display: none; }
         .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Hero Section */
+        /* ===== HERO ===== */
         .training-hero {
-            height: 400px;
+            height: 360px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -47,75 +214,95 @@
             background: linear-gradient(rgba(0,84,165,0.88), rgba(237,28,36,0.78)), url('https://ts.huit.edu.vn/app_web/tttstt/images/slide/chao-tsv-k16-02.png') center/cover;
             color: white;
             border-radius: 20px;
-            margin-bottom: 60px;
+            margin-bottom: 50px;
             clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
         }
 
         .training-hero-content h1 {
-            font-size: 2.8rem;
-            margin-bottom: 15px;
+            font-size: 2.4rem;
+            margin-bottom: 12px;
             text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
             font-weight: 700;
         }
 
         .training-hero-content p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
+            font-size: 1.1rem;
+            margin-bottom: 24px;
             text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
         }
 
         .training-hero-content .btn-cta {
             background: var(--accent);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.05em;
+            transition: opacity 0.2s, transform 0.2s;
+            display: inline-block;
         }
+        .training-hero-content .btn-cta:hover { opacity: 0.88; transform: translateY(-2px); }
 
         /* Major Details Card */
         .major-detail {
-            background: var(--glass-bg);
+            background: var(--glass-bg, #fff);
             border-radius: 20px;
-            padding: 40px;
+            padding: 36px;
             margin-bottom: 30px;
-            box-shadow: var(--card-shadow);
+            box-shadow: 0 4px 24px rgba(0,84,165,0.10);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
         }
+
         .major-detail-header {
             display: grid;
-            grid-template-columns: 60% 40%;
-            gap: 40px;
-            margin-bottom: 40px;
+            grid-template-columns: 60% 38%;
+            gap: 36px;
+            margin-bottom: 36px;
             align-items: start;
         }
-        .major-detail-header h2 { color: var(--primary); font-size: 2rem; margin-bottom: 15px; }
-        .major-detail-header ul { list-style: none; }
+
+        .major-detail-header h2 { color: var(--primary, #0054a5); font-size: 1.9rem; margin-bottom: 12px; }
+        .major-detail-header ul { list-style: none; padding: 0; margin: 0; }
         .major-detail-header li {
-            padding: 10px 0;
+            padding: 8px 0;
             display: flex;
             align-items: center;
             gap: 12px;
         }
-        .major-detail-header i { color: var(--accent); font-size: 1.2rem; }
+        .major-detail-header i { color: var(--accent, #ed1c24); }
+
+        /* Stats box */
+        .stats-box {
+            border-radius: 15px;
+            padding: 22px;
+            color: white;
+        }
+        .stats-box h4 { margin-bottom: 12px; font-size: 1rem; }
+        .stats-box p { margin: 10px 0; }
 
         /* Curriculum Table */
         .curriculum-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 30px 0;
+            margin: 24px 0;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
         }
         .curriculum-table thead {
-            background: linear-gradient(135deg, var(--primary), var(--accent));
+            background: linear-gradient(135deg, var(--primary, #0054a5), var(--accent, #ed1c24));
             color: white;
         }
         .curriculum-table th {
-            padding: 15px;
+            padding: 14px;
             text-align: left;
             font-weight: 600;
         }
         .curriculum-table td {
-            padding: 12px 15px;
-            border-bottom: 1px solid rgba(0, 84, 165, 0.1);
+            padding: 11px 14px;
+            border-bottom: 1px solid rgba(0, 84, 165, 0.08);
         }
         .curriculum-table tbody tr:hover {
             background: rgba(0, 84, 165, 0.05);
@@ -124,180 +311,137 @@
             background: rgba(0, 84, 165, 0.15);
         }
 
-        /* Grid Sections */
+        /* Grid */
         .curriculum-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin: 30px 0;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin: 24px 0;
         }
+
         .curriculum-info-card {
-            background: var(--glass-bg);
-            padding: 25px;
-            border-radius: 15px;
-            border-left: 5px solid var(--primary);
-            box-shadow: var(--card-shadow);
+            background: var(--glass-bg, #fff);
+            padding: 22px;
+            border-radius: 14px;
+            border-left: 5px solid var(--primary, #0054a5);
+            box-shadow: 0 4px 15px rgba(0,84,165,0.07);
         }
-        .curriculum-info-card h4 { color: var(--primary); margin-bottom: 12px; }
-        .curriculum-info-card ul { list-style: none; }
+        .curriculum-info-card h4 { color: var(--primary, #0054a5); margin-bottom: 10px; }
+        .curriculum-info-card ul { list-style: none; padding: 0; margin: 0; }
         .curriculum-info-card li {
-            padding: 8px 0;
+            padding: 7px 0;
             display: flex;
             align-items: flex-start;
             gap: 10px;
         }
-        .curriculum-info-card i { color: var(--accent); margin-top: 2px; }
+        .curriculum-info-card i { color: var(--accent, #ed1c24); margin-top: 2px; }
 
-        /* Lecturers Grid */
-        .lecturers-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 25px;
-            margin: 30px 0;
-        }
-        .lecturer-card {
-            background: var(--glass-bg);
-            border-radius: 15px;
-            overflow: hidden;
+        /* Hệ đào tạo cards */
+        .curriculum-card {
+            background: var(--glass-bg, #fff);
+            border-radius: 16px;
+            padding: 28px;
+            border-left: 5px solid var(--primary, #0054a5);
+            box-shadow: 0 4px 15px rgba(0,84,165,0.07);
             text-align: center;
-            box-shadow: var(--card-shadow);
-            transition: var(--transition);
         }
-        .lecturer-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 30px rgba(0, 84, 165, 0.2);
+
+        /* Lecturers */
+        .lecturers-section { margin-top: 60px; }
+
+        .huit-lecturer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin-top: 32px;
         }
-        .lecturer-avatar {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
+
+        .huit-lecturer-card {
+            background: var(--glass-bg, #fff);
+            border-radius: 16px;
+            padding: 24px 18px;
+            text-align: center;
+            box-shadow: 0 6px 24px rgba(0,84,165,0.07);
+            border: 1px solid rgba(0,84,165,0.07);
+            transition: all 0.3s ease;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            color: white;
         }
-        .lecturer-info { padding: 20px; }
-        .lecturer-info h4 { color: var(--primary); margin-bottom: 5px; }
-        .lecturer-info p { font-size: 0.9rem; color: var(--text-dark); opacity: 0.8; }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .training-hero {
-                height: 300px;
-                margin-top: 30px;
-            }
-
-            .training-hero-content h1 {
-                font-size: 1.8rem;
-            }
-
-            .training-hero-content p {
-                font-size: 1rem;
-            }
-
-            .major-detail-header {
-                grid-template-columns: 1fr;
-                gap: 25px;
-            }
-            .tabs-nav { gap: 0; }
-            .tab-btn { padding: 10px 15px; font-size: 0.9rem; }
-            .curriculum-table { font-size: 0.9rem; }
-            .curriculum-table th, .curriculum-table td { padding: 10px; }
-            .lecturers-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
-            .lecturer-avatar { height: 150px; }
+        .huit-lecturer-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 14px 32px rgba(0,84,165,0.14);
+            border-color: var(--accent, #ed1c24);
         }
-/* Container chính */
-.lecturers-section {
-    margin-top: 80px;
-    padding: 0 20px;
-}
+        .huit-avatar-wrapper {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-bottom: 14px;
+            border: 3px solid var(--primary, #0054a5);
+            padding: 3px;
+            background: white;
+        }
+        .huit-avatar-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        .huit-lecturer-info h4 { margin: 0 0 4px; font-size: 1rem; color: var(--text-dark, #222); }
+        .huit-lecturer-info .role { color: #666; font-size: 0.88rem; margin-bottom: 8px; }
+        .huit-lecturer-info .exp {
+            color: var(--primary, #0054a5);
+            font-size: 0.82rem;
+            font-weight: 600;
+            background: rgba(0,84,165,0.09);
+            padding: 3px 12px;
+            border-radius: 20px;
+            display: inline-block;
+        }
 
-/* Grid Layout */
-.huit-lecturer-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-    margin-top: 40px;
-}
+        [data-theme="dark"] .huit-lecturer-card { background: #1e1e1e; border-color: rgba(255,255,255,0.08); }
+        [data-theme="dark"] .huit-lecturer-info h4 { color: #fff; }
+        [data-theme="dark"] .huit-lecturer-info .role { color: #bbb; }
 
-/* Thẻ Giảng Viên Style */
-.huit-lecturer-card {
-    background: var(--card-bg, #ffffff); /* Tự động đổi theo Dark Mode */
-    border-radius: 16px;
-    padding: 25px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s ease;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+        /* Admission */
+        .admission-section { margin-top: 60px; }
 
-/* Hiệu ứng Hover */
-.huit-lecturer-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-    border-color: var(--accent, #0056b3);
-}
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .page-layout { flex-direction: column; }
+            .left-sidebar {
+                width: 100% !important;
+                min-width: unset !important;
+                position: static;
+                border-radius: 12px;
+                margin-bottom: 20px;
+            }
+            .left-sidebar.collapsed { width: 100% !important; }
+            .left-sidebar.collapsed .menu-label { opacity: 1; max-width: 200px; }
+            .left-sidebar.collapsed .menu-arrow { opacity: 1; }
+            .left-sidebar.collapsed .sidebar-header-text { opacity: 1; width: auto; }
+            .sidebar-menu { display: flex; flex-wrap: wrap; padding: 8px; }
+            .sidebar-menu li { flex: 1 1 auto; }
+            .sidebar-menu-btn { border-left: none; border-bottom: 3px solid transparent; justify-content: center; padding: 10px 12px; font-size: 0.85rem; }
+            .sidebar-menu-btn.active { border-left-color: transparent; border-bottom-color: var(--accent, #ed1c24); }
+            .sidebar-divider { display: none; }
+            .main-content { padding-left: 0; }
+            .major-detail-header { grid-template-columns: 1fr; }
+            .training-hero { height: 260px; }
+            .training-hero-content h1 { font-size: 1.6rem; }
+        }
 
-/* Avatar tròn chuẩn chuyên nghiệp */
-.huit-avatar-wrapper {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-bottom: 15px;
-    border: 3px solid var(--accent, #0056b3);
-    padding: 3px;
-    background: white;
-}
+        @media (max-width: 600px) {
+            .curriculum-table { font-size: 0.85rem; }
+            .curriculum-table th, .curriculum-table td { padding: 9px; }
+        }
 
-.huit-avatar-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-}
-
-/* Thông tin giảng viên */
-.huit-lecturer-info h4 {
-    margin: 10px 0 5px;
-    font-size: 1.15rem;
-    color: var(--text-color, #333);
-}
-
-.huit-lecturer-info .role {
-    color: #666;
-    font-size: 0.95rem;
-    margin-bottom: 8px;
-    font-weight: 500;
-}
-
-.huit-lecturer-info .exp {
-    color: var(--accent, #0056b3);
-    font-size: 0.85rem;
-    font-weight: 600;
-    background: rgba(0, 86, 179, 0.1);
-    padding: 4px 12px;
-    border-radius: 20px;
-    display: inline-block;
-}
-
-/* Dark Mode support (nếu body có attribute data-theme="dark") */
-[data-theme="dark"] .huit-lecturer-card {
-    background: #1e1e1e;
-    border-color: rgba(255, 255, 255, 0.1);
-}
-
-[data-theme="dark"] .huit-lecturer-info h4 {
-    color: #fff;
-}
-
-[data-theme="dark"] .huit-lecturer-info .role {
-    color: #bbb;
-}
+        /* Section title */
+        .section-title { text-align: center; margin-bottom: 36px; }
+        .section-title h2 { font-size: 1.9rem; color: var(--primary, #0054a5); margin-bottom: 10px; }
+        .section-title div { width: 60px; height: 4px; background: var(--accent, #ed1c24); margin: 0 auto; border-radius: 2px; }
     </style>
 </head>
 <body data-theme="light">
@@ -324,7 +468,7 @@
             <div></div>
         </div>
 
-        <!-- Hero Section Introduction -->
+        <!-- Hero -->
         <div class="training-hero">
             <div class="training-hero-content">
                 <h1>Đào Tạo Kỹ Sư Công Nghệ Thông Tin</h1>
@@ -333,465 +477,356 @@
             </div>
         </div>
 
-        <!-- NAV TABS -->
-        <div class="tabs-nav">
-            <button class="tab-btn active" onclick="switchTab(event, 'software')">
-                <i class="fas fa-code"></i> Kỹ thuật Phần mềm
-            </button>
-            <button class="tab-btn" onclick="switchTab(event, 'security')">
-                <i class="fas fa-shield-alt"></i> An toàn Thông tin
-            </button>
-            <button class="tab-btn" onclick="switchTab(event, 'data')">
-                <i class="fas fa-database"></i> Khoa học Dữ liệu
-            </button>
-            <button class="tab-btn" onclick="switchTab(event, 'systems')">
-                <i class="fas fa-network-wired"></i> Hệ thống Thông tin
-            </button>
-        </div>
-
-        <!-- Hệ Đào Tạo Cards -->
-        <div class="curriculum-grid" style="margin-bottom: 60px;">
+        <!-- Hệ đào tạo cards -->
+        <div class="curriculum-grid" style="margin-bottom: 50px;">
             <div class="curriculum-card">
-                <i class="fas fa-graduation-cap" style="font-size: 2.5rem; margin-bottom: 15px;"></i>
+                <i class="fas fa-graduation-cap" style="font-size: 2.2rem; margin-bottom: 12px; color: var(--primary);"></i>
                 <h3>Hệ Đại học Chính quy</h3>
                 <p>Đào tạo Kỹ sư CNTT 4 năm với các chuyên ngành mũi nhọn, chuẩn bị đầy đủ kiến thức và kỹ năng.</p>
                 <small style="color: var(--accent);">Học phí: 20 triệu/năm</small>
             </div>
             <div class="curriculum-card" style="border-left-color: var(--accent);">
-                <i class="fas fa-star" style="font-size: 2.5rem; margin-bottom: 15px;"></i>
+                <i class="fas fa-star" style="font-size: 2.2rem; margin-bottom: 12px; color: var(--accent);"></i>
                 <h3>Hệ Chất Lượng Cao</h3>
-                <p>Môi trường học tập quốc tế, giảng viên tàn thạo, chú trọng tiếng Anh chuyên ngành và kỹ năng mềm.</p>
+                <p>Môi trường học tập quốc tế, giảng viên tài năng, chú trọng tiếng Anh chuyên ngành và kỹ năng mềm.</p>
                 <small style="color: var(--accent);">Học phí: 30 triệu/năm</small>
             </div>
         </div>
-            <button class="tab-btn active" onclick="switchTab(event, 'software')">
-                <i class="fas fa-code"></i> Kỹ thuật Phần mềm
-            </button>
-            <button class="tab-btn" onclick="switchTab(event, 'security')">
-                <i class="fas fa-shield-alt"></i> An toàn Thông tin
-            </button>
-            <button class="tab-btn" onclick="switchTab(event, 'data')">
-                <i class="fas fa-database"></i> Khoa học Dữ liệu
-            </button>
-            <button class="tab-btn" onclick="switchTab(event, 'systems')">
-                <i class="fas fa-network-wired"></i> Hệ thống Thông tin
-            </button>
-        </div>
 
-        <!-- 1. KỸ THUẬT PHẦN MỀM -->
-        <div id="software" class="tab-content active">
-            <div class="major-detail">
-                <div class="major-detail-header">
-                    <div>
-                        <h2>Kỹ thuật Phần mềm</h2>
-                        <p style="margin-bottom: 20px;">Chuyên ngành đào tạo các kỹ sư phần mềm chuyên nghiệp, phát triển hệ thống từ nhỏ đến quy mô cấp doanh nghiệp.</p>
-                        <b style="color: var(--primary);">Kỹ năng chính:</b>
-                        <ul>
-                            <li><i class="fas fa-check-circle"></i> Lập trình C++, Java, Python, JavaScript</li>
-                            <li><i class="fas fa-check-circle"></i> Phân tích và thiết kế hệ thống</li>
-                            <li><i class="fas fa-check-circle"></i> Agile & Scrum methodology</li>
-                            <li><i class="fas fa-check-circle"></i> Web & Mobile development</li>
-                            <li><i class="fas fa-check-circle"></i> Testing & Quality Assurance</li>
-                        </ul>
+        <!-- ===== PAGE LAYOUT: SIDEBAR + CONTENT ===== -->
+        <div class="page-layout">
+
+            <!-- LEFT SIDEBAR -->
+            <aside class="left-sidebar" id="leftSidebar">
+                <div class="sidebar-header" onclick="toggleSidebar()">
+                    <div class="sidebar-header-text">
+                        <i class="fas fa-list-ul"></i>
+                        CHUYÊN NGÀNH
                     </div>
-                    <div style="background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 15px; padding: 20px; color: white;">
-                        <h4>📊 Thống kê</h4>
-                        <p style="margin: 10px 0;"><b>230+</b> sinh viên/năm</p>
-                        <p style="margin: 10px 0;"><b>98%</b> xin việc thành công</p>
-                        <p style="margin: 10px 0;"><b>20+</b> công ty hợp tác</p>
-                        <p style="margin: 10px 0; font-size: 0.9rem;">Trung bình lương: 20-30 triệu/tháng</p>
+                    <button class="sidebar-toggle-btn" title="Thu gọn/Mở rộng">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                </div>
+
+                <ul class="sidebar-menu">
+                    <li>
+                        <button
+                            class="sidebar-menu-btn active"
+                            onclick="switchTab('software', this)"
+                            data-tooltip="Kỹ thuật Phần mềm"
+                        >
+                            <span class="menu-icon"><i class="fas fa-code"></i></span>
+                            <span class="menu-label">Kỹ thuật Phần mềm</span>
+                            <i class="fas fa-chevron-right menu-arrow"></i>
+                        </button>
+                    </li>
+                    <li class="sidebar-divider"></li>
+                    <li>
+                        <button
+                            class="sidebar-menu-btn"
+                            onclick="switchTab('security', this)"
+                            data-tooltip="An toàn Thông tin"
+                        >
+                            <span class="menu-icon"><i class="fas fa-shield-alt"></i></span>
+                            <span class="menu-label">An toàn Thông tin</span>
+                            <i class="fas fa-chevron-right menu-arrow"></i>
+                        </button>
+                    </li>
+                    <li class="sidebar-divider"></li>
+                    <li>
+                        <button
+                            class="sidebar-menu-btn"
+                            onclick="switchTab('data', this)"
+                            data-tooltip="Khoa học Dữ liệu"
+                        >
+                            <span class="menu-icon"><i class="fas fa-database"></i></span>
+                            <span class="menu-label">Khoa học Dữ liệu</span>
+                            <i class="fas fa-chevron-right menu-arrow"></i>
+                        </button>
+                    </li>
+                    <li class="sidebar-divider"></li>
+                    <li>
+                        <button
+                            class="sidebar-menu-btn"
+                            onclick="switchTab('systems', this)"
+                            data-tooltip="Hệ thống Thông tin"
+                        >
+                            <span class="menu-icon"><i class="fas fa-network-wired"></i></span>
+                            <span class="menu-label">Hệ thống Thông tin</span>
+                            <i class="fas fa-chevron-right menu-arrow"></i>
+                        </button>
+                    </li>
+                </ul>
+            </aside>
+
+            <!-- MAIN CONTENT -->
+            <div class="main-content">
+
+                <!-- 1. KỸ THUẬT PHẦN MỀM -->
+                <div id="software" class="tab-content active">
+                    <div class="major-detail">
+                        <div class="major-detail-header">
+                            <div>
+                                <h2>Kỹ thuật Phần mềm</h2>
+                                <p style="margin-bottom: 18px;">Chuyên ngành đào tạo các kỹ sư phần mềm chuyên nghiệp, phát triển hệ thống từ nhỏ đến quy mô cấp doanh nghiệp.</p>
+                                <b style="color: var(--primary);">Kỹ năng chính:</b>
+                                <ul>
+                                    <li><i class="fas fa-check-circle"></i> Lập trình C++, Java, Python, JavaScript</li>
+                                    <li><i class="fas fa-check-circle"></i> Phân tích và thiết kế hệ thống</li>
+                                    <li><i class="fas fa-check-circle"></i> Agile &amp; Scrum methodology</li>
+                                    <li><i class="fas fa-check-circle"></i> Web &amp; Mobile development</li>
+                                    <li><i class="fas fa-check-circle"></i> Testing &amp; Quality Assurance</li>
+                                </ul>
+                            </div>
+                            <div class="stats-box" style="background: linear-gradient(135deg, var(--primary), var(--accent));">
+                                <h4>📊 Thống kê</h4>
+                                <p><b>230+</b> sinh viên/năm</p>
+                                <p><b>98%</b> xin việc thành công</p>
+                                <p><b>20+</b> công ty hợp tác</p>
+                                <p style="font-size: 0.88rem;">Trung bình lương: 20-30 triệu/tháng</p>
+                            </div>
+                        </div>
+
+                        <h3 style="color: var(--primary); margin-bottom: 12px;">📚 Lộ Trình Học</h3>
+                        <table class="curriculum-table">
+                            <thead><tr><th>Năm</th><th>Học kỳ</th><th>Môn học chính</th><th>Tín chỉ</th></tr></thead>
+                            <tbody>
+                                <tr><td rowspan="2"><b>Năm 1</b></td><td>HK1</td><td>Nhập môn lập trình, Toán rời rạc, Đại số</td><td>16</td></tr>
+                                <tr><td>HK2</td><td>Lập trình C++, Cơ sở dữ liệu, Xác suất thống kê</td><td>16</td></tr>
+                                <tr><td rowspan="2"><b>Năm 2</b></td><td>HK3</td><td>Lập trình Java, Web Basic, Cấu trúc dữ liệu</td><td>16</td></tr>
+                                <tr><td>HK4</td><td>Lập trình hướng đối tượng, Thiết kế CSDL, Mạng máy tính</td><td>16</td></tr>
+                                <tr><td rowspan="2"><b>Năm 3</b></td><td>HK5</td><td>Web development, Phân tích hệ thống, Công nghệ phần mềm</td><td>16</td></tr>
+                                <tr><td>HK6</td><td>Mobile development, Thực tập doanh nghiệp</td><td>16</td></tr>
+                                <tr><td colspan="2"><b>Năm 4</b></td><td>Khóa luận tốt nghiệp, Các môn tự chọn</td><td>20</td></tr>
+                            </tbody>
+                        </table>
+
+                        <h3 style="color: var(--primary); margin-top: 28px; margin-bottom: 12px;">🎯 Cơ Hội Sự Nghiệp</h3>
+                        <div class="curriculum-grid">
+                            <div class="curriculum-info-card">
+                                <h4>💼 Các Công Ty Tiềm Năng</h4>
+                                <ul>
+                                    <li><i class="fas fa-building"></i> FPT Software</li>
+                                    <li><i class="fas fa-building"></i> Viettel</li>
+                                    <li><i class="fas fa-building"></i> Techcombank</li>
+                                    <li><i class="fas fa-building"></i> Grab Vietnam</li>
+                                    <li><i class="fas fa-building"></i> Momo</li>
+                                </ul>
+                            </div>
+                            <div class="curriculum-info-card" style="border-left-color: var(--accent);">
+                                <h4>📍 Vị Trí Công Việc</h4>
+                                <ul>
+                                    <li><i class="fas fa-briefcase"></i> Software Developer</li>
+                                    <li><i class="fas fa-briefcase"></i> Full-stack Engineer</li>
+                                    <li><i class="fas fa-briefcase"></i> QA Engineer</li>
+                                    <li><i class="fas fa-briefcase"></i> DevOps Engineer</li>
+                                    <li><i class="fas fa-briefcase"></i> Tech Lead</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <h3 style="color: var(--primary); margin-top: 30px; margin-bottom: 15px;">📚 Lộ Trình Học</h3>
-                <table class="curriculum-table">
-                    <thead>
-                        <tr>
-                            <th>Năm</th>
-                            <th>Học kỳ</th>
-                            <th>Môn học chính</th>
-                            <th>Tín chỉ</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td rowspan="2"><b>Năm 1</b></td>
-                            <td>HK1</td>
-                            <td>Nhập môn lập trình, Toán rời rạc, Đại số</td>
-                            <td>16</td>
-                        </tr>
-                        <tr>
-                            <td>HK2</td>
-                            <td>Lập trình C++, Cơ sở dữ liệu, Xác suất thống kê</td>
-                            <td>16</td>
-                        </tr>
-                        <tr>
-                            <td rowspan="2"><b>Năm 2</b></td>
-                            <td>HK3</td>
-                            <td>Lập trình Java, Wbe Basic, Cấu trúc dữ liệu</td>
-                            <td>16</td>
-                        </tr>
-                        <tr>
-                            <td>HK4</td>
-                            <td>Lập trình hướng đối tượng, Thiết kế CSDL, Mạng máy tính</td>
-                            <td>16</td>
-                        </tr>
-                        <tr>
-                            <td rowspan="2"><b>Năm 3</b></td>
-                            <td>HK5</td>
-                            <td>Web development, Phân tích hệ thống, Công nghệ phần mềm</td>
-                            <td>16</td>
-                        </tr>
-                        <tr>
-                            <td>HK6</td>
-                            <td>Mobile development, Thực tập doanh nghiệp</td>
-                            <td>16</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><b>Năm 4</b></td>
-                            <td>Khóa luận tốt nghiệp, Các môn tiên tuyển chọn</td>
-                            <td>20</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <!-- 2. AN TOÀN THÔNG TIN -->
+                <div id="security" class="tab-content">
+                    <div class="major-detail">
+                        <div class="major-detail-header">
+                            <div>
+                                <h2>An toàn Thông tin</h2>
+                                <p style="margin-bottom: 18px;">Đào tạo chuyên gia bảo mật mạng, bảo vệ hạ tầng CNTT và dữ liệu quốc gia.</p>
+                                <b style="color: var(--primary);">Kỹ năng chính:</b>
+                                <ul>
+                                    <li><i class="fas fa-check-circle"></i> Mã hóa &amp; Cryptography</li>
+                                    <li><i class="fas fa-check-circle"></i> Penetration Testing</li>
+                                    <li><i class="fas fa-check-circle"></i> Network Security</li>
+                                    <li><i class="fas fa-check-circle"></i> Firewall &amp; IDS/IPS</li>
+                                    <li><i class="fas fa-check-circle"></i> Quản lý rủi ro bảo mật</li>
+                                </ul>
+                            </div>
+                            <div class="stats-box" style="background: linear-gradient(135deg, #FF6B6B, #FF8E53);">
+                                <h4>📊 Thống kê</h4>
+                                <p><b>150+</b> sinh viên/năm</p>
+                                <p><b>96%</b> xin việc thành công</p>
+                                <p><b>18+</b> công ty hợp tác</p>
+                                <p style="font-size: 0.88rem;">Trung bình lương: 25-35 triệu/tháng</p>
+                            </div>
+                        </div>
 
-                <h3 style="color: var(--primary); margin-top: 30px; margin-bottom: 15px;">🎯 Cơ Hội Sự Nghiệp</h3>
-                <div class="curriculum-grid">
-                    <div class="curriculum-info-card">
-                        <h4>💼 Các Công Ty Tiềm Năng</h4>
-                        <ul>
-                            <li><i class="fas fa-building"></i> FPT Software</li>
-                            <li><i class="fas fa-building"></i> Viettel</li>
-                            <li><i class="fas fa-building"></i> Techcombank</li>
-                            <li><i class="fas fa-building"></i> Grab Vietnam</li>
-                            <li><i class="fas fa-building"></i> Momo</li>
-                        </ul>
-                    </div>
-                    <div class="curriculum-info-card" style="border-left-color: var(--accent);">
-                        <h4>📍 Vị Trí Công Việc</h4>
-                        <ul>
-                            <li><i class="fas fa-briefcase"></i> Software Developer</li>
-                            <li><i class="fas fa-briefcase"></i> Full-stack Engineer</li>
-                            <li><i class="fas fa-briefcase"></i> QA Engineer</li>
-                            <li><i class="fas fa-briefcase"></i> DevOps Engineer</li>
-                            <li><i class="fas fa-briefcase"></i> Tech Lead</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+                        <h3 style="color: var(--primary); margin-bottom: 12px;">📚 Lộ Trình Học</h3>
+                        <table class="curriculum-table">
+                            <thead><tr><th>Năm</th><th>Học kỳ</th><th>Môn học chính</th><th>Tín chỉ</th></tr></thead>
+                            <tbody>
+                                <tr><td rowspan="2"><b>Năm 1</b></td><td>HK1</td><td>Nhập môn bảo mật, Toán rời rạc, Mạng máy tính cơ bản</td><td>16</td></tr>
+                                <tr><td>HK2</td><td>Cryptography, Lập trình Python, Hệ điều hành</td><td>16</td></tr>
+                                <tr><td rowspan="2"><b>Năm 2</b></td><td>HK3</td><td>Quản trị mạng, Bảo mật ứng dụng Web, Linux Security</td><td>16</td></tr>
+                                <tr><td>HK4</td><td>Penetration Testing, Forensics, Firewall &amp; Network Security</td><td>16</td></tr>
+                                <tr><td rowspan="2"><b>Năm 3</b></td><td>HK5</td><td>Quản lý giấy phép bảo mật, Ethical Hacking, IoT Security</td><td>16</td></tr>
+                                <tr><td>HK6</td><td>Thực tập doanh nghiệp, SOC (Security Operation Center)</td><td>16</td></tr>
+                                <tr><td colspan="2"><b>Năm 4</b></td><td>Khóa luận tốt nghiệp về bảo mật</td><td>20</td></tr>
+                            </tbody>
+                        </table>
 
-        <!-- 2. AN TOÀN THÔNG TIN -->
-        <div id="security" class="tab-content">
-            <div class="major-detail">
-                <div class="major-detail-header">
-                    <div>
-                        <h2>An toàn Thông tin</h2>
-                        <p style="margin-bottom: 20px;">Đào tạo chuyên gia bảo mật mạng, bảo vệ hạ tầng CNTT và dữ liệu quốc gia.</p>
-                        <b style="color: var(--primary);">Kỹ năng chính:</b>
-                        <ul>
-                            <li><i class="fas fa-check-circle"></i> Mã hóa & Cryptography</li>
-                            <li><i class="fas fa-check-circle"></i> Penetration Testing</li>
-                            <li><i class="fas fa-check-circle"></i> Network Security</li>
-                            <li><i class="fas fa-check-circle"></i> Firewall & IDS/IPS</li>
-                            <li><i class="fas fa-check-circle"></i> Quản lý rủi ro bảo mật</li>
-                        </ul>
-                    </div>
-                    <div style="background: linear-gradient(135deg, #FF6B6B, #FF8E53); border-radius: 15px; padding: 20px; color: white;">
-                        <h4>📊 Thống kê</h4>
-                        <p style="margin: 10px 0;"><b>150+</b> sinh viên/năm</p>
-                        <p style="margin: 10px 0;"><b>96%</b> xin việc thành công</p>
-                        <p style="margin: 10px 0;"><b>18+</b> công ty hợp tác</p>
-                        <p style="margin: 10px 0; font-size: 0.9rem;">Trung bình lương: 25-35 triệu/tháng</p>
+                        <h3 style="color: var(--primary); margin-top: 28px; margin-bottom: 12px;">🎯 Cơ Hội Sự Nghiệp</h3>
+                        <div class="curriculum-grid">
+                            <div class="curriculum-info-card">
+                                <h4>💼 Các Công Ty Tiềm Năng</h4>
+                                <ul>
+                                    <li><i class="fas fa-building"></i> Bộ Công an (Cục An ninh Mạng)</li>
+                                    <li><i class="fas fa-building"></i> VNPT</li>
+                                    <li><i class="fas fa-building"></i> Viettel Cyber Security</li>
+                                    <li><i class="fas fa-building"></i> Kaspersky Lab</li>
+                                    <li><i class="fas fa-building"></i> Palo Alto Networks</li>
+                                </ul>
+                            </div>
+                            <div class="curriculum-info-card" style="border-left-color: var(--accent);">
+                                <h4>📍 Vị Trí Công Việc</h4>
+                                <ul>
+                                    <li><i class="fas fa-briefcase"></i> Security Analyst</li>
+                                    <li><i class="fas fa-briefcase"></i> Penetration Tester</li>
+                                    <li><i class="fas fa-briefcase"></i> SOC Analyst</li>
+                                    <li><i class="fas fa-briefcase"></i> Network Security Engineer</li>
+                                    <li><i class="fas fa-briefcase"></i> Security Architect</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <h3 style="color: var(--primary); margin-top: 30px; margin-bottom: 15px;">📚 Lộ Trình Học</h3>
-                <table class="curriculum-table">
-                    <thead>
-                        <tr>
-                            <th>Năm</th>
-                            <th>Học kỳ</th>
-                            <th>Môn học chính</th>
-                            <th>Tín chỉ</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td rowspan="2"><b>Năm 1</b></td>
-                            <td>HK1</td>
-                            <td>Nhập môn bảo mật, Toán rời rạc, Mạng máy tính cơ bản</td>
-                            <td>16</td>
-                        </tr>
-                        <tr>
-                            <td>HK2</td>
-                            <td>Cryptography, Lập trình Python, Hệ điều hành</td>
-                            <td>16</td>
-                        </tr>
-                        <tr>
-                            <td rowspan="2"><b>Năm 2</b></td>
-                            <td>HK3</td>
-                            <td>Quản trị mạng, Bảo mật ứng dụng Web, Linux Security</td>
-                            <td>16</td>
-                        </tr>
-                        <tr>
-                            <td>HK4</td>
-                            <td>Penetration Testing, Forensics, Firewall & Network Security</td>
-                            <td>16</td>
-                        </tr>
-                        <tr>
-                            <td rowspan="2"><b>Năm 3</b></td>
-                            <td>HK5</td>
-                            <td>Quản lý giấc phép bảo mật, Ethical Hacking, IoT Security</td>
-                            <td>16</td>
-                        </tr>
-                        <tr>
-                            <td>HK6</td>
-                            <td>Thực tập doanh nghiệp, SOC (Security Operation Center)</td>
-                            <td>16</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><b>Năm 4</b></td>
-                            <td>Khóa luận tốt nghiệp về bảo mật</td>
-                            <td>20</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <!-- 3. KHOA HỌC DỮ LIỆU -->
+                <div id="data" class="tab-content">
+                    <div class="major-detail">
+                        <div class="major-detail-header">
+                            <div>
+                                <h2>Khoa học Dữ liệu</h2>
+                                <p style="margin-bottom: 18px;">Khai phá kiến thức từ Big Data, xây dựng mô hình AI/ML cho các quyết định kinh doanh.</p>
+                                <b style="color: var(--primary);">Kỹ năng chính:</b>
+                                <ul>
+                                    <li><i class="fas fa-check-circle"></i> Python, R, SQL</li>
+                                    <li><i class="fas fa-check-circle"></i> Machine Learning &amp; Deep Learning</li>
+                                    <li><i class="fas fa-check-circle"></i> Big Data (Spark, Hadoop)</li>
+                                    <li><i class="fas fa-check-circle"></i> Data Visualization &amp; BI Tools</li>
+                                    <li><i class="fas fa-check-circle"></i> Statistical Analysis</li>
+                                </ul>
+                            </div>
+                            <div class="stats-box" style="background: linear-gradient(135deg, #667EEA, #764BA2);">
+                                <h4>📊 Thống kê</h4>
+                                <p><b>180+</b> sinh viên/năm</p>
+                                <p><b>97%</b> xin việc thành công</p>
+                                <p><b>25+</b> công ty hợp tác</p>
+                                <p style="font-size: 0.88rem;">Trung bình lương: 22-32 triệu/tháng</p>
+                            </div>
+                        </div>
 
-                <h3 style="color: var(--primary); margin-top: 30px; margin-bottom: 15px;">🎯 Cơ Hội Sự Nghiệp</h3>
-                <div class="curriculum-grid">
-                    <div class="curriculum-info-card">
-                        <h4>💼 Các Công Ty Tiềm Năng</h4>
-                        <ul>
-                            <li><i class="fas fa-building"></i> Bộ Công an (Cục An ninh Mạng)</li>
-                            <li><i class="fas fa-building"></i> VNPT</li>
-                            <li><i class="fas fa-building"></i> Viettel Cyber Security</li>
-                            <li><i class="fas fa-building"></i> Kaspersky Lab</li>
-                            <li><i class="fas fa-building"></i> Palo Alto Networks</li>
-                        </ul>
-                    </div>
-                    <div class="curriculum-info-card" style="border-left-color: var(--accent);">
-                        <h4>📍 Vị Trí Công Việc</h4>
-                        <ul>
-                            <li><i class="fas fa-briefcase"></i> Security Analyst</li>
-                            <li><i class="fas fa-briefcase"></i> Penetration Tester</li>
-                            <li><i class="fas fa-briefcase"></i> SOC Analyst</li>
-                            <li><i class="fas fa-briefcase"></i> Network Security Engineer</li>
-                            <li><i class="fas fa-briefcase"></i> Security Architect</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+                        <h3 style="color: var(--primary); margin-bottom: 12px;">📚 Lộ Trình Học</h3>
+                        <table class="curriculum-table">
+                            <thead><tr><th>Năm</th><th>Học kỳ</th><th>Môn học chính</th><th>Tín chỉ</th></tr></thead>
+                            <tbody>
+                                <tr><td rowspan="2"><b>Năm 1</b></td><td>HK1</td><td>Python cơ bản, Đại số tuyến tính, Xác suất thống kê</td><td>16</td></tr>
+                                <tr><td>HK2</td><td>SQL, Toán rời rạc, Cơ sở dữ liệu</td><td>16</td></tr>
+                                <tr><td rowspan="2"><b>Năm 2</b></td><td>HK3</td><td>Machine Learning, R Programming, Data Visualization</td><td>16</td></tr>
+                                <tr><td>HK4</td><td>Deep Learning, Big Data với Spark, ETL processes</td><td>16</td></tr>
+                                <tr><td rowspan="2"><b>Năm 3</b></td><td>HK5</td><td>NLP, Computer Vision, Business Analytics</td><td>16</td></tr>
+                                <tr><td>HK6</td><td>Thực tập doanh nghiệp, Dự án khoa học dữ liệu</td><td>16</td></tr>
+                                <tr><td colspan="2"><b>Năm 4</b></td><td>Khóa luận tốt nghiệp về Khoa học Dữ liệu</td><td>20</td></tr>
+                            </tbody>
+                        </table>
 
-        <!-- 3. KHOA HỌC DỮ LIỆU -->
-        <div id="data" class="tab-content">
-            <div class="major-detail">
-                <div class="major-detail-header">
-                    <div>
-                        <h2>Khoa học Dữ liệu</h2>
-                        <p style="margin-bottom: 20px;">Khai phá kiến thức từ Big Data, xây dựng mô hình AI/ML cho các quyết định kinh doanh.</p>
-                        <b style="color: var(--primary);">Kỹ năng chính:</b>
-                        <ul>
-                            <li><i class="fas fa-check-circle"></i> Python, R, SQL</li>
-                            <li><i class="fas fa-check-circle"></i> Machine Learning & Deep Learning</li>
-                            <li><i class="fas fa-check-circle"></i> Big Data (Spark, Hadoop)</li>
-                            <li><i class="fas fa-check-circle"></i> Data Visualization & BI Tools</li>
-                            <li><i class="fas fa-check-circle"></i> Statistical Analysis</li>
-                        </ul>
-                    </div>
-                    <div style="background: linear-gradient(135deg, #667EEA, #764BA2); border-radius: 15px; padding: 20px; color: white;">
-                        <h4>📊 Thống kê</h4>
-                        <p style="margin: 10px 0;"><b>180+</b> sinh viên/năm</p>
-                        <p style="margin: 10px 0;"><b>97%</b> xin việc thành công</p>
-                        <p style="margin: 10px 0;"><b>25+</b> công ty hợp tác</p>
-                        <p style="margin: 10px 0; font-size: 0.9rem;">Trung bình lương: 22-32 triệu/tháng</p>
+                        <h3 style="color: var(--primary); margin-top: 28px; margin-bottom: 12px;">🎯 Cơ Hội Sự Nghiệp</h3>
+                        <div class="curriculum-grid">
+                            <div class="curriculum-info-card">
+                                <h4>💼 Các Công Ty Tiềm Năng</h4>
+                                <ul>
+                                    <li><i class="fas fa-building"></i> Google Vietnam</li>
+                                    <li><i class="fas fa-building"></i> Agribank</li>
+                                    <li><i class="fas fa-building"></i> Shopee</li>
+                                    <li><i class="fas fa-building"></i> Lazada</li>
+                                    <li><i class="fas fa-building"></i> Tiki</li>
+                                </ul>
+                            </div>
+                            <div class="curriculum-info-card" style="border-left-color: var(--accent);">
+                                <h4>📍 Vị Trí Công Việc</h4>
+                                <ul>
+                                    <li><i class="fas fa-briefcase"></i> Data Scientist</li>
+                                    <li><i class="fas fa-briefcase"></i> Machine Learning Engineer</li>
+                                    <li><i class="fas fa-briefcase"></i> Data Analyst</li>
+                                    <li><i class="fas fa-briefcase"></i> Big Data Engineer</li>
+                                    <li><i class="fas fa-briefcase"></i> AI Specialist</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <h3 style="color: var(--primary); margin-top: 30px; margin-bottom: 15px;">📚 Lộ Trình Học</h3>
-                <table class="curriculum-table">
-                    <thead>
-                        <tr>
-                            <th>Năm</th>
-                            <th>Học kỳ</th>
-                            <th>Môn học chính</th>
-                            <th>Tín chỉ</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td rowspan="2"><b>Năm 1</b></td>
-                            <td>HK1</td>
-                            <td>Python cơ bản, Đại số tuyến tính, Xác suất thống kê</td>
-                            <td>16</td>
-                        </tr>
-                        <tr>
-                            <td>HK2</td>
-                            <td>SQL, Toán rời rạc, Cơ sở dữ liệu</td>
-                            <td>16</td>
-                        </tr>
-                        <tr>
-                            <td rowspan="2"><b>Năm 2</b></td>
-                            <td>HK3</td>
-                            <td>Machine Learning, R Programming, Data Visualization</td>
-                            <td>16</td>
-                        </tr>
-                        <tr>
-                            <td>HK4</td>
-                            <td>Deep Learning, Big Data với Spark, ETL processes</td>
-                            <td>16</td>
-                        </tr>
-                        <tr>
-                            <td rowspan="2"><b>Năm 3</b></td>
-                            <td>HK5</td>
-                            <td>NLP, Computer Vision, Business Analytics</td>
-                            <td>16</td>
-                        </tr>
-                        <tr>
-                            <td>HK6</td>
-                            <td>Thực tập doanh nghiệp, Dự án khoa học dữ liệu</td>
-                            <td>16</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><b>Năm 4</b></td>
-                            <td>Khóa luận tốt nghiệp về Khoa học Dữ liệu</td>
-                            <td>20</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <!-- 4. HỆ THỐNG THÔNG TIN -->
+                <div id="systems" class="tab-content">
+                    <div class="major-detail">
+                        <div class="major-detail-header">
+                            <div>
+                                <h2>Hệ thống Thông tin</h2>
+                                <p style="margin-bottom: 18px;">Thiết kế, triển khai và quản lý các hệ thống CNTT cho doanh nghiệp.</p>
+                                <b style="color: var(--primary);">Kỹ năng chính:</b>
+                                <ul>
+                                    <li><i class="fas fa-check-circle"></i> Quản trị hệ thống &amp; Mạng</li>
+                                    <li><i class="fas fa-check-circle"></i> ERP Systems (SAP, Oracle)</li>
+                                    <li><i class="fas fa-check-circle"></i> Cloud Computing (AWS, Azure)</li>
+                                    <li><i class="fas fa-check-circle"></i> IT Infrastructure</li>
+                                    <li><i class="fas fa-check-circle"></i> Business Process Analysis</li>
+                                </ul>
+                            </div>
+                            <div class="stats-box" style="background: linear-gradient(135deg, #F093FB, #F5576C);">
+                                <h4>📊 Thống kê</h4>
+                                <p><b>160+</b> sinh viên/năm</p>
+                                <p><b>95%</b> xin việc thành công</p>
+                                <p><b>22+</b> công ty hợp tác</p>
+                                <p style="font-size: 0.88rem;">Trung bình lương: 18-28 triệu/tháng</p>
+                            </div>
+                        </div>
 
-                <h3 style="color: var(--primary); margin-top: 30px; margin-bottom: 15px;">🎯 Cơ Hội Sự Nghiệp</h3>
-                <div class="curriculum-grid">
-                    <div class="curriculum-info-card">
-                        <h4>💼 Các Công Ty Tiềm Năng</h4>
-                        <ul>
-                            <li><i class="fas fa-building"></i> Google Vietnam</li>
-                            <li><i class="fas fa-building"></i> Agribank</li>
-                            <li><i class="fas fa-building"></i> Shopee</li>
-                            <li><i class="fas fa-building"></i> Lazada</li>
-                            <li><i class="fas fa-building"></i> Tiki</li>
-                        </ul>
-                    </div>
-                    <div class="curriculum-info-card" style="border-left-color: var(--accent);">
-                        <h4>📍 Vị Trí Công Việc</h4>
-                        <ul>
-                            <li><i class="fas fa-briefcase"></i> Data Scientist</li>
-                            <li><i class="fas fa-briefcase"></i> Machine Learning Engineer</li>
-                            <li><i class="fas fa-briefcase"></i> Data Analyst</li>
-                            <li><i class="fas fa-briefcase"></i> Big Data Engineer</li>
-                            <li><i class="fas fa-briefcase"></i> AI Specialist</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+                        <h3 style="color: var(--primary); margin-bottom: 12px;">📚 Lộ Trình Học</h3>
+                        <table class="curriculum-table">
+                            <thead><tr><th>Năm</th><th>Học kỳ</th><th>Môn học chính</th><th>Tín chỉ</th></tr></thead>
+                            <tbody>
+                                <tr><td rowspan="2"><b>Năm 1</b></td><td>HK1</td><td>Nhập môn KHMT, Mạng máy tính cơ bản, Quản lý dự án</td><td>16</td></tr>
+                                <tr><td>HK2</td><td>Cơ sở dữ liệu, Hệ điều hành, Business Analysis</td><td>16</td></tr>
+                                <tr><td rowspan="2"><b>Năm 2</b></td><td>HK3</td><td>ERP Systems, IT Infrastructure, Cloud Computing cơ bản</td><td>16</td></tr>
+                                <tr><td>HK4</td><td>Quản trị mạng Enterprise, Database Administration, Azure/AWS</td><td>16</td></tr>
+                                <tr><td rowspan="2"><b>Năm 3</b></td><td>HK5</td><td>Digital Transformation, IT Governance, SAP/Oracle Administration</td><td>16</td></tr>
+                                <tr><td>HK6</td><td>Thực tập doanh nghiệp, Quản lý hạ tầng CNTT</td><td>16</td></tr>
+                                <tr><td colspan="2"><b>Năm 4</b></td><td>Khóa luận tốt nghiệp về Hệ thống Thông tin</td><td>20</td></tr>
+                            </tbody>
+                        </table>
 
-        <!-- 4. HỆ THỐNG THÔNG TIN -->
-        <div id="systems" class="tab-content">
-            <div class="major-detail">
-                <div class="major-detail-header">
-                    <div>
-                        <h2>Hệ thống Thông tin</h2>
-                        <p style="margin-bottom: 20px;">Thiết kế, triển khai và quản lý các hệ thống CNTT cho doanh nghiệp.</p>
-                        <b style="color: var(--primary);">Kỹ năng chính:</b>
-                        <ul>
-                            <li><i class="fas fa-check-circle"></i> Quản trị hệ thống & Mạng</li>
-                            <li><i class="fas fa-check-circle"></i> ERP Systems (SAP, Oracle)</li>
-                            <li><i class="fas fa-check-circle"></i> Cloud Computing (AWS, Azure)</li>
-                            <li><i class="fas fa-check-circle"></i> IT Infrastructure</li>
-                            <li><i class="fas fa-check-circle"></i> Business Process Analysis</li>
-                        </ul>
-                    </div>
-                    <div style="background: linear-gradient(135deg, #F093FB, #F5576C); border-radius: 15px; padding: 20px; color: white;">
-                        <h4>📊 Thống kê</h4>
-                        <p style="margin: 10px 0;"><b>160+</b> sinh viên/năm</p>
-                        <p style="margin: 10px 0;"><b>95%</b> xin việc thành công</p>
-                        <p style="margin: 10px 0;"><b>22+</b> công ty hợp tác</p>
-                        <p style="margin: 10px 0; font-size: 0.9rem;">Trung bình lương: 18-28 triệu/tháng</p>
+                        <h3 style="color: var(--primary); margin-top: 28px; margin-bottom: 12px;">🎯 Cơ Hội Sự Nghiệp</h3>
+                        <div class="curriculum-grid">
+                            <div class="curriculum-info-card">
+                                <h4>💼 Các Công Ty Tiềm Năng</h4>
+                                <ul>
+                                    <li><i class="fas fa-building"></i> CMC Group</li>
+                                    <li><i class="fas fa-building"></i> KPMG Vietnam</li>
+                                    <li><i class="fas fa-building"></i> IBM Vietnam</li>
+                                    <li><i class="fas fa-building"></i> Accenture</li>
+                                    <li><i class="fas fa-building"></i> Deloitte</li>
+                                </ul>
+                            </div>
+                            <div class="curriculum-info-card" style="border-left-color: var(--accent);">
+                                <h4>📍 Vị Trí Công Việc</h4>
+                                <ul>
+                                    <li><i class="fas fa-briefcase"></i> Systems Administrator</li>
+                                    <li><i class="fas fa-briefcase"></i> ERP Consultant</li>
+                                    <li><i class="fas fa-briefcase"></i> Cloud Architect</li>
+                                    <li><i class="fas fa-briefcase"></i> IT Manager</li>
+                                    <li><i class="fas fa-briefcase"></i> Solutions Architect</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <h3 style="color: var(--primary); margin-top: 30px; margin-bottom: 15px;">📚 Lộ Trình Học</h3>
-                <table class="curriculum-table">
-                    <thead>
-                        <tr>
-                            <th>Năm</th>
-                            <th>Học kỳ</th>
-                            <th>Môn học chính</th>
-                            <th>Tín chỉ</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td rowspan="2"><b>Năm 1</b></td>
-                            <td>HK1</td>
-                            <td>Nhập môn KHMT, Mạng máy tính cơ bản, Quản lý dự án</td>
-                            <td>16</td>
-                        </tr>
-                        <tr>
-                            <td>HK2</td>
-                            <td>Cơ sở dữ liệu, Hệ điều hành, Business Analysis</td>
-                            <td>16</td>
-                        </tr>
-                        <tr>
-                            <td rowspan="2"><b>Năm 2</b></td>
-                            <td>HK3</td>
-                            <td>ERP Systems, IT Infrastructure, Cloud Computing cơ bản</td>
-                            <td>16</td>
-                        </tr>
-                        <tr>
-                            <td>HK4</td>
-                            <td>Quản trị mạng Enterprise, Database Administration, Azure/AWS</td>
-                            <td>16</td>
-                        </tr>
-                        <tr>
-                            <td rowspan="2"><b>Năm 3</b></td>
-                            <td>HK5</td>
-                            <td>Digital Transformation, IT Governance, SAP/Oracle Administration</td>
-                            <td>16</td>
-                        </tr>
-                        <tr>
-                            <td>HK6</td>
-                            <td>Thực tập doanh nghiệp, Quản lý hạ tầng CNTT</td>
-                            <td>16</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><b>Năm 4</b></td>
-                            <td>Khóa luận tốt nghiệp về Hệ thống Thông tin</td>
-                            <td>20</td>
-                        </tr>
-                    </tbody>
-                </table>
+            </div><!-- /main-content -->
+        </div><!-- /page-layout -->
 
-                <h3 style="color: var(--primary); margin-top: 30px; margin-bottom: 15px;">🎯 Cơ Hội Sự Nghiệp</h3>
-                <div class="curriculum-grid">
-                    <div class="curriculum-info-card">
-                        <h4>💼 Các Công Ty Tiềm Năng</h4>
-                        <ul>
-                            <li><i class="fas fa-building"></i> CMC Group</li>
-                            <li><i class="fas fa-building"></i> KPMG Vietnam</li>
-                            <li><i class="fas fa-building"></i> IBM Vietnam</li>
-                            <li><i class="fas fa-building"></i> Accenture</li>
-                            <li><i class="fas fa-building"></i> Deloitte</li>
-                        </ul>
-                    </div>
-                    <div class="curriculum-info-card" style="border-left-color: var(--accent);">
-                        <h4>📍 Vị Trí Công Việc</h4>
-                        <ul>
-                            <li><i class="fas fa-briefcase"></i> Systems Administrator</li>
-                            <li><i class="fas fa-briefcase"></i> ERP Consultant</li>
-                            <li><i class="fas fa-briefcase"></i> Cloud Architect</li>
-                            <li><i class="fas fa-briefcase"></i> IT Manager</li>
-                            <li><i class="fas fa-briefcase"></i> Solutions Architect</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- SECTION: ADMISSION INFO -->
-        <div style="margin-top: 80px;">
+        <!-- ADMISSION INFO -->
+        <div class="admission-section">
             <div class="section-title">
                 <h2>Thông Tin Tuyển Sinh</h2>
                 <div></div>
@@ -827,12 +862,12 @@
             </div>
         </div>
 
+        <!-- LECTURERS -->
         <section class="lecturers-section">
             <div class="section-title">
                 <h2>Đội Ngũ Giảng Viên</h2>
-                <div class="title-underline"></div>
+                <div></div>
             </div>
-            
             <div class="huit-lecturer-grid">
                 <div class="huit-lecturer-card">
                     <div class="huit-avatar-wrapper">
@@ -844,7 +879,6 @@
                         <p class="exp">25 năm kinh nghiệm</p>
                     </div>
                 </div>
-
                 <div class="huit-lecturer-card">
                     <div class="huit-avatar-wrapper">
                         <img src="https://tse4.mm.bing.net/th/id/OIP.UttAB1IMxjjDr6sQY57l6gHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Giảng viên">
@@ -855,64 +889,60 @@
                         <p class="exp">18 năm kinh nghiệm</p>
                     </div>
                 </div>
-
                 <div class="huit-lecturer-card">
                     <div class="huit-avatar-wrapper">
                         <img src="https://tse4.mm.bing.net/th/id/OIP.UttAB1IMxjjDr6sQY57l6gHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Giảng viên">
                     </div>
                     <div class="huit-lecturer-info">
                         <h4>TS. Phùng Thế Bảo</h4>
-                        <p class="role">Trưởng Bộ môn Khoa học dữ liệu</p>
+                        <p class="role">Trưởng BM Khoa học dữ liệu</p>
                         <p class="exp">18 năm kinh nghiệm</p>
                     </div>
                 </div>
-
                 <div class="huit-lecturer-card">
                     <div class="huit-avatar-wrapper">
                         <img src="https://tse4.mm.bing.net/th/id/OIP.UttAB1IMxjjDr6sQY57l6gHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Giảng viên">
                     </div>
                     <div class="huit-lecturer-info">
                         <h4>ThS. Nguyễn Văn Lễ</h4>
-                        <p class="role">Phụ trách Bộ môn Hệ thống thông tin</p>
+                        <p class="role">Phụ trách BM Hệ thống thông tin</p>
                         <p class="exp">18 năm kinh nghiệm</p>
                     </div>
                 </div>
-
                 <div class="huit-lecturer-card">
                     <div class="huit-avatar-wrapper">
                         <img src="https://tse4.mm.bing.net/th/id/OIP.UttAB1IMxjjDr6sQY57l6gHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Giảng viên">
                     </div>
                     <div class="huit-lecturer-info">
                         <h4>ThS. Vũ Văn Vinh</h4>
-                        <p class="role">Phụ trách Bộ môn Kỹ thuật phần mềm</p>
+                        <p class="role">Phụ trách BM Kỹ thuật phần mềm</p>
                         <p class="exp">18 năm kinh nghiệm</p>
                     </div>
                 </div>
-
                 <div class="huit-lecturer-card">
                     <div class="huit-avatar-wrapper">
                         <img src="https://tse4.mm.bing.net/th/id/OIP.UttAB1IMxjjDr6sQY57l6gHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Giảng viên">
                     </div>
                     <div class="huit-lecturer-info">
                         <h4>TS. Nguyễn Hồng Vũ</h4>
-                        <p class="role">Phụ trách Bộ môn Mạng máy tính và ATTT</p>
+                        <p class="role">Phụ trách BM Mạng &amp; ATTT</p>
                         <p class="exp">18 năm kinh nghiệm</p>
                     </div>
                 </div>
-
                 <div class="huit-lecturer-card">
                     <div class="huit-avatar-wrapper">
                         <img src="https://tse4.mm.bing.net/th/id/OIP.UttAB1IMxjjDr6sQY57l6gHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Giảng viên">
                     </div>
                     <div class="huit-lecturer-info">
                         <h4>TS. Trần Khải Thiện</h4>
-                        <p class="role">Phụ trách Bộ môn Công nghệ số</p>
+                        <p class="role">Phụ trách BM Công nghệ số</p>
                         <p class="exp">18 năm kinh nghiệm</p>
                     </div>
                 </div>
             </div>
         </section>
-    </section>
+
+    </section><!-- /section -->
 
     <aside class="right-panel">
         <div class="panel-content">
@@ -966,18 +996,22 @@
 
     <script src="js/script.js"></script>
     <script>
-        function switchTab(event, tabName) {
-            // Hide all tabs
-            const tabContents = document.querySelectorAll('.tab-content');
-            tabContents.forEach(tab => tab.classList.remove('active'));
+        // ===== SIDEBAR TOGGLE =====
+        function toggleSidebar() {
+            const sidebar = document.getElementById('leftSidebar');
+            sidebar.classList.toggle('collapsed');
+        }
 
-            // Remove active class from all buttons
-            const tabButtons = document.querySelectorAll('.tab-btn');
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-
-            // Show selected tab
+        // ===== TAB SWITCHING =====
+        function switchTab(tabName, btn) {
+            // Ẩn tất cả tab content
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            // Bỏ active tất cả sidebar buttons
+            document.querySelectorAll('.sidebar-menu-btn').forEach(b => b.classList.remove('active'));
+            // Hiện tab được chọn
             document.getElementById(tabName).classList.add('active');
-            event.target.classList.add('active');
+            // Active button được click
+            btn.classList.add('active');
         }
     </script>
 </body>
