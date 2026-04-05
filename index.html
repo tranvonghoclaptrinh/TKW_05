@@ -4,155 +4,649 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Khoa Công Nghệ Thông Tin - HUIT</title>
+    <!-- Icon FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- 3. DYNAMIC MULTI-FRAME BANNER (SLIDER) --- */
+        .slider-wrapper {
+            position: relative;
+            width: 100%;
+            height: 650px;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        .slide-container {
+            display: flex;
+            width: 300%; 
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.7, 0, 0.3, 1);
+        }
+
+        .slide {
+            width: 33.333%;
+            height: 100%;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+        }
+
+        .slide-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(0, 84, 165, 0.85) 0%, rgba(0, 84, 165, 0.2) 100%);
+            z-index: 1;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            max-width: 800px;
+            padding: 0 50px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease 0.4s;
+        }
+
+        .slide.active .slide-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-content h1 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .slide-content p {
+            font-size: 1.3rem;
+            margin-bottom: 35px;
+            opacity: 0.9;
+        }
+
+        .slider-nav {
+            position: absolute;
+            bottom: 30px;
+            right: 50px;
+            z-index: 10;
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .nav-dot.active {
+            background: var(--white);
+            transform: scale(1.3);
+        }
+
+        /* --- 4. QUICK LINKS --- */
+        .quick-links-section {
+            padding: 30px 0;
+            background: transparent;
+            margin-top: -55px; 
+            position: relative;
+            z-index: 20;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 15px;
+        }
+
+        .action-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 18px 25px;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0, 84, 165, 0.2);
+            font-size: 0.95rem;
+        }
+
+        .action-button i {
+            font-size: 1.3rem;
+            margin-right: 12px;
+        }
+
+        .action-button:hover {
+            background-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(237, 28, 36, 0.3);
+        }
+
+        /* --- 5. SECTION TITLE GLOBAL --- */
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        /* --- 6. INFO CARDS & FIELDS SHARED STRUCTURE --- */
+        .info-cards-section, .fields-section {
+            padding: 80px 0 40px 0;
+        }
+
+        .fields-section {
+            background-color: var(--bg-alt);
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .info-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .info-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+        }
+
+        .card-img-wrapper {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .info-card:hover .card-img-wrapper img {
+            transform: scale(1.1);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--accent);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            z-index: 2;
+        }
+
+        .card-body {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-body h3 {
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+            line-height: 1.4;
+        }
+
+        .card-body p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .card-footer {
+            padding: 20px 25px;
+            background: var(--bg-alt);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .info-card:hover .card-footer {
+            background: #f8fafc;
+        }
+
+        .read-more {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* --- 7. THÔNG SỐ & THÀNH TỰU --- */
+        .achievement-section {
+            padding: 80px 0;
+            background-color: var(--bg-light);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+        }
+
+        .stat-item {
+            background: var(--white);
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            border-bottom: 5px solid transparent;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-10px);
+            border-bottom: 5px solid var(--primary);
+        }
+
+        .stat-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--bg-alt);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            border-radius: 50%;
+            margin: 0 auto 20px auto;
+            transition: var(--transition);
+        }
+
+        .stat-item:hover .stat-icon {
+            background: var(--primary);
+            color: var(--white);
+            transform: rotateY(180deg);
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 1024px) {
+            .cards-container { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .cards-container { grid-template-columns: 1fr; }
+            .slide-content h1 { font-size: 2.5rem; }
+            .slider-wrapper { height: 500px; }
+        }
+    </style>
 </head>
-<body data-theme="light">
+<body>
+    <div id="top-bar"></div>
+    <div id="header"></div> 
 
-    <header id="header">
-        <nav class="navbar">
-            <a href="index.html" class="logo">HUIT <span>IT</span></a>
-            
-            <ul class="nav-menu" id="nav-menu">
-                <li><a href="gioithieu.html" class="nav-link">Giới thiệu</a></li>
-                <li><a href="daotao.html" class="nav-link">Đào tạo</a></li>
-                <li><a href="tintuc.html" class="nav-link">Tin tức</a></li>
-                <li><a href="lienhe.html" class="nav-link">Liên hệ</a></li>
-            </ul>
 
-            <div class="controls">
-                <i class="fas fa-moon" id="theme-toggle"></i>
-                <div class="hamburger" id="hamburger">
-                    <i class="fas fa-bars"></i>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Khoa Công Nghệ Thông Tin</h1>
-            <p style="margin-bottom: 2rem; font-size: 1.2rem;">Chắp cánh ước mơ công nghệ tại HUIT</p>
-            <button class="btn-cta">TÌM HIỂU NGAY</button>
-        </div>
-    </section>
-
-    <section class="section">
-        <div class="section-title">
-            <h2>Các Ngành Đào Tạo</h2>
-            <div></div>
-        </div>
-        <div class="majors-grid">
-            <div class="major-card">
-                <i class="fas fa-code"></i>
-                <h3>Kỹ thuật Phần mềm</h3>
-                <p>Phát triển các hệ thống phần mềm quy mô lớn.</p>
-            </div>
-            <div class="major-card">
-                <i class="fas fa-shield-alt"></i>
-                <h3>An toàn Thông tin</h3>
-                <p>Bảo vệ tài sản số và hạ tầng mạng quốc gia.</p>
-            </div>
-            <div class="major-card">
-                <i class="fas fa-database"></i>
-                <h3>Khoa học Dữ liệu</h3>
-                <p>Khai phá tri thức từ dữ liệu lớn (Big Data).</p>
-            </div>
-            <div class="major-card">
-                <i class="fas fa-network-wired"></i>
-                <h3>Hệ thống Thông tin</h3>
+    <!-- 1. DYNAMIC BANNER -->
+    <div class="slider-wrapper">
+<div class="slide-container" id="mainSlider">
+    <div class="slide active" style="background-image: url('https://huit.edu.vn/images/tin-tuc-hoat-dong/truong-dh-cong-nghiep-thuc-pham-tp-ho-chi-minh-dat-nhieu-giai-cao-tai-giai-thuong-sinh-vien-nghien-cuu-khoa-hoc-eureka-lan-thu-24-nam-2022-1.jpg')">
+        <div class="slide-overlay"></div>
+        <div class="container">
+            <div class="slide-content">
+                <h1>Khoa Công Nghệ Thông Tin</h1>
+                <p>Môi trường học tập năng động với đội ngũ giảng viên giàu kinh nghiệm, tận tâm đồng hành cùng sinh viên.</p>
+                <a href="gioithieu/doingugiangvien.html" class="action-button" style="display: inline-flex; width: auto;">ĐỘI NGŨ GIẢNG VIÊN</a>
             </div>
         </div>
-    </section>
+    </div>
 
-    <section class="section">
-        <div class="news-container">
-            <div class="news-left">
-                <div class="section-title" style="text-align: left;">
-                    <h2>Tin tức Sự kiện</h2>
-                    <div style="margin: 0;"></div>
-                </div>
-                <div class="news-main">
-                    <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=1000" alt="News" class="news-img">
-                    <div class="news-body">
-                        <span style="color: var(--accent); font-weight: bold;">HỘI THẢO | 15.03.2026</span>
-                        <h3 style="margin: 10px 0;">Hội thảo Công nghệ Blockchain trong Kỷ nguyên Số</h3>
-                        <p>Sự kiện quy tụ các chuyên gia hàng đầu từ các tập đoàn công nghệ lớn...</p>
-                    </div>
-                </div>
-            </div>
-            <div class="news-right">
-                <div class="section-title" style="text-align: left;">
-                    <h2>Thông báo</h2>
-                    <div style="margin: 0;"></div>
-                </div>
-                <div class="notice-list">
-                    <div class="notice-item">
-                        <small>10/03/2026</small>
-                        <p>Thông báo đăng ký học phần học kỳ phụ năm 2026</p>
-                    </div>
-                    <div class="notice-item">
-                        <small>08/03/2026</small>
-                        <p>Lịch thi chứng chỉ CNTT cơ bản đợt 1</p>
-                    </div>
-                    <div class="notice-item">
-                        <small>05/03/2026</small>
-                        <p>Danh sách Tin tức nhận học bổng khuyến khích</p>
-                    </div>
-                </div>
+    <div class="slide" style="background-image: url('https://thpt.huit.edu.vn/ttgdpt/images/van-ban-chinh-sach-moi/hufimedia-93-of-136.jpg')">
+        <div class="slide-overlay"></div>
+        <div class="container">
+            <div class="slide-content">
+                <h1>Chương Trình Đào Tạo</h1>
+                <p>Đào tạo chuyên sâu Công nghệ phần mềm, Mạng máy tính và Trí tuệ nhân tạo (AI) theo tiêu chuẩn quốc tế.</p>
+                <a href="daotao.html" class="action-button" style="white-space: nowrap; display: inline-flex; width: auto;">LĨNH VỰC ĐÀO TẠO</a>
             </div>
         </div>
-    </section>
-    <aside class="right-panel">
-        <div class="panel-content">
-            <a href="lich-dao-tao.html" class="panel-item">
-                <i class="fas fa-calendar-check"></i>
-                <span>Lịch đào tạo</span>
-            </a>
-            <a href="tracuudiem.html" class="panel-item">
+    </div>
+
+    <div class="slide" style="background-image: url('https://huit.edu.vn/images/tin-tuc-hoat-dong/hon-150-doanh-nghiep-tuyen-dung-6-000-viec-lam-tai-ngay-hoi-viec-lam-truong-dai-hoc-cong-thuong-1.jpg')">
+        <div class="slide-overlay"></div>
+        <div class="container">
+            <div class="slide-content">
+                <h1>Cơ Hội Nghề Nghiệp</h1>
+                <p>Kết nối mạng lưới đối tác doanh nghiệp rộng lớn, đảm bảo cơ hội thực tập và việc làm cho sinh viên HUIT.</p>
+                <a href="gioithieu/hoptacdoanhnghiep.html" class="action-button" style="display: inline-flex; width: auto;">HỢP TÁC DOANH NGHIỆP</a>
+            </div>
+        </div>
+    </div>
+</div>
+        <div class="slider-nav">
+            <div class="nav-dot active" onclick="goToSlide(0)"></div>
+            <div class="nav-dot" onclick="goToSlide(1)"></div>
+            <div class="nav-dot" onclick="goToSlide(2)"></div>
+        </div>
+    </div>
+
+<section class="quick-links-section">
+    <div class="container">
+        <div class="links-grid">
+            <a href="gioithieu/sinhvien.html" class="action-button">
                 <i class="fas fa-user-graduate"></i>
-                <span>Tra cứu điểm</span>
-            </a>
-            <a href="thu-vien-so.html" class="panel-item">
-                <i class="fas fa-book-open"></i>
-                <span>Thư viện số</span>
-            </a>
-            <a href="ho-tro-sv.html" class="panel-item">
-                <i class="fas fa-headset"></i>
-                <span>Hỗ trợ SV</span>
-            </a>
-        </div>
-        <div class="panel-trigger">
-            <i class="fas fa-chevron-left"></i>
-        </div>
-    </aside>
+                <span>GÓC SINH VIÊN</span>
+                </a>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-col">
-                <h3>VỀ CHÚNG TÔI</h3>
-                <p>Khoa Công Nghệ Thông Tin - Trường Đại học Công Thương TP.HCM (HUIT) là đơn vị đào tạo nguồn nhân lực chất lượng cao.</p>
+            <a href="daotao.html" class="action-button">
+                <i class="fas fa-book-reader"></i>
+                <span>HÀNH TRÌNH TRI THỨC</span>
+                </a>
+
+            <a href="tintuc.html" class="action-button">
+                <i class="fas fa-newspaper"></i>
+                <span>TIN TỨC - SỰ KIỆN</span>
+                </a>
+
+            <a href="gioithieu/hoptacdoanhnghiep.html" class="action-button">
+                <i class="fas fa-handshake"></i>
+                <span>HỢP TÁC & KẾT NỐI</span>
+                </a>
+        </div>
+    </div>
+</section>
+
+    <!-- 3. INFO CARDS SECTION (Hoạt động nổi bật) -->
+    <section class="info-cards-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Hoạt động nổi bật</h2>
             </div>
-            <div class="footer-col">
-                <h3>LIÊN HỆ</h3>
-                <p><i class="fas fa-map-marker-alt"></i> 140 Lê Trọng Tấn, Tây Thạnh, Tân Phú, TP.HCM</p>
-                <p><i class="fas fa-phone"></i> (028) 3816 1673</p>
-                <p><i class="fas fa-envelope"></i> khoa.cntt@huit.edu.vn</p>
+            
+            <div class="cards-container">
+                <a href="#" class="info-card">
+                    <div class="card-img-wrapper">
+                        <span class="card-badge">TIN TỨC</span>
+                        <img src="https://huit.edu.vn/images/tin-tuc-hoat-dong/talkshow-kien-thuc-nen-tang-ve-cong-nghe-blockchain-web3-metaverse-co-hoi-nghe-nghiep-va-thach-thuc-cho-gioi-tre-1.jpg" alt="News">
+                    </div>
+                    <div class="card-body">
+                        <h3>Hội thảo Blockchain & Tương lai của Web3</h3>
+                        <p>Sự kiện quy tụ những chuyên gia hàng đầu thảo luận về ứng dụng thực tế của công nghệ chuỗi khối.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="read-more">Xem chi tiết <i class="fas fa-chevron-right"></i></span>
+                        <span style="font-size: 0.8rem; color: #999;"><i class="far fa-calendar-alt"></i> 15/05/2024</span>
+                    </div>
+                </a>
+
+                <a href="#" class="info-card">
+                    <div class="card-img-wrapper">
+                        <span class="card-badge" style="background: var(--primary);">ĐÀO TẠO</span>
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop" alt="Training">
+                    </div>
+                    <div class="card-body">
+                        <h3>Định hướng nghề nghiệp Kỹ sư phần mềm</h3>
+                        <p>Buổi giao lưu giữa sinh viên và các nhà tuyển dụng từ các tập đoàn công nghệ lớn tại Việt Nam.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="read-more">Xem chi tiết <i class="fas fa-chevron-right"></i></span>
+                        <span style="font-size: 0.8rem; color: #999;"><i class="far fa-calendar-alt"></i> 20/05/2024</span>
+                    </div>
+                </a>
+
+                <a href="#" class="info-card">
+                    <div class="card-img-wrapper">
+                        <span class="card-badge" style="background: green; color: #000;">SỰ KIỆN</span>
+                        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2070&auto=format&fit=crop" alt="Event">
+                    </div>
+                    <div class="card-body">
+                        <h3>HUIT Code Marathon 2024</h3>
+                        <p>Cuộc thi lập trình sôi nổi dành cho toàn thể sinh viên Khoa Công nghệ thông tin thử sức mình.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="read-more">Xem chi tiết <i class="fas fa-chevron-right"></i></span>
+                        <span style="font-size: 0.8rem; color: #999;"><i class="far fa-calendar-alt"></i> 02/06/2024</span>
+                    </div>
+                </a>
             </div>
-            <div class="footer-col">
-                <h3>FOLLOW US</h3>
-                <div style="display: flex; gap: 15px; font-size: 1.5rem; cursor: pointer;">
-                    <i class="fab fa-facebook"></i>
-                    <i class="fab fa-youtube"></i>
-                    <i class="fab fa-linkedin"></i>
+        </div>
+    </section>
+
+    <!-- 4. LĨNH VỰC ĐÀO TẠO (SỬ DỤNG LẠI CẤU TRÚC CARD) -->
+    <section class="fields-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Lĩnh vực đào tạo</h2>
+            </div>
+            
+            <div class="cards-container">
+                <a href="#" class="info-card">
+                    <div class="card-img-wrapper">
+                        <span class="card-badge" style="background: var(--primary);">NGÀNH ĐÀO TẠO</span>
+                        <img src="https://fita.vnua.edu.vn/wp-content/uploads/2021/01/Nganh-cong-nghe-phan-mem-la-gi.jpg" alt="Software">
+                    </div>
+                    <div class="card-body">
+                        <h3>Công nghệ phần mềm</h3>
+                        <p>Đào tạo kiến thức chuyên sâu về quy trình phát triển phần mềm, từ phân tích yêu cầu đến kiểm thử và triển khai ứng dụng.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="read-more">Xem chi tiết <i class="fas fa-chevron-right"></i></span>
+                        <span style="font-size: 0.8rem; color: #999;"><i class="far fa-calendar-alt"></i> 10/05/2024</span>
+                    </div>
+                </a>
+
+                <a href="#" class="info-card">
+                    <div class="card-img-wrapper">
+                        <span class="card-badge" style="background: var(--primary);">NGÀNH ĐÀO TẠO</span>
+                        <img src="https://i.pinimg.com/736x/45/b7/3e/45b73e2a26e32a769fc91e4070aed030.jpg" alt="Network">
+                    </div>
+                    <div class="card-body">
+                        <h3>Mạng máy tính & An toàn thông tin</h3>
+                        <p>Chương trình chú trọng kỹ năng quản trị mạng, thiết kế hạ tầng CNTT và các kỹ thuật phòng thủ, bảo mật hệ thống.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="read-more">Xem chi tiết <i class="fas fa-chevron-right"></i></span>
+                        <span style="font-size: 0.8rem; color: #999;"><i class="far fa-calendar-alt"></i> 12/05/2024</span>
+                    </div>
+                </a>
+
+                <a href="#" class="info-card">
+                    <div class="card-img-wrapper">
+                        <span class="card-badge" style="background: var(--primary);">NGÀNH ĐÀO TẠO</span>
+                        <img src="https://som.edu.vn/wp-content/uploads/2022/11/ung-dung-cua-tri-tue-nhan-tao.jpg" alt="AI">
+                    </div>
+                    <div class="card-body">
+                        <h3>Trí tuệ nhân tạo (AI)</h3>
+                        <p>Nghiên cứu các thuật toán học máy, xử lý ngôn ngữ tự nhiên và thị giác máy tính để kiến tạo các giải pháp thông minh.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="read-more">Xem chi tiết <i class="fas fa-chevron-right"></i></span>
+                        <span style="font-size: 0.8rem; color: #999;"><i class="far fa-calendar-alt"></i> 14/05/2024</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. ACHIEVEMENT SECTION -->
+    <section class="achievement-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Con số ấn tượng</h2>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-icon"><i class="fas fa-user-graduate"></i></div>
+                    <span class="stat-number">5000+</span>
+                    <span class="stat-label">Sinh viên đang theo học</span>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon"><i class="fas fa-briefcase"></i></div>
+                    <span class="stat-number">95%</span>
+                    <span class="stat-label">Tỷ lệ có việc làm</span>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon"><i class="fas fa-award"></i></div>
+                    <span class="stat-number">20+</span>
+                    <span class="stat-label">Giải thưởng quốc gia</span>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon"><i class="fas fa-handshake"></i></div>
+                    <span class="stat-number">100+</span>
+                    <span class="stat-label">Đối tác doanh nghiệp</span>
                 </div>
             </div>
         </div>
-        <div class="footer-bottom">
-            &copy; 2026 Khoa CNTT - HUIT. Designed by Trần Hữu Vọng.
-        </div>
-    </footer>
+    </section>
+    <div id="right-pannel-placeholder"></div>
+    <div id="chatbot"></div>
 
-<script src="js/script.js"></script>
+    <div id="footer-placeholder"></div>
+
+    <script src="js/script.js"></script>
+    <!-- SCRIPT ĐIỀU KHIỂN SLIDER -->
+    <script>
+        let currentSlide = 0;
+        const totalSlides = 3;
+        const slider = document.getElementById('mainSlider');
+        const dots = document.querySelectorAll('.nav-dot');
+        const slides = document.querySelectorAll('.slide');
+
+        function updateSlider() {
+            if(!slider) return;
+            slider.style.transform = `translateX(-${currentSlide * 33.333}%)`;
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlider();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlider();
+        }
+
+        setInterval(nextSlide, 5000);
+
+        // Hiệu ứng đếm số khi cuộn đến
+        const stats = document.querySelectorAll('.stat-number');
+        let started = false;
+
+        window.onscroll = function() {
+            const achSection = document.querySelector('.achievement-section');
+            if (achSection && window.scrollY >= achSection.offsetTop - 500) {
+                if (!started) {
+                    stats.forEach(s => startCount(s));
+                }
+                started = true;
+            }
+        };
+
+        function startCount(el) {
+            let max = parseInt(el.innerText.replace(/\D/g,''));
+            let count = 0;
+            let timer = setInterval(() => {
+                count += Math.ceil(max / 50);
+                if (count >= max) {
+                    el.innerText = max + (el.innerText.includes('+') ? '+' : (el.innerText.includes('%') ? '%' : ''));
+                    clearInterval(timer);
+                } else {
+                    el.innerText = count;
+                }
+            }, 30);
+        }
+    </script>
+    <script src="js/component.js"></script>
+
 </body>
 </html>

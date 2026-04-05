@@ -207,122 +207,105 @@
             .lecturers-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
             .lecturer-avatar { height: 150px; }
         }
-/* Container chính */
-.lecturers-section {
-    margin-top: 80px;
-    padding: 0 20px;
-}
+        /* Container chính */
+        .lecturers-section {
+            margin-top: 80px;
+            padding: 0 20px;
+        }
 
-/* Grid Layout */
-.huit-lecturer-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-    margin-top: 40px;
-}
+        /* Grid Layout */
+        .huit-lecturer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
 
-/* Thẻ Giảng Viên Style */
-.huit-lecturer-card {
-    background: var(--card-bg, #ffffff); /* Tự động đổi theo Dark Mode */
-    border-radius: 16px;
-    padding: 25px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s ease;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+        /* Thẻ Giảng Viên Style */
+        .huit-lecturer-card {
+            background: var(--card-bg, #ffffff); /* Tự động đổi theo Dark Mode */
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-/* Hiệu ứng Hover */
-.huit-lecturer-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-    border-color: var(--accent, #0056b3);
-}
+        /* Hiệu ứng Hover */
+        .huit-lecturer-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border-color: var(--accent, #0056b3);
+        }
 
-/* Avatar tròn chuẩn chuyên nghiệp */
-.huit-avatar-wrapper {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-bottom: 15px;
-    border: 3px solid var(--accent, #0056b3);
-    padding: 3px;
-    background: white;
-}
+        /* Avatar tròn chuẩn chuyên nghiệp */
+        .huit-avatar-wrapper {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-bottom: 15px;
+            border: 3px solid var(--accent, #0056b3);
+            padding: 3px;
+            background: white;
+        }
 
-.huit-avatar-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-}
+        .huit-avatar-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
 
-/* Thông tin giảng viên */
-.huit-lecturer-info h4 {
-    margin: 10px 0 5px;
-    font-size: 1.15rem;
-    color: var(--text-color, #333);
-}
+        /* Thông tin giảng viên */
+        .huit-lecturer-info h4 {
+            margin: 10px 0 5px;
+            font-size: 1.15rem;
+            color: var(--text-color, #333);
+        }
 
-.huit-lecturer-info .role {
-    color: #666;
-    font-size: 0.95rem;
-    margin-bottom: 8px;
-    font-weight: 500;
-}
+        .huit-lecturer-info .role {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
 
-.huit-lecturer-info .exp {
-    color: var(--accent, #0056b3);
-    font-size: 0.85rem;
-    font-weight: 600;
-    background: rgba(0, 86, 179, 0.1);
-    padding: 4px 12px;
-    border-radius: 20px;
-    display: inline-block;
-}
+        .huit-lecturer-info .exp {
+            color: var(--accent, #0056b3);
+            font-size: 0.85rem;
+            font-weight: 600;
+            background: rgba(0, 86, 179, 0.1);
+            padding: 4px 12px;
+            border-radius: 20px;
+            display: inline-block;
+        }
 
-/* Dark Mode support (nếu body có attribute data-theme="dark") */
-[data-theme="dark"] .huit-lecturer-card {
-    background: #1e1e1e;
-    border-color: rgba(255, 255, 255, 0.1);
-}
+        /* Dark Mode support (nếu body có attribute data-theme="dark") */
+        [data-theme="dark"] .huit-lecturer-card {
+            background: #1e1e1e;
+            border-color: rgba(255, 255, 255, 0.1);
+        }
 
-[data-theme="dark"] .huit-lecturer-info h4 {
-    color: #fff;
-}
+        [data-theme="dark"] .huit-lecturer-info h4 {
+            color: #fff;
+        }
 
-[data-theme="dark"] .huit-lecturer-info .role {
-    color: #bbb;
-}
+        [data-theme="dark"] .huit-lecturer-info .role {
+            color: #bbb;
+        }
     </style>
 </head>
 <body data-theme="light">
-    <header id="header">
-        <nav class="navbar">
-            <a href="index.html" class="logo">HUIT <span>IT</span></a>
-            <ul class="nav-menu" id="nav-menu">
-                <li><a href="gioithieu.html" class="nav-link">Giới thiệu</a></li>
-                <li><a href="daotao.html" class="nav-link">Đào tạo</a></li>
-                <li><a href="tintuc.html" class="nav-link">Tin tức</a></li>
-                <li><a href="lienhe.html" class="nav-link">Liên hệ</a></li>
-            </ul>
-            <div class="controls">
-                <i class="fas fa-moon" id="theme-toggle"></i>
-                <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
-            </div>
-        </nav>
-    </header>
+    <div id="top-bar"></div>
+    <div id="header"></div>
 
-    <section class="section" style="margin-top: 150px;">
-        <!-- Page Title -->
-        <div class="section-title">
-            <h2>Chương Trình Đào Tạo</h2>
-            <div></div>
-        </div>
+    <section class="section" style="margin-top: 50px;">
+
 
         <!-- Hero Section Introduction -->
         <div class="training-hero">
@@ -914,57 +897,13 @@
         </section>
     </section>
 
-    <aside class="right-panel">
-        <div class="panel-content">
-            <a href="lich-dao-tao.html" class="panel-item">
-                <i class="fas fa-calendar-check"></i>
-                <span>Lịch đào tạo</span>
-            </a>
-            <a href="tracuudiem.html" class="panel-item">
-                <i class="fas fa-user-graduate"></i>
-                <span>Tra cứu điểm</span>
-            </a>
-            <a href="thu-vien-so.html" class="panel-item">
-                <i class="fas fa-book-open"></i>
-                <span>Thư viện số</span>
-            </a>
-            <a href="#" class="panel-item">
-                <i class="fas fa-headset"></i>
-                <span>Hỗ trợ SV</span>
-            </a>
-        </div>
-        <div class="panel-trigger">
-            <i class="fas fa-chevron-left"></i>
-        </div>
-    </aside>
+    <div id="right-pannel-placeholder"></div>
+    <div id="chatbot"></div>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-col">
-                <h3>VỀ CHÚNG TÔI</h3>
-                <p>Khoa Công Nghệ Thông Tin - Trường Đại học Công Thương TP.HCM (HUIT) là đơn vị đào tạo nguồn nhân lực chất lượng cao.</p>
-            </div>
-            <div class="footer-col">
-                <h3>LIÊN HỆ</h3>
-                <p><i class="fas fa-map-marker-alt"></i> 140 Lê Trọng Tấn, Tây Thạnh, Tân Phú, TP.HCM</p>
-                <p><i class="fas fa-phone"></i> (028) 3816 1673</p>
-                <p><i class="fas fa-envelope"></i> khoa.cntt@huit.edu.vn</p>
-            </div>
-            <div class="footer-col">
-                <h3>FOLLOW US</h3>
-                <div style="display: flex; gap: 15px; font-size: 1.5rem; cursor: pointer;">
-                    <i class="fab fa-facebook"></i>
-                    <i class="fab fa-youtube"></i>
-                    <i class="fab fa-linkedin"></i>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            &copy; 2026 Khoa CNTT - HUIT. Designed by Trần Hữu Vọng.
-        </div>
-    </footer>
+    <div id="footer-placeholder"></div>
 
     <script src="js/script.js"></script>
+    <script src="js/component.js"></script>
     <script>
         function switchTab(event, tabName) {
             // Hide all tabs

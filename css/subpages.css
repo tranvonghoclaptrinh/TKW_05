@@ -716,3 +716,17 @@
         padding: 15px !important;
     }
 }
+/* Banner dành riêng cho các trang con */
+.subpage-banner {
+    width: 100%;
+    height: 250px; /* Chiều cao vừa phải */
+    background: linear-gradient(rgba(0, 51, 153, 0.8), rgba(0, 51, 153, 0.8)), 
+                url('../assets/img/huit-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-bottom: 30px;
+}
