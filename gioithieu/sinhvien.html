@@ -8,26 +8,6 @@
     <link rel="stylesheet" href="../css/style.css">
     
     <style>
-        /* --- LAYOUT FIXES --- */
-        .page-wrapper {
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            min-height: calc(100vh - 70px);
-        }
-
-        /* --- HUIT HERO SECTION --- */
-        .huit-hero-section {
-            position: relative;
-            padding: 40px;
-            background-color: #0054a5;
-            background-image: linear-gradient(rgba(0, 84, 165, 0.92), rgba(0, 41, 82, 0.92)), 
-                              url('https://huit.edu.vn/images/slide/hufi-2020-6.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: white;
-            overflow-x: hidden;
-        }
 
         .bg-pattern {
             position: absolute;
@@ -166,20 +146,8 @@
     </style>
 </head>
 <body data-theme="light">
-    <header id="header">
-        <nav class="navbar">
-            <a href="../index.html" class="logo">HUIT <span>IT</span></a>
-            <ul class="nav-menu">
-                <li><a href="../gioithieu.html" class="nav-link">Giới thiệu</a></li>
-                <li><a href="../daotao.html" class="nav-link">Đào tạo</a></li>
-                <li><a href="../tintuc.html" class="nav-link">Tin tức</a></li>
-                <li><a href="../lienhe.html" class="nav-link active">Liên hệ</a></li>
-            </ul>
-            <div class="controls">
-                <i class="fas fa-moon" id="theme-toggle"></i>
-            </div>
-        </nav>
-    </header>
+    <div id="top-bar"></div>
+    <div id="header"></div> 
 
     <div class="page-wrapper">
         <aside class="left-sidebar">
@@ -295,55 +263,12 @@
             </div>
         </main>
     </div>
-    <aside class="right-panel">
-        <div class="panel-content">
-            <a href="../lich-dao-tao.html" class="panel-item">
-                <i class="fas fa-calendar-check"></i>
-                <span>Lịch đào tạo</span>
-            </a>
-            <a href="../tracuudiem.html" class="panel-item">
-                <i class="fas fa-user-graduate"></i>
-                <span>Tra cứu điểm</span>
-            </a>
-            <a href="../thu-vien-so.html" class="panel-item">
-                <i class="fas fa-book-open"></i>
-                <span>Thư viện số</span>
-            </a>
-            <a href="../ho-tro-sv.html" class="panel-item">
-                <i class="fas fa-headset"></i>
-                <span>Hỗ trợ SV</span>
-            </a>
-        </div>
-        <div class="panel-trigger">
-            <i class="fas fa-chevron-left"></i>
-        </div>
-    </aside>
-    <footer>
-        <div class="footer-content">
-            <div class="footer-col">
-                <h3>VỀ CHÚNG TÔI</h3>
-                <p>Khoa Công Nghệ Thông Tin - Trường Đại học Công Thương TP.HCM (HUIT) là đơn vị đào tạo nguồn nhân lực chất lượng cao.</p>
-            </div>
-            <div class="footer-col">
-                <h3>LIÊN HỆ</h3>
-                <p><i class="fas fa-map-marker-alt"></i> 140 Lê Trọng Tấn, Tây Thạnh, Tân Phú, TP.HCM</p>
-                <p><i class="fas fa-phone"></i> (028) 3816 1673</p>
-                <p><i class="fas fa-envelope"></i> khoa.cntt@huit.edu.vn</p>
-            </div>
-            <div class="footer-col">
-                <h3>FOLLOW US</h3>
-                <div style="display: flex; gap: 15px; font-size: 1.5rem; cursor: pointer;">
-                    <i class="fab fa-facebook"></i>
-                    <i class="fab fa-youtube"></i>
-                    <i class="fab fa-linkedin"></i>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            &copy; 2026 Khoa CNTT - HUIT. Designed by Trần Hữu Vọng.
-        </div>
-    </footer>
+    <div id="right-pannel-placeholder"></div>
+    <div id="chatbot"></div>
+
+    <div id="footer-placeholder"></div>
 
     <script src="../js/script.js"></script>
+    <script src="../js/component.js"></script>
 </body>
 </html>

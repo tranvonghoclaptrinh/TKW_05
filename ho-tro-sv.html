@@ -349,21 +349,8 @@
     </style>
 </head>
 <body data-theme="light">
-    <header id="header">
-        <nav class="navbar">
-            <a href="index.html" class="logo">HUIT <span>IT</span></a>
-            <ul class="nav-menu" id="nav-menu">
-                <li><a href="gioithieu.html" class="nav-link">Giới thiệu</a></li>
-                <li><a href="daotao.html" class="nav-link">Đào tạo</a></li>
-                <li><a href="tintuc.html" class="nav-link">Tin tức</a></li>
-                <li><a href="lienhe.html" class="nav-link">Liên hệ</a></li>
-            </ul>
-            <div class="controls">
-                <i class="fas fa-moon" id="theme-toggle"></i>
-                <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
-            </div>
-        </nav>
-    </header>
+    <div id="top-bar"></div>
+    <div id="header"></div>
 
     <div class="support-container">
         <!-- Sidebar -->
@@ -416,6 +403,8 @@
             </div>
         </div>
     </div>
+    <div id="right-pannel-placeholder"></div>
+    <div id="chatbot"></div>
 
     <script src="js/script.js"></script>
     <script>
@@ -614,5 +603,6 @@
             }, 500);
         });
     </script>
+    <script src="js/component.js"></script>
 </body>
 </html>
