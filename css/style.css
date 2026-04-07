@@ -923,57 +923,6 @@ text-align: center;
 }
 /* ========================================================
 CSS CHO HIỆU ỨNG NỀN MỜ XANH (HERO SECTION)
-======================================================== */
-
-.main-content-hero {
-/* 1. Thay thế URL và thêm lớp phủ overlay (Gradient mờ xanh đậm) */
-background-image: 
-linear-gradient(rgba(0, 84, 165, 0.8), rgba(0, 61, 122, 0.8)), /* Đây là overlay: rgba(R, G, B, Opacity) */
-url('https://huit.edu.vn/images/slide/hufi-2020-6.jpg');
-
-background-size: cover;
-background-position: center;
-background-attachment: fixed; /* Giữ lại hiệu ứng Parallax (nếu muốn) */
-
-/* 2. Căn chỉnh lại vị trí - GIỮ NGUYÊN */
-grid-column: 2; 
-margin-top: 0; 
-width: 100%;
-
-/* 3. Giữ các hiệu ứng cũ - GIỮ NGUYÊN */
-position: relative;
-padding: 80px 20px; /* Tăng padding trên dưới một chút cho đẹp */
-border-bottom-left-radius: 20px;
-border-bottom-right-radius: 20px;
-box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-
-display: flex;
-justify-content: center;
-overflow: hidden;
-}
-
-/* Đảm bảo chữ bên trong nổi bật lên (Morphing text color) */
-.main-hero-content-wrapper .breadcrumb,
-.main-hero-content-wrapper .breadcrumb a,
-.main-hero-content-wrapper .page-header h1 {
-color: white; /* Bắt buộc là màu trắng */
-text-shadow: 0 2px 10px rgba(0,0,0,0.3); /* Thêm bóng đổ mờ cho chữ sắc nét hơn */
-}
-
-/* Cập nhật màu đường gạch dưới cho Breadcrumb và Page Header */
-.main-hero-content-wrapper .breadcrumb {
-color: white; /* Giữ màu chữ white */
-opacity: 0.9;
-}
-
-.main-hero-content-wrapper .page-header {
-border-bottom: 2px solid white; /* Thay gạch đỏ bằng gạch trắng trên nền ảnh */
-}
-
-/* --------------------------------------------------------
-XỬ LÝ ĐỘNG (HOVER VÀ ACTIVE)
--------------------------------------------------------- */
-
 /* Hiệu ứng hover cho lecturer-card nằm trên nền hero */
 .main-content-hero .training-fields .lecturer-card.active:hover {
 background-color: white !important; /* Trả về nền trắng hoàn toàn */

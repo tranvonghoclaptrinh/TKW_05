@@ -117,6 +117,7 @@ function initMobileMenu() {
             : '<i class="fas fa-bars"></i>';
     });
 
+    // Đóng menu khi click link
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', () => {
             navMenu.classList.remove('active');
