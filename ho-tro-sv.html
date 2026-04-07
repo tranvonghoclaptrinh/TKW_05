@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hỗ trợ sinh viên - Khoa CNTT HUIT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .support-wrap {
+            min-height: calc(100vh - 220px);
+            padding: 120px 20px 60px;
+            display: grid;
+            place-items: center;
+        }
+        
+        .chat-shell {
+            width: min(720px, 100%);
+            border-radius: 24px;
+            overflow: hidden;
+            background: var(--glass-bg);
+            box-shadow: var(--card-shadow);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        .chat-hero {
+            padding: 28px;
+            background: linear-gradient(135deg, var(--primary), #00315f);
+            color: #fff;
+        }
+        
+        .chat-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.14);
+            margin-bottom: 14px;
+            font-size: 0.9rem;
+        }
+        
+        .chat-hero h1 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            margin-bottom: 10px;
+        }
+        
+        .chat-hero p {
+            opacity: 0.92;
+            max-width: 60ch;
+        }
+        
+        .chat-body {
+            padding: 18px;
+        }
+        
+        .chat-messages {
+            min-height: 280px;
+            max-height: 360px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 4px 2px 14px;
+        }
+        
+        .bubble {
+            max-width: 86%;
+            padding: 11px 13px;
+            border-radius: 16px;
+            line-height: 1.45;
+            font-size: 0.95rem;
+        }
+        
+        .bubble.bot {
+            align-self: flex-start;
+            background: rgba(0, 84, 165, 0.08);
+        }
+        
+        .bubble.user {
+            align-self: flex-end;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #fff;
+        }
+        
+        .quick-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 12px 0 14px;
+        }
+        
+        .quick-btn {
+            border: 1px solid rgba(0, 84, 165, 0.16);
+            background: rgba(0, 84, 165, 0.06);
+            color: var(--text-dark);
+            border-radius: 999px;
+            padding: 8px 11px;
+            cursor: pointer;
+            font-size: 0.84rem;
+            font-weight: 600;
+        }
+        
+        .chat-form {
+            display: flex;
+            gap: 10px;
+            border-top: 1px solid rgba(0, 84, 165, 0.12);
+            padding-top: 14px;
+        }
+        
+        .chat-form input {
+            flex: 1;
+            border: 1px solid rgba(0, 84, 165, 0.18);
+            background: rgba(255, 255, 255, 0.84);
+            border-radius: 999px;
+            padding: 12px 14px;
+            outline: none;
+            color: var(--text-dark);
+        }
+        
+        .chat-form button {
+            border: none;
+            border-radius: 999px;
+            padding: 12px 16px;
+            background: var(--accent);
+            color: #fff;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        
+        .mini-note {
+            margin-top: 12px;
+            font-size: 0.88rem;
+            color: var(--text-dark);
+            opacity: 0.75;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .support-wrap {
+                padding-top: 105px;
+                padding-bottom: 40px;
+            }
+            .chat-hero,
+            .chat-body {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+            .chat-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body data-theme="light">
+    <header id="header">
+        <nav class="navbar">
+            <a href="index.html" class="logo">HUIT <span>IT</span></a>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="gioithieu.html" class="nav-link">Giới thiệu</a></li>
+                <li><a href="daotao.html" class="nav-link">Đào tạo</a></li>
+                <li><a href="tintuc.html" class="nav-link">Tin tức</a></li>
+                <li><a href="lienhe.html" class="nav-link">Liên hệ</a></li>
+            </ul>
+            <div class="controls">
+                <i class="fas fa-moon" id="theme-toggle"></i>
+                <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="support-wrap">
+        <section class="chat-shell" aria-label="AI hỗ trợ sinh viên">
+            <div class="chat-hero">
+                <div class="chat-tag"><i class="fa-solid fa-robot"></i> AI hỗ trợ sinh viên</div>
+                <h1>Hỏi nhanh, trả lời gọn</h1>
+                <p>Chat box đơn giản cho các câu hỏi về thực tập, tài liệu, điểm, VPN, giấy xác nhận và liên hệ khoa.</p>
+            </div>
+            <div class="chat-body">
+                <div class="chat-messages" id="aiChatMessages">
+                    <div class="bubble bot">Xin chào, hãy nhập câu hỏi ngắn. Ví dụ: thực tập, tài liệu, VPN, giấy xác nhận.</div>
+                </div>
+                <div class="quick-row">
+                    <button class="quick-btn" type="button" data-question="thực tập">Thực tập</button>
+                    <button class="quick-btn" type="button" data-question="tài liệu">Tài liệu</button>
+                    <button class="quick-btn" type="button" data-question="vpn">VPN</button>
+                    <button class="quick-btn" type="button" data-question="giấy xác nhận">Giấy xác nhận</button>
+                </div>
+                <form class="chat-form" id="aiChatForm">
+                    <input id="aiChatInput" type="text" placeholder="Nhập câu hỏi..." autocomplete="off">
+                    <button type="submit">Gửi</button>
+                </form>
+                <div class="mini-note">Trả lời theo từ khóa, không cần tải lại trang.</div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3>VỀ CHÚNG TÔI</h3>
+                <p>Khoa Công Nghệ Thông Tin - Trường Đại học Công Thương TP.HCM (HUIT) là đơn vị đào tạo nguồn nhân lực chất lượng cao.</p>
+            </div>
+            <div class="footer-col">
+                <h3>LIÊN HỆ</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 140 Lê Trọng Tấn, Tây Thạnh, Tân Phú, TP.HCM</p>
+                <p><i class="fas fa-phone"></i> (028) 3816 1673</p>
+                <p><i class="fas fa-envelope"></i> khoa.cntt@huit.edu.vn</p>
+            </div>
+            <div class="footer-col">
+                <h3>FOLLOW US</h3>
+                <div style="display: flex; gap: 15px; font-size: 1.5rem; cursor: pointer;">
+                    <i class="fab fa-facebook"></i>
+                    <i class="fab fa-youtube"></i>
+                    <i class="fab fa-linkedin"></i>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Khoa CNTT - HUIT. Designed by Tran Huu Vong.
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        const aiChatForm = document.getElementById('aiChatForm');
+        const aiChatInput = document.getElementById('aiChatInput');
+        const aiChatMessages = document.getElementById('aiChatMessages');
+        const quickButtons = document.querySelectorAll('.quick-btn');
+
+        const botReplies = [{
+            keys: ['thực tập', 'internship'],
+            reply: 'Bạn có thể hỏi về doanh nghiệp đối tác, tiến độ báo cáo hoặc quy trình đăng ký thực tập.'
+        }, {
+            keys: ['tài liệu', 'đề thi', 'đề cương', 'slide'],
+            reply: 'Kho tài liệu hiện được phân loại theo học phần như Cấu trúc dữ liệu, OOP và CSDL.'
+        }, {
+            keys: ['vpn', 'server', 'lab', 'phòng máy'],
+            reply: 'Phần Lab & Server hỗ trợ đăng ký phòng máy ngoài giờ, kết nối VPN nội bộ và truy cập tài nguyên của khoa.'
+        }, {
+            keys: ['giấy xác nhận', 'xác nhận', 'thủ tục', 'bảo lưu'],
+            reply: 'Bạn có thể gửi yêu cầu qua form liên hệ hoặc hỏi trực tiếp văn phòng CTSV để được hướng dẫn thủ tục nhanh.'
+        }, {
+            keys: ['điểm', 'tra cứu điểm', 'kết quả'],
+            reply: 'Nếu cần tra cứu điểm, hãy mở trang Tra cứu điểm trên menu chính hoặc panel bên phải.'
+        }, {
+            keys: ['liên hệ', 'email', 'sđt', 'số điện thoại'],
+            reply: 'Bạn có thể liên hệ khoa qua (028) 3816 1673 hoặc email khoa.cntt@huit.edu.vn.'
+        }];
+
+        function appendMessage(text, role) {
+            const bubble = document.createElement('div');
+            bubble.className = `bubble ${role}`;
+            bubble.textContent = text;
+            aiChatMessages.appendChild(bubble);
+            aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+        }
+
+        function getKeywordReply(query) {
+            const normalized = query.toLowerCase();
+            const matched = botReplies.find(item => item.keys.some(key => normalized.includes(key)));
+            return matched ? matched.reply : '';
+        }
+
+        function submitChatMessage(message) {
+            const cleaned = message.trim();
+            if (!cleaned) return;
+            appendMessage(cleaned, 'user');
+            const keywordReply = getKeywordReply(cleaned);
+            if (keywordReply) {
+                appendMessage(keywordReply, 'bot');
+                return;
+            }
+            appendMessage('Mình chưa có câu trả lời sẵn cho ý này. Bạn thử hỏi lại ngắn hơn hoặc chọn một nút gợi ý nhé.', 'bot');
+        }
+
+        aiChatForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            submitChatMessage(aiChatInput.value);
+            aiChatInput.value = '';
+        });
+
+        quickButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                submitChatMessage(button.getAttribute('data-question') || '');
+            });
+        });
+    </script>
+</body>
+
+</html>

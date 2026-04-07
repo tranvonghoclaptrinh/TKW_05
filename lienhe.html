@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +14,7 @@
             gap: 40px;
             margin-top: 30px;
         }
+        
         .form-glass {
             background: var(--glass-bg);
             padding: 30px;
@@ -20,22 +22,127 @@
             box-shadow: var(--card-shadow);
             backdrop-filter: blur(10px);
         }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: 500; }
-        .form-group input, .form-group textarea {
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
             width: 100%;
             padding: 12px;
             border-radius: 10px;
-            border: 1px solid rgba(0,0,0,0.1);
-            background: rgba(255,255,255,0.8);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.8);
             outline: none;
             transition: var(--transition);
         }
-        .form-group input:focus { border-color: var(--primary); box-shadow: 0 0 5px rgba(0,84,165,0.3); }
         
-        @media (max-width: 768px) { .contact-container { grid-template-columns: 1fr; } }
+        .form-group input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 5px rgba(0, 84, 165, 0.3);
+        }
+        
+        .map-card {
+            margin-top: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            background: #eee;
+        }
+        
+        .map-frame {
+            width: 100%;
+            height: 250px;
+            border: 0;
+            display: block;
+        }
+        
+        .map-link {
+            display: block;
+            text-align: center;
+            padding: 12px 16px;
+            background: rgba(0, 84, 165, 0.08);
+            color: var(--primary);
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .map-link:hover {
+            background: rgba(0, 84, 165, 0.14);
+        }
+        
+        .contact-intro {
+            margin-bottom: 22px;
+            color: var(--text-dark);
+            opacity: 0.85;
+        }
+        
+        .contact-highlights {
+            margin-top: 24px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+        }
+        
+        .contact-card {
+            background: rgba(0, 84, 165, 0.06);
+            border: 1px solid rgba(0, 84, 165, 0.12);
+            border-radius: 16px;
+            padding: 18px;
+        }
+        
+        .contact-card h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .contact-card p {
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+        
+        .specialty-grid {
+            margin-top: 24px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+        }
+        
+        .specialty-item {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 14px;
+            padding: 18px;
+            border-left: 4px solid var(--accent);
+        }
+        
+        [data-theme="dark"] .specialty-item {
+            background: rgba(15, 23, 42, 0.8);
+        }
+        
+        .specialty-item h4 {
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+        
+        .specialty-item p {
+            font-size: 0.94rem;
+        }
+        
+        @media (max-width: 768px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
+
 <body data-theme="light">
     <header id="header">
         <nav class="navbar">
@@ -57,6 +164,30 @@
         <div class="section-title">
             <h2>Liên Hệ Với Chúng Tôi</h2>
             <div></div>
+        </div>
+        <p class="contact-intro">Khoa CNTT HUIT tiếp nhận liên hệ cho học vụ, doanh nghiệp, thủ tục sinh viên và hỗ trợ kỹ thuật qua các đầu mối dưới đây.</p>
+
+        <div class="contact-highlights">
+            <article class="contact-card">
+                <h4>Ban chủ nhiệm khoa</h4>
+                <p><i class="fas fa-user-tie"></i> Tiếp nhận các vấn đề học vụ, đối ngoại và phối hợp doanh nghiệp.</p>
+                <p><i class="fas fa-envelope"></i> cnkhoa.cntt@huit.edu.vn</p>
+            </article>
+            <article class="contact-card">
+                <h4>Văn phòng khoa</h4>
+                <p><i class="fas fa-door-open"></i> Phòng C305, lầu 3 nhà C.</p>
+                <p><i class="fas fa-map-marker-alt"></i> 140 Lê Trọng Tấn, Q. Tân Phú, TP.HCM</p>
+            </article>
+            <article class="contact-card">
+                <h4>Hỗ trợ kỹ thuật</h4>
+                <p><i class="fas fa-laptop-code"></i> Tài khoản thực hành, phần mềm bản quyền, môi trường lab.</p>
+                <p><i class="fas fa-headset"></i> hotro.kythuat@huit.edu.vn</p>
+            </article>
+            <article class="contact-card">
+                <h4>Đối tác & doanh nghiệp</h4>
+                <p><i class="fas fa-briefcase"></i> Liên hệ hợp tác thực tập, tuyển dụng, seminar và tài trợ học thuật.</p>
+                <p><i class="fas fa-phone"></i> (028) 3816 1673</p>
+            </article>
         </div>
 
         <div class="contact-container">
@@ -85,27 +216,51 @@
                     <div class="notice-item"><i class="fas fa-phone-alt"></i> (028) 3816 1673 (Ext: 123)</div>
                     <div class="notice-item"><i class="fas fa-envelope"></i> khoa.cntt@huit.edu.vn</div>
                 </div>
-                <div style="margin-top: 30px; border-radius: 15px; overflow: hidden; height: 250px; background: #eee; display: flex; align-items: center; justify-content: center;">
-                    <p style="color: #888;">[Bản đồ Google Maps HUIT]</p>
+
+                <div class="specialty-grid">
+                    <div class="specialty-item">
+                        <h4>Kỹ thuật phần mềm</h4>
+                        <p>Liên hệ về đồ án, quy trình code review, thực tập phần mềm và hướng dẫn triển khai.</p>
+                    </div>
+                    <div class="specialty-item">
+                        <h4>Hệ thống thông tin</h4>
+                        <p>Hỗ trợ dữ liệu, quy trình nghiệp vụ, báo cáo và các bài toán phân tích hệ thống.</p>
+                    </div>
+                    <div class="specialty-item">
+                        <h4>An toàn thông tin</h4>
+                        <p>Các yêu cầu về lab bảo mật, tài khoản thực hành, và hướng dẫn sử dụng tài nguyên nội bộ.</p>
+                    </div>
+                    <div class="specialty-item">
+                        <h4>Mạng máy tính</h4>
+                        <p>Hỗ trợ phòng máy, cấu hình thiết bị, VPN nội bộ và truy cập hệ thống khoa.</p>
+                    </div>
+                </div>
+
+                <div class="map-card">
+                    <iframe class="map-frame" src="https://www.google.com/maps?q=10.8061539,106.6286656&z=14&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Google Maps HUIT">
+                    </iframe>
+                    <a class="map-link" href="https://www.google.com/maps?q=10.8061539,106.6286656" target="_blank" rel="noopener noreferrer">
+                        Mở Google Maps của HUIT
+                    </a>
                 </div>
             </div>
         </div>
     </section>
     <aside class="right-panel">
         <div class="panel-content">
-            <a href="#" class="panel-item">
+            <a href="lich-dao-tao.html" class="panel-item">
                 <i class="fas fa-calendar-check"></i>
                 <span>Lịch đào tạo</span>
             </a>
-            <a href="#" class="panel-item">
+            <a href="tracuudiem.html" class="panel-item">
                 <i class="fas fa-user-graduate"></i>
                 <span>Tra cứu điểm</span>
             </a>
-            <a href="#" class="panel-item">
+            <a href="thu-vien-so.html" class="panel-item">
                 <i class="fas fa-book"></i>
                 <span>Thư viện số</span>
             </a>
-            <a href="#" class="panel-item">
+            <a href="ho-tro-sv.html" class="panel-item">
                 <i class="fas fa-headset"></i>
                 <span>Hỗ trợ SV</span>
             </a>
@@ -136,7 +291,9 @@
                 </div>
             </div>
         </div>
+    </footer>
 
     <script src="js/script.js"></script>
 </body>
+
 </html>
