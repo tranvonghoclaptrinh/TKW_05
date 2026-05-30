@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đội ngũ Giảng viên - Khoa CNTT HUIT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Giả định file style.css gốc vẫn tồn tại, nhưng chúng ta ghi đè bằng style nội bộ bên dưới -->
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <style>
+
+        .bg-pattern {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .huit-container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* --- BREADCRUMB & HEADER --- */
+        .huit-breadcrumb {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+        .huit-breadcrumb a { color: white; text-decoration: none; }
+        .huit-main-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 35px;
+            letter-spacing: 1px;
+        }
+
+        /* --- STATS ROW --- */
+        .huit-stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .stat-card i { font-size: 2rem; color: #ffd700; }
+        .stat-count { font-size: 1.8rem; font-weight: 800; color: #ffd700; display: block; }
+        .stat-card p { font-size: 0.85rem; margin: 0; opacity: 0.9; }
+
+        /* --- MAIN GRID --- */
+        .huit-main-grid {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        /* --- LECTURER CARDS --- */
+        .huit-card {
+            background: white;
+            border-radius: 18px;
+            display: flex;
+            padding: 25px;
+            gap: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            color: #333;
+            transition: 0.3s;
+        }
+        .huit-card:hover { transform: translateY(-5px); }
+
+        .huit-card-img { position: relative; flex-shrink: 0; }
+        .huit-card-img img {
+            width: 150px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 3px solid #f1f5f9;
+        }
+        .img-badge {
+            position: absolute;
+            bottom: -10px; left: 50%;
+            transform: translateX(-50%);
+            background: #0054a5;
+            color: white;
+            font-size: 0.7rem;
+            padding: 4px 12px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        .huit-card-body { flex: 1; }
+        .card-top { display: flex; justify-content: space-between; align-items: center; }
+        .huit-rank-tag {
+            background: #ed1c24;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+        .social-quick-links { color: #0054a5; display: flex; gap: 12px; font-size: 1.1rem; }
+        
+        .huit-name { font-size: 1.6rem; color: #0054a5; margin: 12px 0; }
+        .huit-info-list { list-style: none; padding: 0; margin-bottom: 15px; }
+        .huit-info-list li { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 0.95rem; }
+        .huit-info-list li i { color: #0054a5; width: 20px; text-align: center; }
+
+        .huit-skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+        .huit-skill-tags span {
+            background: #f1f5f9;
+            color: #475569;
+            font-size: 0.75rem;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        /* --- SIDEBAR INFO --- */
+        .huit-side-info .info-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border-left: 5px solid #ed1c24;
+        }
+        .info-box h3 { font-size: 1.1rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .info-box ul { list-style: none; padding-left: 5px; }
+        .info-box ul li { margin-bottom: 10px; font-size: 0.9rem; position: relative; padding-left: 20px; }
+        .info-box ul li::before { content: '→'; position: absolute; left: 0; color: #ffd700; }
+
+        /* --- HORIZONTAL SCROLL SECTION --- */
+        .huit-horizontal-scroll {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            border-radius: 20px;
+            margin-top: 20px;
+        }
+        .scroll-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        .scroll-title { font-size: 1.4rem; font-weight: 700; }
+        .scroll-hint { font-size: 0.8rem; opacity: 0.7; font-style: italic; }
+
+        .scroll-container {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding-bottom: 20px;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255,255,255,0.3) transparent;
+        }
+        .scroll-container::-webkit-scrollbar { height: 6px; }
+        .scroll-container::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); border-radius: 10px; }
+
+        .mini-lecturer-card {
+            min-width: 280px;
+            background: white;
+            color: #333;
+            padding: 20px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            scroll-snap-align: start;
+            transition: 0.3s;
+        }
+        .mini-lecturer-card:hover { background: #f8fafc; cursor: grab; }
+        .mini-img img { width: 70px; height: 70px; border-radius: 50%; object-fit: cover; border: 3px solid #0054a5; }
+        .mini-info h4 { margin: 0; font-size: 1.05rem; color: #0054a5; }
+        .mini-info p { margin: 4px 0; font-size: 0.8rem; color: #64748b; }
+        .view-profile { font-size: 0.75rem; color: #ed1c24; text-decoration: none; font-weight: 700; text-transform: uppercase; }
+
+
+    </style>
+</head>
+<body data-theme="light">
+    <!-- HEADER -->
+    <div id="top-bar"></div>
+    <div id="header"></div> 
+
+    <div class="page-wrapper">
+        <!-- SIDEBAR -->
+        <aside class="left-sidebar">
+            <div class="sidebar-nav">
+                <div class="sidebar-title">
+                    <i class="fas fa-bars"></i> Danh mục
+                </div>
+                <nav class="nav-group">
+                    <a href="../gioithieu.html" class="nav-item">Tổng quan khoa <i class="fas fa-chevron-right"></i></a>
+                    <a href="sumenh-tamnhin.html" class="nav-item">Sứ mệnh - Tầm nhìn <i class="fas fa-chevron-right"></i></a>
+                    <a href="cocautochuc.html" class="nav-item">Cơ cấu tổ chức <i class="fas fa-chevron-right"></i></a>
+                    <a href="doingugiangvien.html" class="nav-item active">Đội ngũ giảng viên <i class="fas fa-chevron-right"></i></a>
+                    <a href="chuongtrinhdaotao.html" class="nav-item">Chương trình đào tạo <i class="fas fa-chevron-right"></i></a>
+                    <a href="nghiencuukhoahoc.html" class="nav-item">Nghiên cứu khoa học <i class="fas fa-chevron-right"></i></a>
+                    <a href="sinhvien.html" class="nav-item">Sinh viên <i class="fas fa-chevron-right"></i></a>
+                    <a href="hoptacdoanhnghiep.html" class="nav-item">Hợp tác doanh nghiệp <i class="fas fa-chevron-right"></i></a>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT HERO -->
+        <main class="huit-hero-section">
+            <div class="bg-pattern"></div>
+
+            <div class="huit-container">
+                <!-- BREADCRUMB & HEADER -->
+
+                    <nav class="huit-breadcrumb">
+                        <a href="../index.html">Trang chủ</a> / <a href="../gioithieu.html">Giới thiệu</a> / <span>Đội ngũ giảng viên</span>
+                    </nav>
+                    <h1 class="huit-main-title">Đội ngũ Giảng viên Cao học</h1>
+
+
+                <!-- STATS ROW (Lấp đầy khoảng trống phía trên) -->
+                <section class="huit-stats-row">
+                    <div class="stat-card">
+                        <i class="fas fa-user-tie"></i>
+                        <div>
+                            <span class="stat-count">50+</span>
+                            <p>Giảng viên giàu kinh nghiệm</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-microscope"></i>
+                        <div>
+                            <span class="stat-count">120+</span>
+                            <p>Bài báo khoa học quốc tế</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-graduation-cap"></i>
+                        <div>
+                            <span class="stat-count">100%</span>
+                            <p>Giảng viên có trình độ TS/ThS</p>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="huit-main-grid">
+                    <!-- DANH SÁCH GIẢNG VIÊN -->
+<div class="huit-lecturer-column">
+    <!-- Card 1 -->
+    <div class="huit-card">
+        <div class="huit-card-img">
+            <img src="https://tse3.mm.bing.net/th/id/OIP.foqa_ZSO1h6Xt0I96wYtBgHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Vũ Thanh Nguyên">
+            <div class="img-badge">HUIT IT FACULTY</div>
+        </div>
+        <div class="huit-card-body">
+            <div class="card-top">
+                <span class="huit-rank-tag">Phó Giáo sư, Tiến sĩ</span>
+                <div class="social-quick-links">
+                    <i class="fab fa-linkedin-in"></i>
+                    <i class="fas fa-envelope-open-text"></i>
+                </div>
+            </div>
+            <h2 class="huit-name">Vũ Thanh Nguyên</h2>
+            <ul class="huit-info-list">
+                <li><i class="fas fa-graduation-cap"></i> <strong>Chuyên ngành:</strong> Công nghệ phần mềm</li>
+                <li><i class="fas fa-brain"></i> <strong>Nghiên cứu:</strong> Kiến trúc phần mềm, Hệ thống thông minh</li>
+                <li><i class="fas fa-envelope"></i> <span>nguyenvt@huit.edu.vn</span></li>
+            </ul>
+            <div class="huit-skill-tags">
+                <span>#Software</span> <span>#Architecture</span> <span>#AI</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="huit-card">
+        <div class="huit-card-img">
+            <img src="https://tse3.mm.bing.net/th/id/OIP.foqa_ZSO1h6Xt0I96wYtBgHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Nguyễn Hồng Vũ">
+            <div class="img-badge">HUIT IT FACULTY</div>
+        </div>
+        <div class="huit-card-body">
+            <div class="card-top">
+                <span class="huit-rank-tag">Tiến sĩ</span>
+                <div class="social-quick-links">
+                    <i class="fab fa-linkedin-in"></i>
+                    <i class="fas fa-envelope-open-text"></i>
+                </div>
+            </div>
+            <h2 class="huit-name">Nguyễn Hồng Vũ</h2>
+            <ul class="huit-info-list">
+                <li><i class="fas fa-shield-alt"></i> <strong>Chuyên ngành:</strong> Hệ thống thông tin</li>
+                <li><i class="fas fa-link"></i> <strong>Nghiên cứu:</strong> Quản lý dữ liệu, Chuyển đổi số</li>
+                <li><i class="fas fa-envelope"></i> <span>vunh@huit.edu.vn</span></li>
+            </ul>
+            <div class="huit-skill-tags">
+                <span>#Data</span> <span>#InformationSystem</span> <span>#Digital</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+                    <!-- SIDEBAR INFO (Lấp đầy khoảng trống bên phải) -->
+                    <aside class="huit-side-info">
+                        <div class="info-box">
+                            <h3><i class="fas fa-bullhorn"></i> Thông báo mới</h3>
+                            <p>Lịch xét duyệt đề tài NCKH cấp Khoa đợt 1/2026 sẽ bắt đầu từ ngày 15/04.</p>
+                        </div>
+                        <div class="info-box">
+                            <h3><i class="fas fa-award"></i> Thành tích khoa</h3>
+                            <ul>
+                                <li>Huân chương lao động hạng Nhì</li>
+                                <li>Top 10 Khoa CNTT miền Nam</li>
+                                <li>95% Sinh viên có việc làm</li>
+                            </ul>
+                        </div>
+                        <div class="info-box">
+                            <h3><i class="fas fa-link"></i> Liên kết nhanh</h3>
+                            <p><small>Truy cập hệ thống quản lý nghiên cứu khoa học HUIT tại đây.</small></p>
+                        </div>
+                    </aside>
+                </div>
+
+                <!-- HORIZONTAL SCROLL: GIẢNG VIÊN TIÊU BIỂU (Dưới cùng) -->
+                <section class="huit-horizontal-scroll">
+                    <div class="scroll-header">
+                        <h3 class="scroll-title"><i class="fas fa-star"></i> Giảng viên tiêu biểu</h3>
+                        <span class="scroll-hint">Kéo sang trái/phải để xem <i class="fas fa-arrows-left-right"></i></span>
+                    </div>
+                    
+                    <div class="scroll-container" id="horizontal-scroll">
+                        <!-- Card Mini 1 -->
+                        <div class="mini-lecturer-card">
+                            <div class="mini-img">
+                                <img src="https://tse3.mm.bing.net/th/id/OIP.foqa_ZSO1h6Xt0I96wYtBgHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Nguyễn Hồng Vũ">
+                            </div>
+                            <div class="mini-info">
+                                <h4>TS. Nguyễn Hồng Vũ</h4>
+                                <p>Trưởng khoa CNTT</p>
+                                <a href="#" class="view-profile">Xem hồ sơ</a>
+                            </div>
+                        </div>
+
+                        <!-- Card Mini 2 -->
+                        <div class="mini-lecturer-card">
+                            <div class="mini-img">
+                                <img src="https://tse3.mm.bing.net/th/id/OIP.foqa_ZSO1h6Xt0I96wYtBgHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Nguyễn Thanh Long">
+                            </div>
+                            <div class="mini-info">
+                                <h4>TS. Nguyễn Thanh Long</h4>
+                                <p>Phó Trưởng khoa CNTT</p>
+                                <a href="#" class="view-profile">Xem hồ sơ</a>
+                            </div>
+                        </div>
+
+                        <!-- Card Mini 3 -->
+                        <div class="mini-lecturer-card">
+                            <div class="mini-img">
+                                <img src="https://tse3.mm.bing.net/th/id/OIP.foqa_ZSO1h6Xt0I96wYtBgHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Phùng Thế Bảo">
+                            </div>
+                            <div class="mini-info">
+                                <h4>TS. Phùng Thế Bảo</h4>
+                                <p>Khoa học dữ liệu</p>
+                                <a href="#" class="view-profile">Xem hồ sơ</a>
+                            </div>
+                        </div>
+
+                        <!-- Card Mini 4 -->
+                        <div class="mini-lecturer-card">
+                            <div class="mini-img">
+                                <img src="https://tse3.mm.bing.net/th/id/OIP.foqa_ZSO1h6Xt0I96wYtBgHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Vũ Thanh Nguyên">
+                            </div>
+                            <div class="mini-info">
+                                <h4>PGS.TS. Vũ Thanh Nguyên</h4>
+                                <p>Công nghệ phần mềm</p>
+                                <a href="#" class="view-profile">Xem hồ sơ</a>
+                            </div>
+                        </div>
+
+                        <!-- Card Mini 5 -->
+                        <div class="mini-lecturer-card">
+                            <div class="mini-img">
+                                <img src="https://tse3.mm.bing.net/th/id/OIP.foqa_ZSO1h6Xt0I96wYtBgHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Vũ Đức Thịnh">
+                            </div>
+                            <div class="mini-info">
+                                <h4>TS. Vũ Đức Thịnh</h4>
+                                <p>Hệ thống thông tin</p>
+                                <a href="#" class="view-profile">Xem hồ sơ</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <div id="right-pannel-placeholder"></div>
+    <div id="chatbot"></div>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- SCRIPT -->
+    <script>
+
+
+        // 2. Horizontal Scroll Dragging (Tạo cảm giác kéo chuột mượt)
+        const slider = document.getElementById('horizontal-scroll');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        slider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            slider.classList.add('active');
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+        });
+        slider.addEventListener('mouseleave', () => {
+            isDown = false;
+        });
+        slider.addEventListener('mouseup', () => {
+            isDown = false;
+        });
+        slider.addEventListener('mousemove', (e) => {
+            if(!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 2; // Tốc độ kéo
+            slider.scrollLeft = scrollLeft - walk;
+        });
+
+        // 3. Right Panel Trigger
+        const panelTrigger = document.querySelector('.panel-trigger');
+        const rightPanel = document.querySelector('.right-panel');
+        panelTrigger.addEventListener('click', () => {
+            rightPanel.classList.toggle('active');
+            panelTrigger.querySelector('i').classList.toggle('fa-chevron-left');
+            panelTrigger.querySelector('i').classList.toggle('fa-chevron-right');
+        });
+    </script>
+    <script src="../js/script.js"></script>
+    <script src="../js/component.js"></script>
+</body>
+</html> 

@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hỗ Trợ Sinh Viên - Khoa CNTT HUIT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Main Container */
+        .support-container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 0;
+            height: calc(100vh - 150px);
+            margin-top: 150px;
+            background: var(--bg-light);
+        }
+
+        /* Sidebar */
+        .support-sidebar {
+            background: var(--glass-bg);
+            border-right: 1px solid rgba(0, 84, 165, 0.1);
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .sidebar-header {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-faq {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid rgba(0, 84, 165, 0.2);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            outline: none;
+            transition: var(--transition);
+        }
+        .search-faq:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 8px rgba(237, 28, 36, 0.2);
+        }
+        [data-theme="dark"] .search-faq {
+            background: rgba(15, 23, 42, 0.5);
+            color: var(--text-dark);
+        }
+
+        .faq-categories {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .category-group {
+            margin-bottom: 15px;
+        }
+
+        .category-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-left: 3px solid var(--accent);
+            padding-left: 12px;
+        }
+
+        .faq-item {
+            padding: 10px 12px;
+            background: rgba(0, 84, 165, 0.05);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            border-left: 3px solid transparent;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            color: var(--text-dark);
+            display: flex;
+            gap: 8px;
+            align-items: flex-start;
+        }
+
+        .faq-item:hover {
+            background: rgba(0, 84, 165, 0.15);
+            border-left-color: var(--accent);
+            padding-left: 15px;
+        }
+
+        .faq-item.active {
+            background: linear-gradient(135deg, rgba(0, 84, 165, 0.2), rgba(237, 28, 36, 0.1));
+            border-left-color: var(--accent);
+            font-weight: 600;
+        }
+
+        .faq-icon {
+            font-size: 1.1rem;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .faq-text {
+            flex: 1;
+        }
+
+        /* Main Chat Area */
+        .support-main {
+            display: flex;
+            flex-direction: column;
+            background: var(--bg-light);
+        }
+
+        .chat-header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(0, 84, 165, 0.1);
+            background: var(--glass-bg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header h2 {
+            color: var(--primary);
+            margin: 0;
+            font-size: 1.3rem;
+        }
+
+        .toggle-sidebar {
+            display: none;
+            background: transparent;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: var(--primary);
+        }
+
+        /* Chat Messages */
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .chat-message {
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .msg-user {
+            align-self: flex-end;
+        }
+
+        .msg-bot {
+            align-self: flex-start;
+        }
+
+        .msg-bubble {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            line-height: 1.5;
+            word-wrap: break-word;
+        }
+
+        .msg-user .msg-bubble {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .msg-bot .msg-bubble {
+            background: var(--glass-bg);
+            color: var(--text-dark);
+            border-bottom-left-radius: 4px;
+            border: 1px solid rgba(0, 84, 165, 0.1);
+        }
+
+        .msg-time {
+            font-size: 0.75rem;
+            opacity: 0.6;
+            margin-top: 5px;
+            text-align: center;
+        }
+
+        .empty-chat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--text-dark);
+            opacity: 0.5;
+        }
+
+        .empty-chat i {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            opacity: 0.3;
+        }
+
+        /* Chat Input */
+        .chat-input-area {
+            padding: 20px;
+            border-top: 1px solid rgba(0, 84, 165, 0.1);
+            background: var(--glass-bg);
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input-group {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid rgba(0, 84, 165, 0.2);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.5);
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--transition);
+            color: var(--text-dark);
+        }
+
+        .chat-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 8px rgba(237, 28, 36, 0.2);
+        }
+
+        [data-theme="dark"] .chat-input {
+            background: rgba(15, 23, 42, 0.5);
+        }
+
+        .btn-send {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-send:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(237, 28, 36, 0.3);
+        }
+
+        .btn-send:active {
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .support-container {
+                grid-template-columns: 1fr;
+                height: auto;
+                min-height: 100vh;
+            }
+
+            .support-sidebar {
+                position: fixed;
+                left: -300px;
+                top: 0;
+                width: 300px;
+                height: 100vh;
+                z-index: 999;
+                transition: left 0.3s ease;
+                margin-top: 70px;
+            }
+
+            .support-sidebar.open {
+                left: 0;
+            }
+
+            .support-sidebar::after {
+                content: '';
+                position: absolute;
+                right: -9999px;
+                top: 0;
+                width: 9999px;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.3);
+                cursor: pointer;
+            }
+
+            .support-main {
+                height: 100vh;
+            }
+
+            .toggle-sidebar {
+                display: block;
+            }
+
+            .msg-bubble {
+                max-width: 95%;
+            }
+
+            .chat-messages {
+                padding: 15px;
+            }
+
+            .chat-input-area {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .chat-header h2 {
+                font-size: 1.1rem;
+            }
+
+            .msg-bubble {
+                font-size: 0.9rem;
+                padding: 10px 12px;
+            }
+
+            .chat-input {
+                font-size: 0.85rem;
+                padding: 10px 12px;
+            }
+
+            .btn-send {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <div id="top-bar"></div>
+    <div id="header"></div>
+
+    <div class="support-container">
+        <!-- Sidebar -->
+        <div class="support-sidebar" id="supportSidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-list"></i>
+                Câu hỏi thường gặp
+            </div>
+            <input 
+                type="text" 
+                class="search-faq" 
+                id="searchFaq" 
+                placeholder="🔍 Tìm câu hỏi..."
+            >
+
+            <div class="faq-categories" id="faqCategories">
+                <!-- Will be populated by JS -->
+            </div>
+        </div>
+
+        <!-- Main Chat -->
+        <div class="support-main">
+            <div class="chat-header">
+                <h2>🤖 Hỗ Trợ Sinh Viên</h2>
+                <button class="toggle-sidebar" id="toggleSidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <div class="chat-messages" id="chatMessages">
+                <div class="empty-chat">
+                    <i class="fas fa-headset"></i>
+                    <p>Chọn một câu hỏi ở sidebar hoặc nhập câu hỏi của bạn</p>
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <div class="chat-input-group">
+                    <input 
+                        type="text"
+                        class="chat-input"
+                        id="chatInput"
+                        placeholder="Nhập câu hỏi của bạn..."
+                        autocomplete="off"
+                    >
+                    <button class="btn-send" onclick="sendMessage()">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="right-pannel-placeholder"></div>
+    <div id="chatbot"></div>
+
+    <script src="js/script.js"></script>
+    <script>
+        let faqData = [];
+        let chatHistory = [];
+
+        // Load FAQ data
+        document.addEventListener('DOMContentLoaded', () => {
+            loadFAQ();
+            setupEventListeners();
+        });
+
+        async function loadFAQ() {
+            try {
+                const response = await fetch('data/faq.json');
+                faqData = await response.json();
+                renderFAQSidebar();
+            } catch (error) {
+                console.error('Error loading FAQ:', error);
+            }
+        }
+
+        function renderFAQSidebar() {
+            const sidebar = document.getElementById('faqCategories');
+            const categories = [...new Set(faqData.map(item => item.category))];
+            
+            let html = '';
+            categories.forEach(category => {
+                const catFaqs = faqData.filter(item => item.category === category);
+                html += `<div class="category-group">
+                    <div class="category-title">${category}</div>`;
+                
+                catFaqs.forEach(faq => {
+                    html += `
+                        <div class="faq-item" onclick="selectFAQ(${faq.id})">
+                            <span class="faq-icon">${faq.icon}</span>
+                            <span class="faq-text">${faq.question}</span>
+                        </div>
+                    `;
+                });
+                html += '</div>';
+            });
+
+            sidebar.innerHTML = html;
+        }
+
+        function selectFAQ(id) {
+            const faq = faqData.find(item => item.id === id);
+            if (!faq) return;
+
+            // Remove active class from all items
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+
+            // Mark selected item as active
+            event.currentTarget?.classList.add('active');
+
+            // Add to chat history
+            addMessageToChat(faq.question, 'user');
+            setTimeout(() => {
+                addMessageToChat(faq.answer, 'bot');
+            }, 300);
+
+            // Close sidebar on mobile
+            const sidebar = document.getElementById('supportSidebar');
+            if (window.innerWidth <= 768) {
+                sidebar.classList.remove('open');
+            }
+
+            // Clear input
+            document.getElementById('chatInput').value = '';
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+
+            if (!message) return;
+
+            // Add user message
+            addMessageToChat(message, 'user');
+
+            // Find matching FAQ or show generic response
+            const matchedFaq = findSimilarFAQ(message);
+            
+            setTimeout(() => {
+                if (matchedFaq) {
+                    addMessageToChat(matchedFaq.answer, 'bot');
+                } else {
+                    addMessageToChat(
+                        "Xin lỗi, tôi chưa có câu trả lời cho câu hỏi này. Bạn vui lòng liên hệ trực tiếp với Khoa CNTT qua:\n📞 (028) 3816 1673 - Ext 234\n📧 khoa.cntt@huit.edu.vn\n🏢 Tòa A, Phòng 205",
+                        'bot'
+                    );
+                }
+            }, 500);
+
+            input.value = '';
+        }
+
+        function findSimilarFAQ(query) {
+            const queryLower = query.toLowerCase();
+            
+            // Exact match
+            let matching = faqData.filter(faq =>
+                faq.question.toLowerCase().includes(queryLower) ||
+                faq.answer.toLowerCase().includes(queryLower)
+            );
+
+            if (matching.length > 0) {
+                return matching[0];
+            }
+
+            // Keyword matching
+            const keywords = queryLower.split(' ').filter(w => w.length > 2);
+            matching = faqData.filter(faq => {
+                const text = (faq.question + ' ' + faq.answer).toLowerCase();
+                return keywords.some(keyword => text.includes(keyword));
+            });
+
+            return matching.length > 0 ? matching[0] : null;
+        }
+
+        function addMessageToChat(text, sender) {
+            const chatMessages = document.getElementById('chatMessages');
+
+            // Clear empty state if first message
+            if (chatHistory.length === 0) {
+                chatMessages.innerHTML = '';
+            }
+
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message msg-${sender}`;
+
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
+
+            messageDiv.innerHTML = `
+                <div class="msg-bubble">${text}</div>
+                <div class="msg-time">${timeStr}</div>
+            `;
+
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            chatHistory.push({ text, sender, time: timeStr });
+        }
+
+        function setupEventListeners() {
+            // Enter key to send message
+            document.getElementById('chatInput').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+
+            // Search FAQ
+            document.getElementById('searchFaq').addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase();
+                const items = document.querySelectorAll('.faq-item');
+
+                items.forEach(item => {
+                    const text = item.textContent.toLowerCase();
+                    item.style.display = text.includes(query) ? 'flex' : 'none';
+                });
+
+                // Hide empty category groups
+                document.querySelectorAll('.category-group').forEach(group => {
+                    const visibleItems = group.querySelectorAll('.faq-item:not([style*="display: none"])');
+                    group.style.display = visibleItems.length > 0 ? 'block' : 'none';
+                });
+            });
+
+            // Toggle sidebar on mobile
+            document.getElementById('toggleSidebar').addEventListener('click', () => {
+                document.getElementById('supportSidebar').classList.toggle('open');
+            });
+
+            // Close sidebar when clicking outside
+            document.addEventListener('click', (e) => {
+                const sidebar = document.getElementById('supportSidebar');
+                const toggle = document.getElementById('toggleSidebar');
+                if (!sidebar.contains(e.target) && !toggle.contains(e.target) && window.innerWidth <= 768) {
+                    sidebar.classList.remove('open');
+                }
+            });
+        }
+
+        // Send greeting on page load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                addMessageToChat(
+                    "👋 Chào bạn! Tôi là trợ lý ảo của Khoa CNTT HUIT. Bạn có thể chọn câu hỏi ở bên trái hoặc nhập câu hỏi của mình. Tôi sẽ cố gắng giúp bạn!",
+                    'bot'
+                );
+            }, 500);
+        });
+    </script>
+    <script src="js/component.js"></script>
+</body>
+</html>

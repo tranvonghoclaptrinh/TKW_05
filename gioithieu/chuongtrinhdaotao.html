@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chương trình đào tạo - Khoa CNTT HUIT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/subpages.css">
+    
+    <style>
+
+        .bg-pattern {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .huit-container {
+            position: relative;
+            z-index: 1;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* --- BREADCRUMB & HEADER --- */
+        .huit-breadcrumb {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+        .huit-breadcrumb a { color: white; text-decoration: none; }
+        .huit-main-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 35px;
+            letter-spacing: 1px;
+        }
+
+        /* --- TRAINING PROGRAMS STYLES --- */
+        .program-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .program-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            color: #333;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        .program-card:hover { transform: translateY(-10px); }
+
+        .program-header {
+            padding: 25px;
+            background: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .program-header i {
+            font-size: 2rem;
+            color: #ed1c24;
+        }
+        .program-header h3 {
+            font-size: 1.2rem;
+            color: #0054a5;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .program-body {
+            padding: 25px;
+            flex-grow: 1;
+        }
+        .program-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .program-list li {
+            padding: 12px 0;
+            border-bottom: 1px dashed #cbd5e1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+        }
+        .program-list li:last-child { border-bottom: none; }
+        .program-list li i { color: #0054a5; font-size: 0.8rem; }
+
+        .program-footer {
+            padding: 20px 25px;
+            background: #f1f5f9;
+            text-align: center;
+        }
+        .btn-detail {
+            display: inline-block;
+            padding: 8px 20px;
+            background: #0054a5;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .btn-detail:hover { background: #ed1c24; }
+
+        .info-ribbon {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .ribbon-item { text-align: center; }
+        .ribbon-item strong { display: block; font-size: 1.2rem; color: #ffd700; }
+        .ribbon-item span { font-size: 0.8rem; opacity: 0.9; }
+
+    </style>
+</head>
+<body data-theme="light">
+    <div id="top-bar"></div>
+    <div id="header"></div> 
+
+    <div class="page-wrapper">
+        <aside class="left-sidebar">
+            <div class="sidebar-nav">
+                <div class="sidebar-title"><i class="fas fa-bars"></i> Danh mục</div>
+                <nav class="nav-group">
+                    <a href="../gioithieu.html" class="nav-item">Tổng quan khoa <i class="fas fa-chevron-right"></i></a>
+                    <a href="sumenh-tamnhin.html" class="nav-item">Sứ mệnh - Tầm nhìn <i class="fas fa-chevron-right"></i></a>
+                    <a href="cocautochuc.html" class="nav-item">Cơ cấu tổ chức <i class="fas fa-chevron-right"></i></a>
+                    <a href="doingugiangvien.html" class="nav-item">Đội ngũ giảng viên <i class="fas fa-chevron-right"></i></a>
+                    <a href="chuongtrinhdaotao.html" class="nav-item active">Chương trình đào tạo <i class="fas fa-chevron-right"></i></a>
+                    <a href="nghiencuukhoahoc.html" class="nav-item">Nghiên cứu khoa học <i class="fas fa-chevron-right"></i></a>
+                    <a href="sinhvien.html" class="nav-item">Sinh viên <i class="fas fa-chevron-right"></i></a>
+                    <a href="hoptacdoanhnghiep.html" class="nav-item">Hợp tác doanh nghiệp <i class="fas fa-chevron-right"></i></a>
+                </nav>
+            </div>
+        </aside>
+
+        <main class="huit-hero-section">
+            <div class="bg-pattern"></div>
+            <div class="huit-container">
+
+                    <nav class="huit-breadcrumb">
+                        <a href="../index.html">Trang chủ</a> / <a href="../gioithieu.html">Giới thiệu</a> / <span>Chương trình đào tạo</span>
+                    </nav>
+                    <h1 class="huit-main-title">Hệ thống đào tạo đa bậc</h1>
+
+
+                <div class="info-ribbon">
+                    <div class="ribbon-item">
+                        <strong>04 Năm</strong>
+                        <span>Thời gian đào tạo ĐH</span>
+                    </div>
+                    <div class="ribbon-item">
+                        <strong>150+</strong>
+                        <span>Tín chỉ tích lũy</span>
+                    </div>
+                    <div class="ribbon-item">
+                        <strong>Chất lượng cao</strong>
+                        <span>Chuẩn đầu ra quốc tế</span>
+                    </div>
+                </div>
+
+                <div class="program-grid">
+                    <!-- ĐÀO TẠO ĐẠI HỌC -->
+                    <div class="program-card">
+                        <div class="program-header">
+                            <i class="fas fa-user-graduate"></i>
+                            <h3>Đào tạo Đại học</h3>
+                        </div>
+                        <div class="program-body">
+                            <ul class="program-list">
+                                <li>Công nghệ thông tin <i class="fas fa-check-circle"></i></li>
+                                <li>An toàn thông tin <i class="fas fa-check-circle"></i></li>
+                                <li>Khoa học dữ liệu <i class="fas fa-check-circle"></i></li>
+                                <li>Công nghệ phần mềm <i class="fas fa-check-circle"></i></li>
+                                <li>Hệ thống thông tin <i class="fas fa-check-circle"></i></li>
+                            </ul>
+                        </div>
+                        <div class="program-footer">
+                            <a href="#" class="btn-detail">Xem chi tiết khung chương trình</a>
+                        </div>
+                    </div>
+
+                    <!-- ĐÀO TẠO SAU ĐẠI HỌC -->
+                    <div class="program-card">
+                        <div class="program-header">
+                            <i class="fas fa-microscope"></i>
+                            <h3>Sau Đại học</h3>
+                        </div>
+                        <div class="program-body">
+                            <ul class="program-list">
+                                <li>Thạc sĩ Công nghệ thông tin <i class="fas fa-star"></i></li>
+                                <li>Tiến sĩ Khoa học máy tính <i class="fas fa-star"></i></li>
+                                <li>Chứng chỉ chuyên sâu AI <i class="fas fa-star"></i></li>
+                            </ul>
+                            <p style="font-size: 0.85rem; margin-top: 15px; opacity: 0.7;">Chương trình tập trung vào nghiên cứu ứng dụng và chuyển giao công nghệ.</p>
+                        </div>
+                        <div class="program-footer">
+                            <a href="#" class="btn-detail">Thông tin tuyển sinh</a>
+                        </div>
+                    </div>
+
+                    <!-- ĐÀO TẠO NGẮN HẠN -->
+                    <div class="program-card">
+                        <div class="program-header">
+                            <i class="fas fa-certificate"></i>
+                            <h3>Chứng chỉ ngắn hạn</h3>
+                        </div>
+                        <div class="program-body">
+                            <ul class="program-list">
+                                <li>Lập trình Web/Mobile Fullstack <i class="fas fa-clock"></i></li>
+                                <li>Quản trị mạng CCNA/LPI <i class="fas fa-clock"></i></li>
+                                <li>Thiết kế đồ họa chuyên nghiệp <i class="fas fa-clock"></i></li>
+                                <li>Phân tích dữ liệu với Python <i class="fas fa-clock"></i></li>
+                            </ul>
+                        </div>
+                        <div class="program-footer">
+                            <a href="#" class="btn-detail">Lịch khai giảng</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <div id="right-pannel-placeholder"></div>
+    <div id="chatbot"></div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../js/script.js"></script>
+    <script src="../js/component.js"></script>
+</body>
+</html>

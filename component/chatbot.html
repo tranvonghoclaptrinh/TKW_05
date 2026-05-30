@@ -1,0 +1,33 @@
+<div class="chatbot-widget">
+    <!-- Chatbot Toggle Button -->
+    <button class="chatbot-toggle" id="chatbotToggle" aria-label="Mở hỗ trợ">
+        <i class="fas fa-comments"></i>
+        <span class="chatbot-badge">?</span>
+    </button>
+
+    <!-- Chat Interface Container -->
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header">
+            <span>🤖 Hỗ Trợ HUIT IT</span>
+            <button id="chatbotClose" title="Đóng cửa sổ">✖</button>
+        </div>
+
+        <div id="chatbotMessages" class="chatbot-messages">
+            <div class="msg-bot">
+                <div class="msg-bubble">Chào bạn! Mình là trợ lý ảo HUIT. Mình có thể giúp gì cho bạn? 👋</div>
+            </div>
+        </div>
+
+        <div id="chatbotSuggestions">
+            <button onclick="quickReply('Lịch đào tạo')">📅 Lịch học</button>
+            <button onclick="quickReply('Tra cứu điểm')">📊 Tra điểm</button>
+            <button onclick="quickReply('Học phí')">💰 Học phí</button>
+        </div>
+
+        <div class="chatbot-input-area">
+            <input id="chatbotInput" placeholder="Nhập câu hỏi của bạn..." autocomplete="off" />
+            <button id="chatbotSendBtn"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+</div>
+

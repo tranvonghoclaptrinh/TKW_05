@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liên hệ - Khoa CNTT HUIT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        .form-glass {
+            background: var(--glass-bg);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            backdrop-filter: blur(10px);
+        }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 500; }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(0,0,0,0.1);
+            background: rgba(255,255,255,0.8);
+            outline: none;
+            transition: var(--transition);
+        }
+        .form-group input:focus, .form-group textarea:focus { 
+            border-color: var(--primary); 
+            box-shadow: 0 0 5px rgba(0,84,165,0.3); 
+        }
+        
+        /* Notification Styles */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+            min-width: 300px;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            animation: slideInRight 0.3s ease;
+        }
+        
+        .notification.success {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+        }
+        
+        .notification.error {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+        }
+        
+        .notification-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .notification-content i {
+            font-size: 1.2rem;
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @media (max-width: 768px) { 
+            .contact-container { grid-template-columns: 1fr; }
+            .notification { left: 20px; right: 20px; min-width: auto; }
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <div id="top-bar"></div>
+    <div id="header"></div> 
+
+    <section class="section" style="margin-top: 150px;">
+        <div class="section-title">
+            <h2>Liên Hệ Với Chúng Tôi</h2>
+            <div></div>
+        </div>
+
+        <div class="contact-container">
+            <div class="form-glass">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="contactName">Họ và Tên *</label>
+                        <input type="text" id="contactName" name="from_name" placeholder="Nhập tên của bạn..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactEmail">Email liên hệ *</label>
+                        <input type="email" id="contactEmail" name="from_email" placeholder="example@huit.edu.vn" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactMessage">Lời nhắn *</label>
+                        <textarea id="contactMessage" name="message" rows="5" placeholder="Bạn cần hỗ trợ gì?" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-cta" style="width: 100%;">GỬI LIÊN HỆ</button>
+                </form>
+            </div>
+
+            <div class="info-box">
+                <h3 style="color: var(--primary); margin-bottom: 20px;">Thông tin văn phòng Khoa</h3>
+                <div class="notice-list">
+                    <div class="notice-item"><i class="fas fa-map-marker-alt"></i> 140 Lê Trọng Tấn, P. Tây Thạnh, Q. Tân Phú, TP. HCM</div>
+                    <div class="notice-item"><i class="fas fa-phone-alt"></i> (028) 3816 1673 (Ext: 123)</div>
+                    <div class="notice-item"><i class="fas fa-envelope"></i> khoa.cntt@huit.edu.vn</div>
+                </div>
+                <div style="margin-top: 30px; border-radius: 15px; overflow: hidden; height: 250px; background: #eee; display: flex; align-items: center; justify-content: center;">
+                    <p style="color: #888;">[Bản đồ Google Maps HUIT]</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div id="right-pannel-placeholder"></div>
+    <div id="chatbot"></div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        // Initialize EmailJS
+        (function(){
+            // ⚠️ THAY ĐỔI: Thay YOUR_PUBLIC_KEY bằng Public Key thật từ EmailJS Dashboard
+            emailjs.init("EcEUtM1EXDidE6STV");
+        })();
+
+        // Contact form handler
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            
+            // Show loading state
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ĐANG GỬI...';
+            submitBtn.disabled = true;
+            
+            // Get form data
+            const templateParams = {
+                from_name: document.getElementById('contactName').value.trim(),
+                from_email: document.getElementById('contactEmail').value.trim(),
+                message: document.getElementById('contactMessage').value.trim(),
+                to_name: 'Khoa CNTT HUIT',
+                current_date: new Date().toLocaleString('vi-VN')
+            };
+            
+            // Validate form
+            if (!templateParams.from_name || !templateParams.from_email || !templateParams.message) {
+                showNotification('Vui lòng điền đầy đủ thông tin!', 'error');
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                return;
+            }
+            
+            // ⚠️ THAY ĐỔI: Thay YOUR_SERVICE_ID và YOUR_TEMPLATE_ID bằng ID thật
+            emailjs.send('service_np6u8dq', 'template_n6xl2xj', templateParams)
+                .then(function(response) {
+                    console.log('✅ Email sent successfully:', response);
+                    showNotification('🎉 Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi trong 24h.', 'success');
+                    document.getElementById('contactForm').reset();
+                }, function(error) {
+                    console.error('❌ Email send failed:', error);
+                    showNotification('❌ Có lỗi xảy ra. Vui lòng thử lại hoặc liên hệ hotline.', 'error');
+                    
+                    // Log detailed error for debugging
+                    if (error && error.text) {
+                        console.error('Error details:', error.text);
+                    }
+                })
+                .finally(function() {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                });
+        });
+
+        // Notification function
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                notification.remove();
+            }, 5000);
+        }
+    </script>
+    <script src="js/component.js"></script>
+</body>
+</html>

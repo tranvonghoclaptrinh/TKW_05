@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lịch đào tạo - Khoa CNTT HUIT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        /* --- LAYOUT FIXES --- */
+        .page-wrapper {
+            display: block; /* Thay đổi từ grid sang block vì đã bỏ sidebar */
+            min-height: calc(100vh - 70px);
+        }
+
+        /* --- HUIT HERO SECTION --- */
+        .huit-hero-section {
+            position: relative;
+            padding: 40px;
+            background-color: #0054a5;
+            background-image: linear-gradient(rgba(0, 84, 165, 0.95), rgba(0, 41, 82, 0.95)), 
+                              url('https://huit.edu.vn/images/slide/hufi-2020-6.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .bg-pattern {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .huit-container {
+            position: relative;
+            z-index: 1;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* --- BREADCRUMB & HEADER --- */
+        .huit-breadcrumb {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+        .huit-breadcrumb a { color: white; text-decoration: none; }
+        .huit-main-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 35px;
+            letter-spacing: 1px;
+
+        }
+
+
+        /* --- CALENDAR CONTENT --- */
+        .calendar-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            color: #333;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            margin-bottom: 30px;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 15px;
+        }
+
+        .calendar-title {
+            color: #0054a5;
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* --- TRAINING TABLE STYLES --- */
+        .table-responsive {
+            overflow-x: auto;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            max-height: 550px;
+            overflow-y: auto;
+            position: relative;
+            scroll-behavior: smooth;
+        }
+
+        .training-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .training-table thead th {
+            position: sticky;
+            top: 0;
+            background: #f8fafc;
+            color: #1e293b;
+            font-weight: 700;
+            padding: 15px;
+            border-bottom: 2px solid #e2e8f0;
+            z-index: 10;
+        }
+
+        .training-table tbody td {
+            padding: 15px 10px;
+            border-bottom: 1px solid #f1f5f9;
+            color: #475569;
+        }
+
+        /* Tuần hiện tại highlight */
+        .training-table tr.active-week {
+            background-color: #fffbeb !important;
+            border: 2px solid #fbbf24;
+        }
+
+        .training-table tr.active-week td {
+            font-weight: 700;
+            color: #92400e;
+        }
+
+        .week-num {
+            font-weight: 800;
+            color: #0054a5;
+            background: #f8fafc;
+            position: relative;
+        }
+
+        .current-indicator {
+            background: #fbbf24;
+            color: #000;
+            font-size: 0.6rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            display: block;
+            margin-top: 5px;
+            font-weight: 900;
+        }
+
+        /* Status Badges */
+        .status-tag {
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: inline-block;
+        }
+        .status-study { background: #dcfce7; color: #166534; }
+        .status-exam { background: #fee2e2; color: #991b1b; }
+        .status-break { background: #fef9c3; color: #854d0e; }
+
+        /* --- LEGEND --- */
+        .calendar-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 25px;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 12px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <div id="top-bar"></div>
+    <div id="header"></div> 
+
+    <div class="page-wrapper">
+        <!-- Sidebar đã được loại bỏ theo yêu cầu -->
+        <main class="huit-hero-section">
+            <div class="bg-pattern"></div>
+            <div class="huit-container">
+
+                    <nav class="huit-breadcrumb">
+                        <a href="index.html">Trang chủ</a> / <span>Lịch đào tạo</span>
+                    </nav>
+                    <h1 class="huit-main-title" style="color: orange;">Kế hoạch thời gian đào tạo</h1>
+
+
+                <div class="calendar-card">
+                    <div class="calendar-header">
+                        <div class="calendar-title">
+                            <i class="fas fa-calendar-alt"></i>
+                            Học kỳ 2 - Năm học 2025-2026
+                        </div>
+                        <div id="today-info" style="font-weight: 600; color: #0054a5;"></div>
+                    </div>
+
+                    <div class="table-responsive" id="calendar-container">
+                        <table class="training-table" id="schedule-table">
+                            <thead>
+                                <tr>
+                                    <th>Tuần</th>
+                                    <th>Ngày bắt đầu</th>
+                                    <th>Nội dung chi tiết</th>
+                                    <th>Trạng thái</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Dữ liệu HK2 Năm học 2025-2026 -->
+                                <tr data-start="2026-02-02">
+                                    <td class="week-num">22</td>
+                                    <td>02/02/2026</td>
+                                    <td>Bắt đầu Học kỳ 2 - Đăng ký học phần bổ sung</td>
+                                    <td><span class="status-tag status-study">Nhập học</span></td>
+                                </tr>
+                                <tr data-start="2026-02-09">
+                                    <td class="week-num">23</td>
+                                    <td>09/02/2026</td>
+                                    <td>Học tập tuần 1</td>
+                                    <td><span class="status-tag status-study">Đang học</span></td>
+                                </tr>
+                                <tr data-start="2026-02-16">
+                                    <td class="week-num">24</td>
+                                    <td>16/02/2026</td>
+                                    <td>Học tập tuần 2</td>
+                                    <td><span class="status-tag status-study">Đang học</span></td>
+                                </tr>
+                                <tr data-start="2026-02-23">
+                                    <td class="week-num">25</td>
+                                    <td>23/02/2026</td>
+                                    <td>Học tập tuần 3 - Kiểm tra giữa kỳ</td>
+                                    <td><span class="status-tag status-study">Đang học</span></td>
+                                </tr>
+                                <tr data-start="2026-03-02">
+                                    <td class="week-num">26</td>
+                                    <td>02/03/2026</td>
+                                    <td>Học tập tuần 4</td>
+                                    <td><span class="status-tag status-study">Đang học</span></td>
+                                </tr>
+                                <tr data-start="2026-03-09">
+                                    <td class="week-num">27</td>
+                                    <td>09/03/2026</td>
+                                    <td>Học tập tuần 5</td>
+                                    <td><span class="status-tag status-study">Đang học</span></td>
+                                </tr>
+                                <tr data-start="2026-03-16">
+                                    <td class="week-num">28</td>
+                                    <td>16/03/2026</td>
+                                    <td>Học tập tuần 6</td>
+                                    <td><span class="status-tag status-study">Đang học</span></td>
+                                </tr>
+                                <tr data-start="2026-03-23">
+                                    <td class="week-num">29</td>
+                                    <td>23/03/2026</td>
+                                    <td>Nghỉ giữa học kỳ</td>
+                                    <td><span class="status-tag status-break">Nghỉ lễ</span></td>
+                                </tr>
+                                <tr data-start="2026-03-30">
+                                    <td class="week-num">30</td>
+                                    <td>30/03/2026</td>
+                                    <td>Học tập tuần 7</td>
+                                    <td><span class="status-tag status-study">Đang học</span></td>
+                                </tr>
+                                <tr data-start="2026-04-06">
+                                    <td class="week-num">31</td>
+                                    <td>06/04/2026</td>
+                                    <td>Học tập tuần 8</td>
+                                    <td><span class="status-tag status-study">Đang học</span></td>
+                                </tr>
+                                <tr data-start="2026-04-13">
+                                    <td class="week-num">32</td>
+                                    <td>13/04/2026</td>
+                                    <td>Học tập tuần 9</td>
+                                    <td><span class="status-tag status-study">Đang học</span></td>
+                                </tr>
+                                <tr data-start="2026-04-20">
+                                    <td class="week-num">33</td>
+                                    <td>20/04/2026</td>
+                                    <td>Học tập tuần 10</td>
+                                    <td><span class="status-tag status-study">Đang học</span></td>
+                                </tr>
+                                <tr data-start="2026-04-27">
+                                    <td class="week-num">34</td>
+                                    <td>27/04/2026</td>
+                                    <td>Thi kết thúc học phần đợt 1</td>
+                                    <td><span class="status-tag status-exam">Thi HK</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="calendar-legend">
+                        <div class="legend-item">
+                            <div class="legend-color status-study"></div>
+                            <span>Học tập lý thuyết/thực hành</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color status-exam"></div>
+                            <span>Thi kết thúc học phần</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color status-break"></div>
+                            <span>Nghỉ lễ / Nghỉ giữa học kỳ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <div id="right-pannel-placeholder"></div>
+    <div id="chatbot"></div>
+    <div id="footer-placeholder"></div>
+    <script>
+
+        // 2. Logic Tự động di chuyển đến tuần hiện tại
+        function scrollToCurrentWeek() {
+            const now = new Date();
+            // Test thử ngày (Xóa dòng dưới khi dùng thật)
+            // const now = new Date('2026-03-18'); 
+
+            const rows = document.querySelectorAll('#schedule-table tbody tr');
+            const todayInfo = document.getElementById('today-info');
+            
+            todayInfo.innerText = `Hôm nay: ${now.toLocaleDateString('vi-VN')}`;
+
+            let activeRow = null;
+
+            rows.forEach((row, index) => {
+                const startDate = new Date(row.getAttribute('data-start'));
+                
+                let endDate;
+                const nextRow = rows[index + 1];
+                if (nextRow) {
+                    endDate = new Date(nextRow.getAttribute('data-start'));
+                } else {
+                    endDate = new Date(startDate.getTime() + 7 * 24 * 60 * 60 * 1000);
+                }
+
+                if (now >= startDate && now < endDate) {
+                    row.classList.add('active-week');
+                    const weekCell = row.querySelector('.week-num');
+                    weekCell.innerHTML += `<span class="current-indicator">TUẦN NÀY</span>`;
+                    activeRow = row;
+                }
+            });
+
+            if (activeRow) {
+                setTimeout(() => {
+                    const container = document.getElementById('calendar-container');
+                    const offsetTop = activeRow.offsetTop - container.offsetTop - 50;
+                    container.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }, 300);
+            }
+        }
+
+        window.onload = scrollToCurrentWeek;
+    </script>
+    <script src="js/script.js"></script>
+    <script src="js/component.js"></script>
+</body>
+</html>

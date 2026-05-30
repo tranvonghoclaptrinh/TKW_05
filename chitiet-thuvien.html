@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi Tiết Tài Liệu - Thư Viện Số HUIT</title>
+    
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/subpages.css">
+
+    <style>
+        body { background: #f0f2f5; }
+        .detail-layout { 
+            display: flex; 
+            gap: 30px; 
+            margin-top: 120px; 
+            padding-bottom: 80px; 
+            flex-wrap: wrap; 
+        }
+        .meta-sidebar {
+            flex: 1; 
+            min-width: 320px; 
+            background: white; 
+            padding: 35px;
+            border-radius: 20px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08); 
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+        .reader-zone { 
+            flex: 2.5; 
+            min-width: 550px; 
+            background: #1a1a1a; 
+            padding: 40px; 
+            border-radius: 20px; 
+        }
+        .paper-sheet {
+            background: white; 
+            padding: 60px 50px; 
+            min-height: 850px;
+            box-shadow: 0 0 40px rgba(0,0,0,0.6); 
+            line-height: 1.85; 
+            color: #222;
+            font-size: 1.05rem;
+            border-radius: 8px;
+        }
+        .btn-back {
+            background: #eee; 
+            border: none; 
+            padding: 12px 20px; 
+            width: 100%; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            color: #555;
+            margin-bottom: 25px;
+        }
+        @media (max-width: 768px) {
+            .detail-layout { margin-top: 80px; }
+            .reader-zone { min-width: unset; }
+            .paper-sheet { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div id="top-bar"></div>
+    <div id="header"></div>
+
+    <div class="container">
+        <div class="detail-layout" id="root">
+            <p class="text-center w-100">Đang tải tài liệu...</p>
+        </div>
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/component.js"></script>
+
+    <script>
+        async function loadLibraryDetail() {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+
+            if (!id) {
+                $('#root').html('<div class="col-12 text-center py-5"><h4>Không tìm thấy tài liệu</h4></div>');
+                return;
+            }
+
+            try {
+                const res = await fetch('data/library.json');
+                const data = await res.json();
+                const item = data.find(x => x.id === id);
+
+                if (!item) {
+                    $('#root').html('<div class="col-12 text-center py-5"><h4>Không tìm thấy tài liệu</h4></div>');
+                    return;
+                }
+
+                // jQuery: dùng $.each để render thông tin meta
+                let metaHtml = '';
+                const metaFields = { 'Tác giả': item.author };
+                $.each(metaFields, function(label, value) {
+                    metaHtml += `<p><i class="fas fa-user"></i> <strong>${label}:</strong> ${value}</p>`;
+                });
+
+                $('#root').html(`
+                    <aside class="meta-sidebar">
+                        <button class="btn-back" onclick="history.back()">
+                            ← QUAY LẠI THƯ VIỆN
+                        </button>
+                        <span class="badge bg-success mb-3">${item.category}</span>
+                        <h2 style="color:#0054a5; margin:15px 0 25px;">${item.title}</h2>
+                        <div style="color:#555;">${metaHtml}</div>
+                        <div style="margin-top:20px; padding:15px; background:#fdf7e3; border-radius:10px; border:1px solid #f9ebbb; font-size:0.88rem;">
+                            <strong>Mô tả:</strong><br>${item.desc}
+                        </div>
+                    </aside>
+
+                    <section class="reader-zone">
+                        <div class="paper-sheet">
+                            <h1 style="text-align:center; margin-bottom:40px; color:#0054a5;">${item.title}</h1>
+                            <div style="font-size:1.08rem; text-align:justify;">
+                                ${item.content}
+                            </div>
+                            <div style="margin-top:100px; text-align:center; color:#999; font-size:0.9rem;">
+                                ─── HẾT PHẦN XEM TRƯỚC ───
+                            </div>
+                        </div>
+                    </section>
+                `);
+
+            } catch (e) {
+                console.error(e);
+                $('#root').html('<div class="col-12 text-center text-danger">Lỗi tải tài liệu</div>');
+            }
+        }
+
+        $(document).ready(function () {
+            loadComponent('top-bar', 'top-bar.html');
+            loadComponent('header', 'menu.html');
+            loadComponent('footer-placeholder', 'footer.html');
+            loadLibraryDetail();
+        });
+    </script>
+</body>
+</html>
