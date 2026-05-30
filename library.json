@@ -1,0 +1,66 @@
+[
+  {
+    "id": "l1",
+    "category": "AN NINH MẠNG",
+    "title": "Giáo trình Kỹ thuật phòng thủ mạng máy tính",
+    "author": "Trần Nguyễn Quốc Hiền",
+    "desc": "Tài liệu chuyên sâu về thiết lập Firewall và hệ thống giám sát IDS.",
+    "content": "<h3>CHƯƠNG 1: KIẾN TRÚC PHÒNG THỦ ĐA TẦNG</h3><br>An ninh mạng hiện nay không chỉ dừng lại ở việc cài đặt phần mềm diệt virus. Một hệ thống mạnh cần sự kết hợp giữa <b>Next-Gen Firewall (NGFW)</b> và hệ thống phát hiện xâm nhập <b>IDS/IPS</b>. <br><br><b>1. Firewall:</b> Thiết lập các Rules nghiêm ngặt dựa trên địa chỉ IP và Port.<br><b>2. IDS (Snort):</b> Giám sát lưu lượng mạng để tìm ra các Signature (chữ ký mã độc).<br><b>3. Quy trình:</b> Khảo sát hạ tầng, phân vùng DMZ và cấu hình VPN cho truy cập từ xa."
+  },
+  {
+    "id": "l2",
+    "category": "DỮ LIỆU",
+    "title": "Quản trị Big Data với Hệ sinh thái Hadoop",
+    "author": "NXB Thống kê",
+    "desc": "Hướng dẫn lưu trữ và xử lý dữ liệu quy mô hàng Terabyte.",
+    "content": "<h3>KIẾN TRÚC HADOOP PHÂN TÁN</h3><br>Hadoop cho phép xử lý dữ liệu lớn trên một cụm máy chủ rẻ tiền nhưng hiệu năng cực cao. <br><br><b>1. HDFS:</b> Hệ thống tệp phân tán giúp lưu trữ dữ liệu an toàn ngay cả khi một Node gặp sự cố.<br><b>2. MapReduce:</b> Mô hình lập trình song song chia bài toán lớn thành các phần nhỏ.<br><b>3. Spark:</b> Xử lý dữ liệu trong bộ nhớ (In-memory) giúp tốc độ nhanh gấp 100 lần so với MapReduce truyền thống."
+  },
+  {
+    "id": "l3",
+    "category": "AN NINH MẠNG",
+    "title": "Phân tích mã độc Android bằng Machine Learning",
+    "author": "TS. Lê Quang B",
+    "desc": "Ứng dụng XGBoost để nhận diện malware dựa trên App Permissions.",
+    "content": "<h3>PHƯƠNG PHÁP PHÂN TÍCH TĨNH</h3><br>Nội dung đi sâu vào việc giải mã tệp tin APK để trích xuất quyền (Permissions). Ví dụ, một ứng dụng đèn pin nhưng lại đòi quyền đọc tin nhắn và danh bạ là dấu hiệu của mã độc. Tài liệu hướng dẫn cách xây dựng bộ đặc trưng (feature set) để đưa vào mô hình <b>XGBoost</b> nhằm đạt độ chính xác trên 95% trong việc phân loại mã độc."
+  },
+  {
+    "id": "l4",
+    "category": "LẬP TRÌNH",
+    "title": "Lập trình C# WPF và Mô hình MVVM",
+    "author": "Microsoft Press",
+    "desc": "Hướng dẫn xây dựng ứng dụng Windows chuyên nghiệp.",
+    "content": "Mô hình <b>Model-View-ViewModel</b> giúp tách biệt hoàn toàn giữa giao diện (UI) và logic xử lý dữ liệu. Tài liệu này hướng dẫn cách sử dụng Data Binding, Command và các kỹ thuật tối ưu hóa tài nguyên trong WPF để tạo ra ứng dụng quản lý sinh viên mượt mà, dễ bảo trì."
+  },
+  {
+    "id": "l5",
+    "category": "DỮ LIỆU",
+    "title": "Cơ sở dữ liệu NoSQL với MongoDB",
+    "author": "MongoDB University",
+    "desc": "Lưu trữ dữ liệu dạng Document cho ứng dụng Web quy mô lớn.",
+    "content": "Khác với SQL truyền thống, MongoDB cho phép lưu trữ dữ liệu không cần lược đồ cố định (Schema-less). Phù hợp cho các dự án tin tức, mạng xã hội nơi cấu trúc dữ liệu thay đổi liên tục. Tài liệu hướng dẫn cách tạo Index, Aggregation Pipeline để truy vấn hàng triệu bản ghi trong thời gian mili giây."
+  },
+  {
+    "id": "l6",
+    "category": "AN NINH MẠNG",
+    "title": "Kiểm thử xâm nhập (Pentest) ứng dụng Web",
+    "author": "OWASP Team",
+    "desc": "Tìm lỗi SQL Injection, XSS và Broken Authentication.",
+    "content": "Tài liệu bám sát danh mục <b>OWASP Top 10</b>. Hướng dẫn sử dụng Burp Suite để bắt gói tin, chỉnh sửa tham số và khai thác các lỗ hổng bảo mật phổ biến. Quan trọng nhất là phần hướng dẫn khắc phục (Remediation) để lập trình viên có thể viết code an toàn ngay từ đầu."
+  },
+  {
+    "id": "l7",
+    "category": "LẬP TRÌNH",
+    "title": "Thiết kế Web hiện đại với React & Tailwind",
+    "author": "Frontend Master",
+    "desc": "Xây dựng giao diện Responsive và Single Page Application.",
+    "content": "Tập trung vào tư duy Component-based. Cách sử dụng <b>Tailwind CSS</b> để thiết kế giao diện nhanh chóng mà không cần viết CSS thuần. Tài liệu bao gồm các bài tập xây dựng Dashboard quản trị và trang Portfolio cá nhân."
+  },
+  {
+    "id": "l8",
+    "category": "DỮ LIỆU",
+    "title": "Data Warehouse và Business Intelligence",
+    "author": "Oracle Academy",
+    "desc": "Xây dựng kho dữ liệu và báo cáo thông minh cho doanh nghiệp.",
+    "content": "Hướng dẫn quy trình <b>ETL</b> (Extract - Transform - Load) để đổ dữ liệu từ nhiều nguồn vào một kho lưu trữ tập trung. Cách sử dụng Power BI để vẽ biểu đồ trực quan giúp lãnh đạo đưa ra quyết định kinh doanh chính xác."
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "id": "n1",
+    "type": "Học vụ",
+    "title": "Thông báo đăng ký học phần hè năm học 2025-2026",
+    "date": "05/04/2026",
+    "desc": "Hướng dẫn chi tiết quy trình đăng ký các môn học trong học kỳ hè.",
+    "content": "<b>1. Thời gian mở cổng:</b> Từ 0h00 ngày 10/04 đến hết 20/04/2026.<br><b>2. Đối tượng:</b> Sinh viên tất cả các hệ đào tạo có nhu cầu học cải thiện hoặc học vượt.<br><b>3. Danh sách môn mở lớp:</b> Cấu trúc dữ liệu, Lập trình .NET, Cơ sở dữ liệu, Kiến trúc máy tính.<br><b>4. Lưu ý:</b> Sinh viên phải hoàn tất học phí trước khi đăng ký chính thức trên hệ thống."
+  },
+  {
+    "id": "n2",
+    "type": "Sự kiện",
+    "title": "Workshop: AI và Machine Learning trong An ninh mạng",
+    "date": "10/04/2026",
+    "desc": "Giao lưu cùng chuyên gia Google về ứng dụng AI phát hiện mã độc.",
+    "content": "Buổi hội thảo tập trung vào việc áp dụng các mô hình học máy như <b>XGBoost</b> và <b>Random Forest</b> để phân tích hành vi mã độc Android. Sinh viên sẽ được thực hành trực tiếp trên các bộ dữ liệu (dataset) thực tế từ các cuộc tấn công mạng năm 2025 tại Việt Nam."
+  },
+  {
+    "id": "n3",
+    "type": "Tuyển dụng",
+    "title": "Ngày hội việc làm HUIT Career Day 2026",
+    "date": "12/04/2026",
+    "desc": "Hơn 50 doanh nghiệp CNTT tuyển dụng thực tập sinh và nhân viên chính thức.",
+    "content": "Cơ hội cho sinh viên năm cuối tiếp cận với các nhà tuyển dụng hàng đầu như VNG, FPT Software, TMA Solutions. Các vị trí tuyển dụng bao gồm: Web Developer, Mobile App, SOC Analyst và Data Engineer. Hãy chuẩn bị sẵn CV để phỏng vấn trực tiếp tại gian hàng của doanh nghiệp."
+  },
+  {
+    "id": "n4",
+    "type": "Học thuật",
+    "title": "Cuộc thi Olympic Tin học sinh viên toàn quốc 2026",
+    "date": "15/04/2026",
+    "desc": "Thông báo tuyển chọn đội tuyển tham dự Olympic Tin học.",
+    "content": "Khoa CNTT tổ chức vòng sơ loại để tìm kiếm các tài năng giải thuật. Nội dung thi bao gồm lập trình thi đấu trên nền tảng Codeforces với các chủ đề: Đồ thị, Quy hoạch động và Hình học tính toán. Giải nhất sẽ nhận học bổng toàn phần khóa học An ninh mạng chuyên sâu."
+  },
+  {
+    "id": "n5",
+    "type": "Học vụ",
+    "title": "Kế hoạch thi học kỳ 2 và nộp đồ án cuối kỳ",
+    "date": "18/04/2026",
+    "desc": "Lịch thi chi tiết và thời hạn bảo vệ đồ án chuyên ngành.",
+    "content": "Toàn bộ sinh viên lưu ý thời gian thi từ 01/05 đến 15/05. Đối với sinh viên làm Đồ án thiết kế Web, thời hạn cuối cùng để nộp source code và báo cáo lên hệ thống LMS là ngày 25/04/2026. Các bài nộp trễ sẽ bị trừ 20% tổng số điểm."
+  },
+  {
+    "id": "n6",
+    "type": "Sự kiện",
+    "title": "Ra mắt Câu lạc bộ Lập trình Game HUIT",
+    "date": "20/04/2026",
+    "desc": "Sân chơi mới cho các bạn đam mê Unity và Unreal Engine.",
+    "content": "Câu lạc bộ sẽ là nơi chia sẻ kiến thức về thiết kế đồ họa 3D, lập trình logic game và tối ưu hóa hiệu năng trên mobile. Buổi ra mắt sẽ có sự góp mặt của các cựu sinh viên đang làm việc tại các studio game lớn tại TP.HCM."
+  }
+]
