@@ -309,7 +309,6 @@
             <h2>Tra Cứu Điểm Sinh Viên</h2>
             <div></div>
         </div>
-        
 
         <!-- Search Form -->
         <div class="search-container">
@@ -651,67 +650,6 @@
             const errorMsg = document.getElementById('errorMessage');
             errorMsg.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
             errorMsg.classList.add('show');
-        }
-        async function searchStudent(event) {
-            event.preventDefault();
-            
-            const mssv = document.getElementById('mssv').value.trim();
-            const display = document.getElementById('search-result') || document.querySelector('.search-container');
-
-            try {
-                const [resStu, resSco] = await Promise.all([
-                    fetch('data/students.json').then(r => r.json()),
-                    fetch('data/scores.json').then(r => r.json())
-                ]);
-
-                const student = resStu.find(s => s.mssv === mssv);
-                const scoreData = resSco.find(s => s.mssv === mssv);
-
-                if (!student) {
-                    showError("Không tìm thấy sinh viên có MSSV: " + mssv);
-                    return;
-                }
-
-                let html = `
-                    <div id="search-result" style="margin-top: 20px; padding: 20px; background: white; color: #333; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                        <h4 style="color: #0054a5; margin-bottom: 10px;">Kết quả: ${student.hoTen}</h4>
-                        <p style="font-size: 0.9rem; margin-bottom: 15px;">Lớp: ${student.lop} | Ngành: ${student.chuyenNganh}</p>
-                        <table style="width: 100%; border-collapse: collapse;">
-                            <thead>
-                                <tr style="background: #f39c12; color: white;">
-                                    <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">Môn học</th>
-                                    <th style="padding: 10px; border: 1px solid #ddd; text-align: center;">Điểm TK</th>
-                                </tr>
-                            </thead>
-                            <tbody>`;
-                
-                if (scoreData && scoreData.marks) {
-                    scoreData.marks.forEach(m => {
-                        const isPass = m.diemTK >= 4;
-                        html += `
-                            <tr>
-                                <td style="padding: 10px; border: 1px solid #ddd;">${m.maMonHoc}</td>
-                                <td style="padding: 10px; border: 1px solid #ddd; text-align: center; font-weight: bold; color: ${isPass ? '#27ae60' : '#e74c3c'};">
-                                    ${m.diemTK}
-                                </td>
-                            </tr>`;
-                    });
-                } else {
-                    html += `<tr><td colspan="2" style="padding: 15px; text-align: center;">Chưa có dữ liệu điểm</td></tr>`;
-                }
-
-                const existingResult = document.getElementById('search-result');
-                if (existingResult) {
-                    existingResult.outerHTML = html + "</tbody></table></div>";
-                } else {
-                    const div = document.createElement('div');
-                    div.innerHTML = html + "</tbody></table></div>";
-                    document.querySelector('.search-container').appendChild(div.firstElementChild);
-                }
-
-            } catch (err) {
-                showError("Lỗi: Không thể truy cập dữ liệu hệ thống!");
-            }
         }
     </script>
     <script src="js/component.js"></script>
